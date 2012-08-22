@@ -1,0 +1,12 @@
+[alias]
+	wdiff = diff --color-words
+
+[difftool.latex]
+        cmd = ~/bin/git-latexdiff "$LOCAL" "$REMOTE"
+[difftool]
+        prompt = false
+[alias]
+        ldiff = difftool -t latex 
+[user]
+	name = horimislime
+	email = horimislime@gmail.com

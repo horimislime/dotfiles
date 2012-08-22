@@ -1,0 +1,18 @@
+#========================================
+#Aliaes
+#========================================
+#less options
+export LESS=' -M -N -Q -R --tabs=4 --no-init --ignore-case'
+export LESSOPEN='| /opt/local/bin/src-hilite-lesspipe.sh %s'
+
+#Color for each file type
+#alias ls='RED ls -GwF'
+alias sl='ls'
+alias ll='ls -l'
+
+alias o='open'
+alias paste='pbpaste'
+alias tarc='tar -czvf'
+alias tarx='tar -zxvf'
+alias reload_rc='source ~/.zshrc'
+alias pingg='ping www.google.com'

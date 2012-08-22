@@ -1,0 +1,9 @@
+#!/bin/bash
+
+case $2 in
+    contents/*.tex)
+
+	latexdiff -e utf8 "$1" "$2" > "$2".diff
+	echo Finished writing diff to "$2".diff
+	;;
+esac
