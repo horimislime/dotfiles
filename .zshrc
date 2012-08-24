@@ -61,6 +61,7 @@ setopt ignore_eof
 source .zsh.d/appearance.zsh
 source .zsh.d/keybinding.zsh
 source .zsh.d/mysql.zsh
+source .zsh.d/.zshalias
 
 #========================================
 # Load settings for each platform

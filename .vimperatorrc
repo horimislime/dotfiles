@@ -59,12 +59,8 @@ map s :statusbarpanel
 "Show Evernote clipping button on status bar
 map E :statusbarpanel webclipper3-button-clone<CR>
 
-"Open HatenaBookmark window(requires HatenaBookmark extension)
-map H :statusbarpanel hBookmark-statusBarPanel<CR>
-
-"Open HatenaBookmark sidebar
-command hatenabar :sidebar Hatena Bookmark
-map hb :hatenabar<CR>
+"Hatena bookmark setting
+javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
 
 "Send to Instapaper(requires Instapaper.js)
 map I :rl<CR>
