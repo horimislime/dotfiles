@@ -58,10 +58,10 @@ setopt ignore_eof
 #========================================
 # Import settings
 #========================================
-source .zsh.d/appearance.zsh
-source .zsh.d/keybinding.zsh
-source .zsh.d/mysql.zsh
-source .zsh.d/.zshalias
+source ${HOME}/.zsh.d/appearance.zsh
+source ${HOME}/.zsh.d/keybinding.zsh
+source ${HOME}/.zsh.d/mysql.zsh
+source ${HOME}/.zsh.d/.zshalias
 
 #========================================
 # Load settings for each platform
@@ -71,7 +71,6 @@ darwin*)
     [ -f ${HOME}/.zsh.d/.zsh.osx ] && source ${HOME}/.zsh.d/.zsh.osx
     ;;
 linux*)
-    # ここに設定
     [ -f ${HOME}/.zsh.linux ] && source ${HOME}/.zsh.d/.zsh.linux
     ;;
 esac
