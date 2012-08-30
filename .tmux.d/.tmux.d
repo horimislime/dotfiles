@@ -1,0 +1,1 @@
+/Users/horimislime/dotfiles/.tmux.d
