@@ -3,3 +3,6 @@
 #========================================
 export LESSOPEN='| /opt/local/bin/src-hilite-lesspipe.sh %s'
 alias copy_path='pwd | pbcopy'
+
+eval "$(rbenv init -)"
+source ~/.rbenv/completions/rbenv.zsh
