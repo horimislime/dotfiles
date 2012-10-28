@@ -38,6 +38,7 @@ setopt nolistbeep
 #Autocomplete command option
 autoload -U compinit
 compinit
+zstyle ':completion:*:default' menu select=1
 
 #Complete path even after characters(ex.--prefix=/usr...
 setopt magic_equal_subst
