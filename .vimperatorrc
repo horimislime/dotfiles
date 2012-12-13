@@ -1,6 +1,13 @@
 "=======================================
+"Plugin loading
+"=======================================
+let g:plugin_loader_roots="~/Dropbox/Sync/vimperator-plugins/"
+let g:plugin_loader_plugins="appendAnchor,migemo-find,auto_reload,twittperator,slideshare,sbmcommentsviewer,bitly,feedSomeKeys_3,ldrize_cooperation,instapaper,commandBookmarklet,stylechanger,direct_bookmark,_smooziee,tombloo,hint-tombloo,statusbar_panel,statusline-toolbar,feeder,auto_source"
+"=======================================
 "General settings
 "=======================================
+"Restrict characters for Hint
+set hintchars=ifjklasdweuocvbnm
 
 "Always autocomplete
 set wildoptions=auto
@@ -24,6 +31,9 @@ set titlestring=Firefox
 set hlsearch
 set preload
 highlight Bell display:none
+
+"Disable smart completion
+":set complete=sf
 
 "=======================================
 "Keybind settings
@@ -62,24 +72,22 @@ map E :statusbarpanel webclipper3-button-clone<CR>
 "Hatena bookmark setting
 javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
 
-"Send to Instapaper(requires Instapaper.js)
+"Send to Instapaper
 map I :rl<CR>
 
-"Bindings on Slideshare(requires slideshare.js)
-nnoremap -urls=www\\.slideshare\\.net l :slideshare next<CR>
-nnoremap -urls=www\\.slideshare\\.net h :slideshare prev<CR>
+"FeedSomeKeys_3.js
+command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+lazy fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r a # [ ] ? gi gs gt gd ga gc
+lazy fmaps -u='mail\.google\.com/mail/.*/[0-9a-f]+$' c / j,n k,p n,j p,k o u e x s r a # [ ] ? gi gs gt gd ga gc
+lazy fmaps -u='www\.google\.com/reader' -events=vkeypress j k i o n p m s v A r S N P X O gh ga gs gt gu u / ?
+lazy fmaps -u='(fastladder|livedoor)\.com/reader' j k s a p o v c i,p <Space> <S-Space> z b < > q w e,g
+lazy fmaps -u='https?://www\.rememberthemilk\.com/home/' j k m i c t ? d F,f G,g S,s L,l Y,y H,h M,m <Del> <C-S-Left> <C-S-Right>
+lazy fmaps -u='reblog\.machine\.mamemomonga\.com/*' t l j k m
+lazy fmaps -u='www\.tumblr\.com/dashboard' t l j k m
 
-
-"=======================================
-"Command declarations
-"=======================================
-
-"Reload .vimeratorrc
-command reload_rc :source ~/.vimperatorrc
-
-"Evernote clipping command
-command clip javascript Evernote.Overlay.init(null)
-
+"Service specific mappings
+noremap -u='([0-9a-zA-Z])+\.tumblr\.com' ,r :tombloo ReBlog - Tumblr
+noremap -u='http://www\.pixiv\.net*' ,r ;Rj
 
 "=======================================
 "Plugin configurations
@@ -92,66 +100,17 @@ let g:smooziee_scroll_interval="50"
 "ldrize_cooperation.js
 let g:ldrc_intelligence_bind="true"
 
-"switchtab.js
-map T :switchTab<CR>
-
-"FeedSomeKeys_3.js
-command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
-lazy fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r a # [ ] ? gi gs gt gd ga gc
-lazy fmaps -u='mail\.google\.com/mail/.*/[0-9a-f]+$' c / j,n k,p n,j p,k o u e x s r a # [ ] ? gi gs gt gd ga gc
-lazy fmaps -u='www\.google\.com/reader' -events=vkeypress j k i o n p m s v A r S N P X O gh ga gs gt gu u / ?
-lazy fmaps -u='(fastladder|livedoor)\.com/reader' j k s a p o v c i,p <Space> <S-Space> z b < > q w e,g
-lazy fmaps -u='https?://www\.rememberthemilk\.com/home/' j k m i c t ? d F,f G,g S,s L,l Y,y H,h M,m <Del> <C-S-Left> <C-S-Right>
-lazy fmaps -u='http://code.google.com/p/vimperator-labs/issues/list' o j k
-lazy fmaps -u='http://code.google.com/p/vimperator-labs/issues/detail' u
-lazy fmaps -u='www\.facebook\.com/' j k
-lazy fmaps -u='reblog\.machine\.mamemomonga\.com/*' t l j k m
-
-"pdf.js
-nnoremap -urls "^chrome:\\/\\/pdf\\.js\\/content\\/web\\/viewer.html\\?file=.*" <C-j> :js content.window.PDFView.page++<CR>
-nnoremap -urls "^chrome:\\/\\/pdf\\.js\\/content\\/web\\/viewer.html\\?file=.*" <C-k> :js content.window
-
-
-"twittperator.js
-js <<EOM
-commands.addUserCommand(
-    ["twurl"],
-    "Twittperator tweet with URI",
-    function(){
-        let uri = 'https://www.googleapis.com/urlshortener/v1/url';
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", uri, false);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(JSON.stringify({ longUrl: buffer.URI }));
-        let result = JSON.parse(xhr.responseText).id;
-        commandline.open(":",["tw"," /",buffer.title,result].join(" "),modes.EX);
-    }
-);
+"copy.js
+noremap l
+javascript <<EOM
+liberator.globalVariables.copy_templates = [
+  { label:'Markdown', value:'[%TITLE%](%URL%)', map:'m'},
+  { label:'Share URL', value:'%TITLE% / %URL%', map:'l'}
+];
 EOM
 
-"pdf.js
-var viewerReg = /^chrome:\/\/pdf\.js\/content\/web\/viewer.html\?file=.*/;
-
-var maps = [
-  Map([modes.NORMAL], ["<C-j>"], "pdf.js go next page",
-    function (count) {
-      content.window.PDFView.page += Math.max(count, 1);
-    }, {
-      count: true,
-      matchingUrls: viewerReg,
-    }
-  ),
-  Map([modes.NORMAL], ["<C-k>"], "pdf.js go previous page",
-    function (count) {
-      content.window.PDFView.page -= Math.max(count, 1);
-    }, {
-      count: true,
-      matchingUrls: viewerReg,
-    }
-  )];
-maps.forEach(function (map) {
-  mappings._addMap(map);
-});
+"autosource
+":autosource ~/.vimperatorrc
 
 "=======================================
 "Appearances
@@ -162,6 +121,3 @@ colorscheme snaka_custom
 
 "Move menubar items on statusbar
 set statuslinetoolbars=webclipper3-button,feed-button
-
-"Restrict characters for Hint
-set hintchars=ifjklasdweuocvbnm

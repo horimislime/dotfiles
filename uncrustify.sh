@@ -1,5 +1,5 @@
 #!/bin/sh
-
+printenv
 #Project root dir
 XCODE_BASE=${PWD}
 
