@@ -15,8 +15,13 @@ autoload -U $(echo $HOME/.zsh.d/functions/*(:t))
 HISTFILE=~/.zsh_history
 HISTSIZE=6000000
 SAVEHIST=6000000
+
+#Discard duplicate history
+setopt hist_ignore_all_dups
 setopt hist_ignore_dups
+
 setopt share_history 
+
 #History search
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
