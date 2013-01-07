@@ -2,7 +2,7 @@
 "Plugin loading
 "=======================================
 let g:plugin_loader_roots="~/Dropbox/Sync/vimperator-plugins/"
-let g:plugin_loader_plugins="appendAnchor,migemo-find,auto_reload,twittperator,slideshare,sbmcommentsviewer,bitly,feedSomeKeys_3,ldrize_cooperation,instapaper,commandBookmarklet,stylechanger,direct_bookmark,_smooziee,tombloo,hint-tombloo,statusbar_panel,statusline-toolbar,feeder,auto_source"
+let g:plugin_loader_plugins="twittperator,appendAnchor,migemo-find,auto_reload,twittperator,slideshare,sbmcommentsviewer,bitly,feedSomeKeys_3,ldrize_cooperation,instapaper,commandBookmarklet,stylechanger,direct_bookmark,_smooziee,tombloo,hint-tombloo,statusbar_panel,statusline-toolbar,feeder,auto_source"
 "=======================================
 "General settings
 "=======================================
@@ -101,11 +101,10 @@ let g:smooziee_scroll_interval="50"
 let g:ldrc_intelligence_bind="true"
 
 "copy.js
-noremap l
 javascript <<EOM
 liberator.globalVariables.copy_templates = [
-  { label:'Markdown', value:'[%TITLE%](%URL%)', map:'m'},
-  { label:'Share URL', value:'%TITLE% / %URL%', map:'l'}
+  { label:'Markdown', value:'[%TITLE%](%URL%)', map:'l'}
+
 ];
 EOM
 

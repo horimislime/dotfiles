@@ -1,5 +1,5 @@
 #========================================
-#General settings
+# General settings
 #========================================
 EDITOR=emacs
 
@@ -55,6 +55,12 @@ bindkey "^[[Z" reverse-menu-complete
 #Prevent exiting session with EOF
 setopt ignore_eof
 
+#========================================
+# zsh-syntax-highlighting
+#========================================
+if [ -f ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 #========================================
 # Import settings
@@ -65,7 +71,7 @@ source ${HOME}/.zsh.d/mysql.zsh
 source ${HOME}/.zsh.d/.zshalias
 
 #========================================
-# Load settings for each platform
+# Platform specific settings
 #========================================
 case "${OSTYPE}" in
 darwin*)
@@ -79,4 +85,10 @@ esac
 if [[ -f "$HOME/.zshenv" ]]; then
     source "$HOME/.zshenv"
 fi
+
+if [[ -f "${HOME}/.zsh.d/.zsh.local" ]]; then
+    source "${HOME}/.zsh.d/.zsh.local"
+fi
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
