@@ -40,6 +40,13 @@ setopt correct
 #Disable beep
 setopt nolistbeep
 
+#Prevent exiting session with EOF
+setopt ignore_eof
+
+#========================================
+# Completion
+#========================================
+
 #Autocomplete command option
 autoload -U compinit
 compinit
@@ -57,8 +64,16 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 #Shift-tab to reverse in directory autocomplete
 bindkey "^[[Z" reverse-menu-complete
 
-#Prevent exiting session with EOF
-setopt ignore_eof
+#autojump
+[[ -s ~/bin/etc/profile.d/autojump.sh ]] && . ~/bin/etc/profile.d/autojump.sh
+fpath=($fpath ~/.autojump/functions(N))
+
+#========================================
+# Functions
+#========================================
+function _ssh {
+  compadd `fgrep 'Host ' ~/.ssh/config | awk '{print $2}' | sort`;
+}
 
 #========================================
 # zsh-syntax-highlighting
@@ -97,3 +112,4 @@ fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
+export PATH=${PATH}:~/bin/bin/

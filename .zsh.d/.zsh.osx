@@ -1,5 +1,7 @@
 #========================================
 # MacOS specific settings
 #========================================
-export LESSOPEN='| /opt/local/bin/src-hilite-lesspipe.sh %s'
+if [[ -f "/opt/local/bin/src-hilite-lesspipe.sh" ]]; then
+   export LESSOPEN='| /opt/local/bin/src-hilite-lesspipe.sh %s'
+fi
 alias copy_path='pwd | pbcopy'
