@@ -4,3 +4,6 @@
 [submodule ".zsh.d/autojump"]
 	path = .zsh.d/autojump
 	url = git://github.com/joelthelion/autojump.git
+[submodule ".zsh.d/z"]
+	path = .zsh.d/z
+	url = https://github.com/rupa/z.git
