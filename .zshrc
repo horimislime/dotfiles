@@ -43,6 +43,13 @@ setopt nolistbeep
 #Prevent exiting session with EOF
 setopt ignore_eof
 
+show_buffer_stack() {
+  POSTDISPLAY="
+stack: $LBUFFER"
+  zle push-line-or-edit
+}
+zle -N show_buffer_stack
+
 #========================================
 # Completion
 #========================================
@@ -64,16 +71,19 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 #Shift-tab to reverse in directory autocomplete
 bindkey "^[[Z" reverse-menu-complete
 
-#autojump
-[[ -s ~/bin/etc/profile.d/autojump.sh ]] && . ~/bin/etc/profile.d/autojump.sh
-fpath=($fpath ~/.autojump/functions(N))
+#z.sh
+_Z_CMD=j
+source ~/.zsh.d/z/z.sh
+precmd() {
+    _z --add "${pwd -P}"
+}
 
 #========================================
 # Functions
 #========================================
-function _ssh {
-  compadd `fgrep 'Host ' ~/.ssh/config | awk '{print $2}' | sort`;
-}
+#function _ssh {
+#  compadd `fgrep 'Host ' ~/.ssh/config | awk '{print $2}' | sort`;
+#}
 
 #========================================
 # zsh-syntax-highlighting
