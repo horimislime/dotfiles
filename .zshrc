@@ -20,6 +20,11 @@ SAVEHIST=6000000
 setopt hist_ignore_all_dups
 setopt hist_ignore_dups
 
+# 
+#export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '
+#setopt extendedhistory
+
+# Share history between clients
 setopt share_history 
 
 #History search
@@ -92,6 +97,13 @@ if [ -f ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+# =======================================
+# **FOR EMACS** Generating shellenv.el
+## create emacs env file
+#perl -wle \
+#    'do { print qq/(setenv "$_" "$ENV{$_}")/ if exists $ENV{$_} } for @ARGV' \
+#    PATH > ~/.emacs.d/shellenv.el
+
 #========================================
 # Import settings
 #========================================
@@ -99,6 +111,7 @@ source ${HOME}/.zsh.d/appearance.zsh
 source ${HOME}/.zsh.d/keybinding.zsh
 source ${HOME}/.zsh.d/mysql.zsh
 source ${HOME}/.zsh.d/.zshalias
+source ${HOME}/.zsh.d/antigen-config.zsh
 
 #========================================
 # Platform specific settings
@@ -119,7 +132,3 @@ fi
 if [[ -f "${HOME}/.zsh.d/.zsh.local" ]]; then
     source "${HOME}/.zsh.d/.zsh.local"
 fi
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
-export PATH=${PATH}:~/bin/bin/
