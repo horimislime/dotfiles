@@ -10,3 +10,6 @@
 [submodule ".zsh.d/antigen"]
 	path = .zsh.d/antigen
 	url = https://github.com/zsh-users/antigen.git
+[submodule ".tmux.d/tmux-colors-solarized"]
+	path = .tmux.d/tmux-colors-solarized
+	url = https://github.com/seebi/tmux-colors-solarized.git
