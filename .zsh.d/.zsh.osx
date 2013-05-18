@@ -1,8 +1,13 @@
+
 #========================================
 # MacOS specific settings
 #========================================
 export LESSOPEN='| /opt/local/bin/src-hilite-lesspipe.sh %s'
 alias copy_path='pwd | pbcopy'
 
-eval "$(rbenv init -)"
-source ~/.rbenv/completions/rbenv.zsh
+export PATH=~/.rbenv/versions/1.9.2-p290/bin:${PATH}
+
+#eval "$(rbenv init -)"
+#source ~/.rbenv/completions/rbenv.zsh
+
+alias emacs='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -nw'

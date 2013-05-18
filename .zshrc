@@ -16,7 +16,10 @@ HISTFILE=~/.zsh_history
 HISTSIZE=6000000
 SAVEHIST=6000000
 setopt hist_ignore_dups
-setopt share_history 
+#setopt share_history 
+setopt inc_append_history
+setopt extended_history
+
 #History search
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
@@ -34,6 +37,10 @@ setopt correct
 
 #Disable beep
 setopt nolistbeep
+
+setopt list_types
+setopt auto_param_keys
+setopt mark_dirs
 
 #Autocomplete command option
 autoload -U compinit
@@ -57,12 +64,23 @@ setopt ignore_eof
 
 
 #========================================
-# Import settings
+# Load setting files
 #========================================
 source ${HOME}/.zsh.d/appearance.zsh
 source ${HOME}/.zsh.d/keybinding.zsh
 source ${HOME}/.zsh.d/mysql.zsh
 source ${HOME}/.zsh.d/.zshalias
+
+if [[ -f "$HOME/.zshenv" ]]; then
+    source "$HOME/.zshenv"
+fi
+
+#========================================
+# Plugin setting
+#========================================
+if [ -d ~/.zsh.d/plugins ]; then
+        source ~/.zsh.d/plugins/*
+fi
 
 #========================================
 # Load settings for each platform
@@ -76,7 +94,5 @@ linux*)
     ;;
 esac
 
-if [[ -f "$HOME/.zshenv" ]]; then
-    source "$HOME/.zshenv"
-fi
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

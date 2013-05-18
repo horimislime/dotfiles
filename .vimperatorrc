@@ -9,6 +9,10 @@ let g:plugin_loader_plugins="appendAnchor,migemo-find,auto_reload,twittperator,s
 "Restrict characters for Hint
 set hintchars=ifjklasdweuocvbnm
 
+"_smooziee.js
+let g:smooziee_scroll_amount="500"
+let g:smooziee_scroll_interval="50"
+
 "Always autocomplete
 set wildoptions=auto
 set wildmode=list:full
@@ -46,7 +50,7 @@ map k 1<C-y>
 "Asign backward action to Backspace key
 map <BS> <A-Left>
 
-"Move to a left/right tab using h/l
+"Move to a left/right tab
 map K gT
 map J gt
 
@@ -60,20 +64,11 @@ map <S-Right> :tabmove! +1<CR>
 "Move to the last tab
 map L g$
 
-"Open Print window
-map P :hardcopy<CR>
-
-"status bar panel mapping
-map s :statusbarpanel
-
-"Show Evernote clipping button on status bar
-map E :statusbarpanel webclipper3-button-clone<CR>
-
 "Hatena bookmark setting
 javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
 
 "Send to Instapaper
-map I :rl<CR>
+"map I :rl<CR>
 
 "FeedSomeKeys_3.js
 command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
@@ -82,7 +77,7 @@ lazy fmaps -u='mail\.google\.com/mail/.*/[0-9a-f]+$' c / j,n k,p n,j p,k o u e x
 lazy fmaps -u='www\.google\.com/reader' -events=vkeypress j k i o n p m s v A r S N P X O gh ga gs gt gu u / ?
 lazy fmaps -u='(fastladder|livedoor)\.com/reader' j k s a p o v c i,p <Space> <S-Space> z b < > q w e,g
 lazy fmaps -u='https?://www\.rememberthemilk\.com/home/' j k m i c t ? d F,f G,g S,s L,l Y,y H,h M,m <Del> <C-S-Left> <C-S-Right>
-lazy fmaps -u='reblog\.machine\.mamemomonga\.com/*' t l j k m
+lazy fmaps -u='reblog\.machine\.mamemomonga\.com/dashboard' t l j k m
 lazy fmaps -u='www\.tumblr\.com/dashboard' t l j k m
 
 "Service specific mappings
@@ -92,22 +87,18 @@ noremap -u='http://www\.pixiv\.net*' ,r ;Rj
 "=======================================
 "Plugin configurations
 "=======================================
-
-"_smooziee.js
-let g:smooziee_scroll_amount="500"
-let g:smooziee_scroll_interval="50"
+"copy.js
+noremap M
+javascript <<EOM
+(function(){
+liberator.globalVariables.copy_templates = [
+  { label:'Markdown', value:'[%TITLE%](%URL%)', map:',m'}
+];
+})();
+EOM
 
 "ldrize_cooperation.js
 let g:ldrc_intelligence_bind="true"
-
-"copy.js
-noremap l
-javascript <<EOM
-liberator.globalVariables.copy_templates = [
-  { label:'Markdown', value:'[%TITLE%](%URL%)', map:'m'},
-  { label:'Share URL', value:'%TITLE% / %URL%', map:'l'}
-];
-EOM
 
 "autosource
 ":autosource ~/.vimperatorrc
@@ -120,4 +111,10 @@ EOM
 colorscheme snaka_custom
 
 "Move menubar items on statusbar
-set statuslinetoolbars=webclipper3-button,feed-button
+"status bar panel mapping
+"map s :statusbarpanel
+
+"Show Evernote clipping button on status bar
+"map E :statusbarpanel webclipper3-button-clone<CR>
+
+"set statuslinetoolbars=webclipper3-button,feed-button
