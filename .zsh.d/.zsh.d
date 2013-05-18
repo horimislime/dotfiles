@@ -1,1 +1,0 @@
-/Users/horimislime/dotfiles/.zsh.d

@@ -3,7 +3,6 @@
 #========================================
 #less options
 export LESS=' -M -N -Q -R --tabs=4 --no-init --ignore-case'
-export LESSOPEN='| /opt/local/bin/src-hilite-lesspipe.sh %s'
 
 #Color for each file type
 #alias ls='RED ls -GwF'

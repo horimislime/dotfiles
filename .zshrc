@@ -1,5 +1,5 @@
 #========================================
-#General settings
+# General settings
 #========================================
 EDITOR=emacs
 
@@ -15,8 +15,11 @@ autoload -U $(echo $HOME/.zsh.d/functions/*(:t))
 HISTFILE=~/.zsh_history
 HISTSIZE=6000000
 SAVEHIST=6000000
+
+#Discard duplicate history
+setopt hist_ignore_all_dups
 setopt hist_ignore_dups
-#setopt share_history 
+
 setopt inc_append_history
 setopt extended_history
 
@@ -42,6 +45,19 @@ setopt list_types
 setopt auto_param_keys
 setopt mark_dirs
 
+#Prevent exiting session with EOF
+setopt ignore_eof
+
+show_buffer_stack() {
+  POSTDISPLAY="
+stack: $LBUFFER"
+  zle push-line-or-edit
+}
+zle -N show_buffer_stack
+
+#========================================
+# Completion
+#========================================
 #Autocomplete command option
 autoload -U compinit
 compinit
@@ -59,9 +75,33 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 #Shift-tab to reverse in directory autocomplete
 bindkey "^[[Z" reverse-menu-complete
 
-#Prevent exiting session with EOF
-setopt ignore_eof
+#z.sh
+_Z_CMD=j
+source ~/.zsh.d/z/z.sh
+precmd() {
+    _z --add "${pwd -P}"
+}
 
+#========================================
+# Functions
+#========================================
+#function _ssh {
+#  compadd `fgrep 'Host ' ~/.ssh/config | awk '{print $2}' | sort`;
+#}
+
+#========================================
+# zsh-syntax-highlighting
+#========================================
+if [ -f ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# =======================================
+# **FOR EMACS** Generating shellenv.el
+## create emacs env file
+#perl -wle \
+#    'do { print qq/(setenv "$_" "$ENV{$_}")/ if exists $ENV{$_} } for @ARGV' \
+#    PATH > ~/.emacs.d/shellenv.el
 
 #========================================
 # Load setting files
@@ -70,6 +110,7 @@ source ${HOME}/.zsh.d/appearance.zsh
 source ${HOME}/.zsh.d/keybinding.zsh
 source ${HOME}/.zsh.d/mysql.zsh
 source ${HOME}/.zsh.d/.zshalias
+source ${HOME}/.zsh.d/antigen-config.zsh
 
 if [[ -f "$HOME/.zshenv" ]]; then
     source "$HOME/.zshenv"
@@ -83,7 +124,7 @@ if [ -d ~/.zsh.d/plugins ]; then
 fi
 
 #========================================
-# Load settings for each platform
+# Platform specific settings
 #========================================
 case "${OSTYPE}" in
 darwin*)
@@ -96,3 +137,12 @@ esac
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+if [[ -f "$HOME/.zshenv" ]]; then
+    source "$HOME/.zshenv"
+fi
+
+if [[ -f "${HOME}/.zsh.d/.zsh.local" ]]; then
+    source "${HOME}/.zsh.d/.zsh.local"
+fi
+

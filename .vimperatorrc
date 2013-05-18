@@ -2,7 +2,7 @@
 "Plugin loading
 "=======================================
 let g:plugin_loader_roots="~/Dropbox/Sync/vimperator-plugins/"
-let g:plugin_loader_plugins="appendAnchor,migemo-find,auto_reload,twittperator,slideshare,sbmcommentsviewer,bitly,feedSomeKeys_3,ldrize_cooperation,instapaper,commandBookmarklet,stylechanger,direct_bookmark,_smooziee,tombloo,hint-tombloo,statusbar_panel,statusline-toolbar,feeder,auto_source"
+let g:plugin_loader_plugins="twittperator,appendAnchor,migemo-find,auto_reload,twittperator,slideshare,sbmcommentsviewer,bitly,feedSomeKeys_3,ldrize_cooperation,instapaper,commandBookmarklet,stylechanger,direct_bookmark,_smooziee,tombloo,hint-tombloo,statusbar_panel,statusline-toolbar,feeder,auto_source"
 "=======================================
 "General settings
 "=======================================
@@ -89,6 +89,7 @@ noremap -u='http://www\.pixiv\.net*' ,r ;Rj
 "=======================================
 "copy.js
 noremap M
+
 javascript <<EOM
 (function(){
 liberator.globalVariables.copy_templates = [
