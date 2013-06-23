@@ -6,6 +6,7 @@ antigen-bundle git
 antigen-bundle svn
 antigen-bundle brew
 antigen-bundle vagrant
+antigen-bundle github
 
 antigen-theme robbyrussell
 
