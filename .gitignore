@@ -1,4 +1,17 @@
 .DS_Store
 #*#
+.#*#
 *~
 .zsh.d/.zsh.local
+.vimperator/info/default
+.#install.sh
+
+#install.sh#
+
+#install.sh#
+
+.emacs.d
+
+#install.sh#
+
+.zsh.d/plugins/incr-0.2.zsh

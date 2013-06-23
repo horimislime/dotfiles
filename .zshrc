@@ -146,3 +146,4 @@ if [[ -f "${HOME}/.zsh.d/.zsh.local" ]]; then
     source "${HOME}/.zsh.d/.zsh.local"
 fi
 
+. /Users/horimislime/bin/.pvm/pvm.sh
