@@ -8,7 +8,7 @@ alias copy_path='pwd | pbcopy'
 export PATH=~/.rbenv/versions/1.9.3-p327/bin:${PATH}
 
 # Use emacsclient
-alias emacs='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -n'
+alias emacs='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -nw'
 
 # Maven encoding
 MAVEN_OPTS=-Dfile.encoding=UTF-8
