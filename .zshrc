@@ -147,3 +147,10 @@ if [[ -f "${HOME}/.zsh.d/.zsh.local" ]]; then
 fi
 
 . /Users/horimislime/bin/.pvm/pvm.sh
+
+if [[ -e "$HOME/.rbenv" ]]; then
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+fi
+#export PATH="~.rbenv/versions/1.9.2-p290/bin/:$PATH"
+export PYTHONSTARTUP="$HOME/.pyrc"
