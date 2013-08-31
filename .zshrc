@@ -89,13 +89,6 @@ precmd() {
 #  compadd `fgrep 'Host ' ~/.ssh/config | awk '{print $2}' | sort`;
 #}
 
-#========================================
-# zsh-syntax-highlighting
-#========================================
-if [ -f ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
 # =======================================
 # **FOR EMACS** Generating shellenv.el
 ## create emacs env file
@@ -108,7 +101,6 @@ fi
 #========================================
 source ${HOME}/.zsh.d/appearance.zsh
 source ${HOME}/.zsh.d/keybinding.zsh
-source ${HOME}/.zsh.d/mysql.zsh
 source ${HOME}/.zsh.d/.zshalias
 source ${HOME}/.zsh.d/antigen-config.zsh
 
