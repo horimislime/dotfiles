@@ -15,6 +15,6 @@ zsh-users/zsh-syntax-highlighting
 tetsujin/zsh-function-mysql
 EOBUNDLES
 
-antigen-theme kennethreitz
+#antigen-theme kennethreitz
 
 antigen-apply
