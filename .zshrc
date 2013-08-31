@@ -99,10 +99,10 @@ precmd() {
 #========================================
 # Load setting files
 #========================================
-source ${HOME}/.zsh.d/appearance.zsh
 source ${HOME}/.zsh.d/keybinding.zsh
 source ${HOME}/.zsh.d/.zshalias
 source ${HOME}/.zsh.d/antigen-config.zsh
+source ${HOME}/.zsh.d/appearance.zsh
 
 if [[ -f "$HOME/.zshenv" ]]; then
     source "$HOME/.zshenv"

@@ -12,7 +12,10 @@ colors
 
 #Set tab title to working directory
 precmd() {
-echo -ne "\033]0;${PWD}\007"
+  echo -ne "\033]0;${PWD}\007"
+  psvar=()
+  LANG=en_US.UTF-8 vcs_info
+  [ -n "$vcs_info_msg_0_" ] && psvar[1]="$vcs_info_msg_0_"
 }
 
 #Appearance
@@ -37,27 +40,6 @@ colors=(
 colored_user=$colors[$((`echo "$USER" | sum | cut -f1 -d' '`%${#colors}))+1]$USER
 colored_host=$colors[$((`echo "$HOST" | sum | cut -f1 -d' '`%${#colors}))+1]"%m"
 
-
-BASE_PROMPT="$colored_user"$'%{\e[1;39m%}'"@$colored_host"$'%{\e[1;39m%}'
-case ${UID} in
-0)
-    PROMPT=$BASE_PROMPT" # "
-    PROMPT2="%B%{[32m%}%_#%{[m%}%b "
-    SPROMPT="%B%{[32m%}%r is correct? [n,y,a,e]:%{[m%}%b "
-    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
-    PROMPT="%{[37m%}${HOST%%.*} ${PROMPT}"
-    ;;
-*)
-    PROMPT=$BASE_PROMPT" %% "
-    RPROMPT="%{[32m%}%~%{[m%} "
-    PROMPT2="%{[32m%}%_%{[m%} %%"
-    SPROMPT="%{[32m%}%r is correct? [n,y,a,e]:%{[m%} "
-    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
-    PROMPT="%{[31m%}(SSH->${HOST%%.*})${PROMPT}"
-    ;;
-esac 
-#PROMPT="$colored_user"
-
 #Colorize std error message
 function redrev() {
     perl -pe 's/^/\e[41m/ && s/$/\e[m/';
@@ -71,3 +53,30 @@ alias -g RED='2> >(redrev)'
 
 zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 #zstyle ':completion:*:default' list-colors ${LS_COLORS}
+
+
+# vcs_info
+autoload vcs_info
+# only active under git repo
+zstyle ":vcs_info:*" enable git
+zstyle ":vcs_info:git:*" check-for-changes true
+zstyle ":vcs_info:git:*" stagedstr " ✚"
+zstyle ":vcs_info:git:*" unstagedstr " ✑ "
+zstyle ":vcs_info:git:*" formats " (%b%c%u)"
+zstyle ":vcs_info:git:*" actionformats "%b|%a"
+
+# stash check
+stash_info () {
+  if [[ -e $PWD/.git/refs/stash ]]; then
+    stashes=$(git stash list 2>/dev/null | wc -l)
+    psvar[2]=" [☰ ${stashes// /}]"
+  fi
+}
+
+
+add-zsh-hook precmd stash_info
+PROMPT="%B%F{246}%F{red}%1v%{${reset_color}%}%F{yellow}%2v%{${reset_color}%} ✘%f%b "
+PROMPT2="%B%F{246}%_>%f%b "
+SPROMPT="Did you mean %B%F{001}%r%f%b? [n,y,a,e]: "
+
+RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"

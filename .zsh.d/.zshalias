@@ -16,6 +16,6 @@ alias paste='pbpaste'
 alias tarc='tar -czvf'
 alias tarx='tar -zxvf'
 alias reload_rc='source ~/.zshrc'
-alias git='hub'
+alias h='hub'
 alias ls="ls -G"
 alias gls="gls --color"
