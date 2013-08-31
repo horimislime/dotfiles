@@ -2,13 +2,17 @@ source ~/.zsh.d/antigen/antigen.zsh
 
 antigen-use oh-my-zsh
 
-antigen-bundle git
-antigen-bundle svn
-antigen-bundle brew
-antigen-bundle vagrant
-antigen-bundle github
+antigen-bundles <<EOBUNDLES
+git
+github
+brew
+vagrant
+knife
+cp
+gem
+python
+zsh-users/zsh-syntax-highlighting
+tetsujin/zsh-function-mysql
+EOBUNDLES
 
-antigen-theme robbyrussell
-
-#antigen-theme funky
 antigen-apply

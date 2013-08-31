@@ -8,6 +8,7 @@ export LESS=' -M -N -Q -R --tabs=4 --no-init --ignore-case'
 #alias ls='RED ls -GwF'
 alias sl='ls'
 alias ll='ls -l'
+alias lla='ls -la'
 
 alias grep='grep --color=auto'
 alias o='open'
@@ -15,3 +16,6 @@ alias paste='pbpaste'
 alias tarc='tar -czvf'
 alias tarx='tar -zxvf'
 alias reload_rc='source ~/.zshrc'
+alias h='hub'
+alias ls="ls -G"
+alias gls="gls --color"

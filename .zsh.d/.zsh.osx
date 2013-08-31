@@ -9,4 +9,5 @@ alias cpath='pwd | pbcopy'
 # Use emacsclient
 alias emacs='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -nw'
 
-
+# Maven encoding
+MAVEN_OPTS=-Dfile.encoding=UTF-8

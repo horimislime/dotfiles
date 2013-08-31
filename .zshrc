@@ -89,13 +89,6 @@ precmd() {
 #  compadd `fgrep 'Host ' ~/.ssh/config | awk '{print $2}' | sort`;
 #}
 
-#========================================
-# zsh-syntax-highlighting
-#========================================
-if [ -f ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
 # =======================================
 # **FOR EMACS** Generating shellenv.el
 ## create emacs env file
@@ -106,11 +99,10 @@ fi
 #========================================
 # Load setting files
 #========================================
-source ${HOME}/.zsh.d/appearance.zsh
 source ${HOME}/.zsh.d/keybinding.zsh
-source ${HOME}/.zsh.d/mysql.zsh
 source ${HOME}/.zsh.d/.zshalias
 source ${HOME}/.zsh.d/antigen-config.zsh
+source ${HOME}/.zsh.d/appearance.zsh
 
 if [[ -f "$HOME/.zshenv" ]]; then
     source "$HOME/.zshenv"
@@ -146,11 +138,15 @@ if [[ -f "${HOME}/.zsh.d/.zsh.local" ]]; then
     source "${HOME}/.zsh.d/.zsh.local"
 fi
 
-. /Users/horimislime/bin/.pvm/pvm.sh
+
+if [[ -f "${HOME}/bin/.pvm/pvm.sh" ]]; then
+    . /Users/horimislime/bin/.pvm/pvm.sh
+fi
 
 if [[ -e "$HOME/.rbenv" ]]; then
     export PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"
 fi
-#export PATH="~.rbenv/versions/1.9.2-p290/bin/:$PATH"
+
 export PYTHONSTARTUP="$HOME/.pyrc"
+
