@@ -7,11 +7,20 @@
         prompt = false
 [alias]
         ldiff = difftool -t latex 
+	st = status
+	l = log
+	pu = push origin 
+	c = commit
+	cb = checkout -b 
+	ch = checkout 
 [user]
 	name = horimislime
 	email = horimislime@gmail.com
+
 [core]
-	excludesfile = /Users/horimislime/.gitignore_global
+	excludesfile = ~/.gitignore_global
+	editor = emacs
+
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -22,10 +31,7 @@
 [tig "bind"]
 	generic = g move-first-line
 	generic = G move-last-line
-[hub]
-	host = ghe.amb.ca.local
-	protocol = http
-	host = ghe.amb.ca.local
-	protocol = http
-	host = ghe.amb.ca.local
-	host = my.example.org
+
+[include]
+	path = .gitconfig.local
+
