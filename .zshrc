@@ -20,12 +20,8 @@ SAVEHIST=6000000
 setopt hist_ignore_all_dups
 setopt hist_ignore_dups
 
-# 
-#export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '
-#setopt extendedhistory
-
-# Share history between clients
-setopt share_history 
+setopt inc_append_history
+setopt extended_history
 
 #History search
 autoload history-search-end
@@ -45,6 +41,10 @@ setopt correct
 #Disable beep
 setopt nolistbeep
 
+setopt list_types
+setopt auto_param_keys
+setopt mark_dirs
+
 #Prevent exiting session with EOF
 setopt ignore_eof
 
@@ -58,7 +58,6 @@ zle -N show_buffer_stack
 #========================================
 # Completion
 #========================================
-
 #Autocomplete command option
 autoload -U compinit
 compinit
@@ -105,13 +104,24 @@ fi
 #    PATH > ~/.emacs.d/shellenv.el
 
 #========================================
-# Import settings
+# Load setting files
 #========================================
 source ${HOME}/.zsh.d/appearance.zsh
 source ${HOME}/.zsh.d/keybinding.zsh
 source ${HOME}/.zsh.d/mysql.zsh
 source ${HOME}/.zsh.d/.zshalias
 source ${HOME}/.zsh.d/antigen-config.zsh
+
+if [[ -f "$HOME/.zshenv" ]]; then
+    source "$HOME/.zshenv"
+fi
+
+#========================================
+# Plugin setting
+#========================================
+if [ -d ~/.zsh.d/plugins ]; then
+        source ~/.zsh.d/plugins/*
+fi
 
 #========================================
 # Platform specific settings
@@ -125,10 +135,17 @@ linux*)
     ;;
 esac
 
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
 if [[ -f "$HOME/.zshenv" ]]; then
     source "$HOME/.zshenv"
 fi
 
 if [[ -f "${HOME}/.zsh.d/.zsh.local" ]]; then
     source "${HOME}/.zsh.d/.zsh.local"
+fi
+
+if [[ -f "${HOME}/bin/.pvm/pvm.sh" ]]; then
+    . /Users/horimislime/bin/.pvm/pvm.sh
 fi
