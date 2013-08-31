@@ -146,6 +146,15 @@ if [[ -f "${HOME}/.zsh.d/.zsh.local" ]]; then
     source "${HOME}/.zsh.d/.zsh.local"
 fi
 
+
 if [[ -f "${HOME}/bin/.pvm/pvm.sh" ]]; then
     . /Users/horimislime/bin/.pvm/pvm.sh
 fi
+
+if [[ -e "$HOME/.rbenv" ]]; then
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+fi
+
+export PYTHONSTARTUP="$HOME/.pyrc"
+

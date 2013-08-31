@@ -1,13 +1,10 @@
-
 #========================================
 # MacOS specific settings
 #========================================
 if [[ -f "/opt/local/bin/src-hilite-lesspipe.sh" ]]; then
    export LESSOPEN='| /opt/local/bin/src-hilite-lesspipe.sh %s'
 fi
-alias copy_path='pwd | pbcopy'
-
-export PATH=~/.rbenv/versions/1.9.2-p290/bin:${PATH}
+alias cpath='pwd | pbcopy'
 
 # Use emacsclient
 alias emacs='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -nw'
