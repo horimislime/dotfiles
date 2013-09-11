@@ -1,5 +1,6 @@
 [alias]
 	wdiff = diff --color-words
+	pbcopy = !printf "$1" | pbcopy
 
 [difftool.latex]
         cmd = ~/bin/git-latexdiff "$LOCAL" "$REMOTE"
@@ -13,6 +14,9 @@
 	c = commit
 	cb = checkout -b 
 	ch = checkout 
+	branches = branch -a
+	p = !git push origin `git rev-parse --abbrev-ref HEAD`
+
 [user]
 	name = horimislime
 	email = horimislime@gmail.com
@@ -27,10 +31,6 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
-
-[tig "bind"]
-	generic = g move-first-line
-	generic = G move-last-line
 
 [include]
 	path = .gitconfig.local
