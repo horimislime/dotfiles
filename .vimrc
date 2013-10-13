@@ -6,13 +6,19 @@ set modelines=0		" CVE-2007-2438
 set nocompatible	" Use Vim defaults instead of 100% vi compatibility
 set backspace=2		" more powerful backspacing
 
+" show line number
+set number
+" case insensitive
+set ignorecase
+set incsearch
+set hlsearch
+
 " Don't write backup file if vim is being called by "crontab -e"
 au BufWrite /private/tmp/crontab.* set nowritebackup
 " Don't write backup file if vim is being called by "chpass"
 au BufWrite /private/etc/pw.* set nowritebackup
 "colorscheme molokai
 syntax on
-
 filetype off
 
 " neobundle
@@ -21,6 +27,10 @@ if has('vim_starting')
   call neobundle#rc(expand('~/.vim/bundle/'))
 endif
 " originalrepos on github
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc'
 NeoBundle 'VimClojure'
@@ -31,10 +41,32 @@ NeoBundle 'Shougo/neosnippet'
 NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tomasr/molokai'
-""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
+
 
 filetype plugin indent on     " required!
 filetype indent on
 
 set t_Co=256
-colorscheme molokai
+set background=dark
+colorscheme solarized
+
+
+" jedi/neocomplete settings
+autocmd FileType python setlocal omnifunc=jedi#completions
+
+let g:jedi#auto_vim_configuration = 0
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+	let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+
+" Open marked.app with quickrun
+let g:quickrun_config = {}
+let g:quickrun_config.markdown = {
+      \ 'outputter' : 'null',
+      \ 'command'   : 'open',
+      \ 'cmdopt'    : '-a',
+      \ 'args'      : 'Marked',
+      \ 'exec'      : '%c %o %a %s',
+      \ }
