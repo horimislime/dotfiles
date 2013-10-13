@@ -8,3 +8,4 @@
 #install.sh#
 .zsh.d/plugins/incr-0.2.zsh
 .gitconfig.local
+.vim/bundle/
