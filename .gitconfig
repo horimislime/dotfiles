@@ -16,7 +16,8 @@
 	ch = checkout 
 	branches = branch -a
 	p = !git push origin `git rev-parse --abbrev-ref HEAD`
-
+	pick = cherry-pick -rn
+	pbcopy = !printf "$1" | pbcopy
 [user]
 	name = horimislime
 	email = horimislime@gmail.com
@@ -34,4 +35,3 @@
 
 [include]
 	path = .gitconfig.local
-
