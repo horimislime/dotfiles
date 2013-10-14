@@ -13,3 +13,6 @@
 [submodule ".tmux.d/tmux-colors-solarized"]
 	path = .tmux.d/tmux-colors-solarized
 	url = https://github.com/seebi/tmux-colors-solarized.git
+[submodule ".vim/bundle/neobundle.vim"]
+	path = .vim/bundle/neobundle.vim
+	url = https://github.com/Shougo/neobundle.vim
