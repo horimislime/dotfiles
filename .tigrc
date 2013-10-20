@@ -1,7 +1,8 @@
 bind generic g move-first-line
+bind generic G move-last-line
 
-bind main G !@hub browse -- commit/%(commit)
-bind diff G !@hub browse -- commit/%(commit)
+bind main i !@hub browse -- commit/%(commit)
+bind diff i !@hub browse -- commit/%(commit)
 
 bind main c !@git pbcopy %(commit)
 

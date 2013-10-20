@@ -27,6 +27,8 @@ if has('vim_starting')
   call neobundle#rc(expand('~/.vim/bundle/'))
 endif
 " originalrepos on github
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'mattn/qiita-vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'altercation/vim-colors-solarized'
@@ -96,3 +98,6 @@ let g:quickrun_config.markdown = {
     nnoremap <silent> ,vcb :Unite build:!<CR>
     nnoremap <silent> ,vch :UniteBuildClearHighlight<CR>
     "" }}}
+
+nnoremap <silent> ,gs :<C-u>GitGutterToggle<CR>
+nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
