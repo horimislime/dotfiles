@@ -43,7 +43,7 @@ NeoBundle 'Shougo/neosnippet'
 NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tomasr/molokai'
-
+NeoBundle 'TwitVim'
 
 filetype plugin indent on     " required!
 filetype indent on
@@ -101,3 +101,18 @@ let g:quickrun_config.markdown = {
 
 nnoremap <silent> ,gs :<C-u>GitGutterToggle<CR>
 nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
+
+" Twitvim 関連
+let twitvim_count = 40
+nnoremap <C-t> :<C-u>PosttoTwitter<CR>
+nnoremap ,tf :<C-u>FriendsTwitter<CR><C-w>j
+nnoremap ,tu :<C-u>UserTwitter<CR><C-w>j
+nnoremap ,tr :<C-u>RepliesTwitter<CR><C-w>j
+nnoremap ,tn :<C-u>NextTwitter<CR>
+
+autocmd FileType twitvim call s:twitvim_my_settings()
+function! s:twitvim_my_settings()
+  set nowrap
+endfunction
+syntax on
+filetype detect
