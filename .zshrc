@@ -82,13 +82,6 @@ precmd() {
     _z --add "${pwd -P}"
 }
 
-#========================================
-# Functions
-#========================================
-#function _ssh {
-#  compadd `fgrep 'Host ' ~/.ssh/config | awk '{print $2}' | sort`;
-#}
-
 # =======================================
 # **FOR EMACS** Generating shellenv.el
 ## create emacs env file
@@ -101,7 +94,6 @@ precmd() {
 #========================================
 source ${HOME}/.zsh.d/keybinding.zsh
 source ${HOME}/.zsh.d/.zshalias
-source ${HOME}/.zsh.d/antigen-config.zsh
 source ${HOME}/.zsh.d/appearance.zsh
 
 if [[ -f "$HOME/.zshenv" ]]; then
