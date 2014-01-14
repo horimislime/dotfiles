@@ -32,6 +32,7 @@ bindkey "^N" history-beginning-search-forward-end
 
 #'cd' with directory name
 setopt auto_cd
+cdpath=(.. ~)
 #Records 'cd' history and autocomplete with 'cd -[Tab]'
 setopt auto_pushd
 
