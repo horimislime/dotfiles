@@ -65,6 +65,15 @@ zstyle ":vcs_info:git:*" unstagedstr " ✑ "
 zstyle ":vcs_info:git:*" formats " (%b%c%u)"
 zstyle ":vcs_info:git:*" actionformats "%b|%a"
 
+# stash check
+stash_info () {
+  if [[ -e $PWD/.git/refs/stash ]]; then
+    stashes=$(git stash list 2>/dev/null | wc -l)
+    psvar[2]=" [☰ ${stashes// /}]"
+  fi
+}
+add-zsh-hook precmd stash_info
+
 PROMPT="%B%F{246}%F{red}%1v%{${reset_color}%}%F{yellow}%2v%{${reset_color}%} ✘%f%b "
 PROMPT2="%B%F{246}%_>%f%b "
 SPROMPT="Did you mean %B%F{001}%r%f%b? [n,y,a,e]: "
