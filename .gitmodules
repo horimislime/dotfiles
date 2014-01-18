@@ -3,7 +3,7 @@
 	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule ".zsh.d/z"]
 	path = .zsh.d/z
-	url = https://github.com/rupa/z.git
+	url = git://github.com/rupa/z
 [submodule ".tmux.d/tmux-powerline"]
 	path = .tmux.d/tmux-powerline
 	url = https://github.com/erikw/tmux-powerline.git
