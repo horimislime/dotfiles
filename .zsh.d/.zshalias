@@ -1,6 +1,10 @@
 #========================================
 #Aliaes
 #========================================
+
+# inherit user defined variables in sudo
+alias sudo='sudo -E '
+
 #less options
 export LESS=' -M -N -Q -R --tabs=4 --no-init --ignore-case'
 
