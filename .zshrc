@@ -61,7 +61,7 @@ zle -N show_buffer_stack
 #========================================
 #Autocomplete command option
 autoload -U compinit
-compinit
+compinit -u
 zstyle ':completion:*:default' menu select=1
 
 #Complete path even after characters(ex.--prefix=/usr...
