@@ -1,6 +1,9 @@
 #========================================
 # MacOS specific settings
 #========================================
+
+export PATH=/usr/local/bin:$PATH
+
 if [[ -f "/opt/local/bin/src-hilite-lesspipe.sh" ]]; then
    export LESSOPEN='| /opt/local/bin/src-hilite-lesspipe.sh %s'
 fi
