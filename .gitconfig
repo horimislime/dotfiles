@@ -18,6 +18,7 @@
 	p = !git push origin `git rev-parse --abbrev-ref HEAD`
 	pick = cherry-pick -rn
 	pbcopy = !printf "$1" | pbcopy
+	up = !git pull origin `git rev-parse --abbrev-ref HEAD`
 [user]
 	name = horimislime
 	email = horimislime@gmail.com
