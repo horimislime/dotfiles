@@ -24,3 +24,5 @@ alias g='git'
 alias h='hub'
 alias ls="ls -G"
 alias gls="gls --color"
+
+alias t="tig status"

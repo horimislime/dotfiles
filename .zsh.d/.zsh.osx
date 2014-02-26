@@ -2,7 +2,7 @@
 # MacOS specific settings
 #========================================
 
-export PATH=/usr/local/bin:$PATH
+export PATH=$HOME/.rbenv/bin:/usr/local/bin:$PATH
 
 if [[ -f "/opt/local/bin/src-hilite-lesspipe.sh" ]]; then
    export LESSOPEN='| /opt/local/bin/src-hilite-lesspipe.sh %s'
@@ -14,3 +14,5 @@ alias e='emacsclient -nw '
 
 # Maven encoding
 MAVEN_OPTS=-Dfile.encoding=UTF-8
+
+eval "$(rbenv init - zsh)"
