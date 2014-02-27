@@ -10,7 +10,7 @@ fi
 alias cpath='pwd | pbcopy'
 
 # Emacs.app
-alias e='emacsclient -nw '
+alias e='emacsclient -t '
 
 # Maven encoding
 MAVEN_OPTS=-Dfile.encoding=UTF-8
