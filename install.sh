@@ -6,3 +6,6 @@ done
 ln -Fs $HOME/Dropbox/Sync/emacs.d $HOME/.emacs.d
 git submodule init
 git submodule update
+
+# install gvm
+curl -s get.gvmtool.net | bash

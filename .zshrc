@@ -1,7 +1,6 @@
 #========================================
 # General settings
 #========================================
-EDITOR=emacs
 
 typeset -U fpath
 fpath=(
@@ -96,10 +95,7 @@ precmd() {
 source ${HOME}/.zsh.d/keybinding.zsh
 source ${HOME}/.zsh.d/.zshalias
 source ${HOME}/.zsh.d/appearance.zsh
-
-if [[ -f "$HOME/.zshenv" ]]; then
-    source "$HOME/.zshenv"
-fi
+source ${HOME}/.zsh.d/zshenv
 
 #========================================
 # Plugin setting
@@ -143,3 +139,5 @@ fi
 
 export PYTHONSTARTUP="$HOME/.pyrc"
 
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
