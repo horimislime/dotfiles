@@ -19,14 +19,10 @@
 	pick = cherry-pick -rn
 	pbcopy = !printf "$1" | pbcopy
 	up = !git pull origin `git rev-parse --abbrev-ref HEAD`
-	check = !echo `python -c "print 'hello'"`
-[user]
-	name = horimi-soichiro
-	email = horimi_soichiro@cyberagent.co.jp
 
 [core]
 	excludesfile = ~/.gitignore_global
-	editor = "/usr/local/bin/emacsclient -nw"
+	editor = vim
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
@@ -36,6 +32,7 @@
 	trustExitCode = true
 
 [include]
-	path = .gitconfig.local
-[init]
-	templatedir = ~/.git_template
+	path = ~/.gitconfig.local
+#[init]
+#	templatedir = ~/.git_template
+
