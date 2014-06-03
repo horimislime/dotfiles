@@ -67,7 +67,7 @@ zstyle ":vcs_info:git:*" actionformats "%b|%a"
 
 PROMPT="%B%F{246}%F{red}%1v%{${reset_color}%}%F{yellow}%2v%{${reset_color}%} ✘%f%b "
 PROMPT2="%B%F{246}%_>%f%b "
-SPROMPT="Did you mean %B%F{001}%r%f%b? [n,y,a,e]: "
+SPROMPT="(๑•﹏•) %B%F{001}%r%f%b? [n,y,a,e]: "
 
 RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
 

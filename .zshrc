@@ -75,26 +75,11 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 #Shift-tab to reverse in directory autocomplete
 bindkey "^[[Z" reverse-menu-complete
 
-#z.sh
-_Z_CMD=j
-source ~/.zsh.d/z/z.sh
-precmd() {
-    _z --add "${pwd -P}"
-}
-
-# =======================================
-# **FOR EMACS** Generating shellenv.el
-## create emacs env file
-#perl -wle \
-#    'do { print qq/(setenv "$_" "$ENV{$_}")/ if exists $ENV{$_} } for @ARGV' \
-#    PATH > ~/.emacs.d/shellenv.el
-
 #========================================
 # Load setting files
 #========================================
 source ${HOME}/.zsh.d/keybinding.zsh
 source ${HOME}/.zsh.d/.zshalias
-source ${HOME}/.zsh.d/appearance.zsh
 source ${HOME}/.zsh.d/zshenv
 
 #========================================
@@ -103,6 +88,10 @@ source ${HOME}/.zsh.d/zshenv
 if [ -d ~/.zsh.d/plugins ]; then
         source ~/.zsh.d/plugins/*
 fi
+
+source ~/.zsh.d/antigen-config.zsh
+source ~/.zsh.d/zaw-config.zsh
+
 
 #========================================
 # Platform specific settings
@@ -123,8 +112,8 @@ if [[ -f "$HOME/.zshenv" ]]; then
     source "$HOME/.zshenv"
 fi
 
-if [[ -f "${HOME}/.zsh.d/.zsh.local" ]]; then
-    source "${HOME}/.zsh.d/.zsh.local"
+if [[ -f "${HOME}/.zsh.local" ]]; then
+    source "${HOME}/.zsh.local"
 fi
 
 
@@ -133,11 +122,20 @@ if [[ -f "${HOME}/bin/.pvm/pvm.sh" ]]; then
 fi
 
 if [[ -e "$HOME/.rbenv" ]]; then
-    export PATH="$HOME/.rbenv/bin:$PATH"
+    export PATH="$HOME/.rbenv/shims:$PATH"
     eval "$(rbenv init -)"
 fi
 
 export PYTHONSTARTUP="$HOME/.pyrc"
 
+export PYENV_ROOT="${HOME}/.pyenv"
+if [ -d "${PYENV_ROOT}" ]; then
+	export PATH=${PYENV_ROOT}/bin:$PATH
+	eval "$(pyenv init -)"
+fi
+
+# tmuxinator
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
+#[[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
