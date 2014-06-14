@@ -1,0 +1,38 @@
+# command history
+function peco-select-history() {
+    BUFFER=$(fc -ln 1 | eval tail -r | peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle accept-line
+    zle clear-screen
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+
+# kill process
+function peco-proc () {
+    ps ax -o pid,lstart,command | peco --query "$LBUFFER" | awk '{print $1}' | xargs kill
+    zle clear-screen
+}         
+zle -N peco-proc
+bindkey '^x^p' peco-proc
+
+# find files under git source control
+function list-files-under-git () {
+    if [ -d .git ]; then
+        BUFFER=$(git ls-tree -r `git rev-parse --abbrev-ref HEAD` --name-only | eval tail -r | peco --query "$LBUFFER")
+	CURSOR=$#BUFFER
+	zle clear-screen
+    fi
+}         
+zle -N list-files-under-git
+bindkey '^x^g' list-files-under-git
+
+# find git branches
+function git-branches () {
+    if [ -d .git ]; then
+        git branch | eval tail -r | peco --query "$LBUFFER" | xargs git checkout
+	zle accept-line
+    fi
+}         
+zle -N git-branches
+bindkey '^x^b' git-branches
