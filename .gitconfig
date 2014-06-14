@@ -1,12 +1,10 @@
-[alias]
-	wdiff = diff --color-words
-	pbcopy = !printf "$1" | pbcopy
-
 [difftool.latex]
         cmd = ~/bin/git-latexdiff "$LOCAL" "$REMOTE"
 [difftool]
         prompt = false
 [alias]
+	wdiff = diff --color-words
+	pbcopy = !printf "$1" | pbcopy
         ldiff = difftool -t latex 
 	st = status
 	l = log
@@ -19,6 +17,7 @@
 	pick = cherry-pick -rn
 	pbcopy = !printf "$1" | pbcopy
 	up = !git pull origin `git rev-parse --abbrev-ref HEAD`
+	j = !hub browse
 
 [core]
 	excludesfile = ~/.gitignore_global
@@ -33,6 +32,7 @@
 
 [include]
 	path = ~/.gitconfig.local
+
 #[init]
 #	templatedir = ~/.git_template
 

@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+mv $1 $1.backup
+echo "$(git rev-parse --abbrev-ref HEAD) " > $1
+cat $1.backup >> $1

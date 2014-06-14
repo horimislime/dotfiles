@@ -65,7 +65,7 @@ zstyle ":vcs_info:git:*" unstagedstr " ✑ "
 zstyle ":vcs_info:git:*" formats " (%b%c%u)"
 zstyle ":vcs_info:git:*" actionformats "%b|%a"
 
-PROMPT="%B%F{246}%F{red}%1v%{${reset_color}%}%F{yellow}%2v%{${reset_color}%} ✘%f%b "
+PROMPT="%F{cyan}☁'%B%F{246}%F{red}%1v%{${reset_color}%}%F{yellow}%2v%{${reset_color}%} ✘%f%b "
 PROMPT2="%B%F{246}%_>%f%b "
 SPROMPT="(๑•﹏•) %B%F{001}%r%f%b? [n,y,a,e]: "
 

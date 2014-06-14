@@ -26,3 +26,5 @@ alias ls="ls -G"
 alias gls="gls --color"
 
 alias t="tig status"
+
+alias copy=pbcopy

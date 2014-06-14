@@ -76,13 +76,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 bindkey "^[[Z" reverse-menu-complete
 
 #========================================
-# Load setting files
-#========================================
-source ${HOME}/.zsh.d/keybinding.zsh
-source ${HOME}/.zsh.d/.zshalias
-source ${HOME}/.zsh.d/zshenv
-
-#========================================
 # Plugin setting
 #========================================
 if [ -d ~/.zsh.d/plugins ]; then
@@ -90,8 +83,15 @@ if [ -d ~/.zsh.d/plugins ]; then
 fi
 
 source ~/.zsh.d/antigen-config.zsh
-source ~/.zsh.d/zaw-config.zsh
+#source ~/.zsh.d/zaw-config.zsh
+source ~/.peco/pecorc
 
+#========================================
+# Load setting files
+#========================================
+source ${HOME}/.zsh.d/keybinding.zsh
+source ${HOME}/.zsh.d/.zshalias
+source ${HOME}/.zsh.d/zshenv
 
 #========================================
 # Platform specific settings
@@ -107,10 +107,6 @@ esac
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-
-if [[ -f "$HOME/.zshenv" ]]; then
-    source "$HOME/.zshenv"
-fi
 
 if [[ -f "${HOME}/.zsh.local" ]]; then
     source "${HOME}/.zsh.local"
@@ -137,5 +133,4 @@ fi
 # tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-#[[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
+
