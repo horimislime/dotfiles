@@ -6,7 +6,7 @@ function peco-select-history() {
     zle clear-screen
 }
 zle -N peco-select-history
-bindkey '^r' peco-select-history
+bindkey '^x^r' peco-select-history
 
 # kill process
 function peco-proc () {
@@ -36,3 +36,14 @@ function git-branches () {
 }         
 zle -N git-branches
 bindkey '^x^b' git-branches
+
+function peco-dir () {
+    local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-dir
+bindkey '^x^g' peco-dir
