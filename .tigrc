@@ -1,5 +1,5 @@
-bind diff g move-first-line
-bind diff G move-last-line
+bind generic g move-first-line
+bind generic G move-last-line
 
 bind main G !@hub browse -- commit/%(commit)
 
