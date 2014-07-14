@@ -28,3 +28,5 @@ alias gls="gls --color"
 alias t="tig status"
 
 alias copy=pbcopy
+
+alias gg='cd ~/.ghq/$(ghq list | peco)'
