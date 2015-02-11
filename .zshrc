@@ -90,7 +90,7 @@ source ~/.peco/pecorc
 # Load setting files
 #========================================
 source ${HOME}/.zsh.d/keybinding.zsh
-source ${HOME}/.zsh.d/.zshalias
+source ${HOME}/.zsh.d/zshalias
 source ${HOME}/.zsh.d/zshenv
 
 #========================================
@@ -133,4 +133,7 @@ fi
 # tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
-
+## create emacs env file
+perl -wle \
+    'do { print qq/(setenv "$_" "$ENV{$_}")/ if exists $ENV{$_} } for @ARGV' \
+    PATH > ~/.emacs.d/shellenv.el
