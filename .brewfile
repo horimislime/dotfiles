@@ -1,78 +1,95 @@
-tap 'caskroom/cask'
-tap 'homebrew/binary'
-tap 'homebrew/brewdler'
-tap 'peco/peco'
-tap 'pivotal/tap'
-tap 'sanemat/font'
 
-brew 'emacs'
-brew 'git'
-brew 'peco'
-brew 'rbenv'
-brew 'ruby-build'
-brew 'tig'
-brew 'tmux'
-brew 'zsh'
-brew 'ricty'
+# tap repositories and their packages
 
-brew 'cmigemo'
-brew 'csshx'
-brew 'fontconfig'
-brew 'fontforge', args: ['with-python']
-brew 'ghi'
-brew 'gibo'
-brew 'gnu-sed'
-brew 'gnu-time'
-brew 'go'
-brew 'heroku-toolbelt'
-brew 'htop-osx'
-brew 'hub', args: ['HEAD']
-brew 'imagemagick'
-brew 'jq'
-brew 'maven'
-brew 'memcached'
-brew 'mercurial'
-brew 'nkf'
-brew 'node'
-brew 'open-cobol'
-brew 'openssl'
-brew 'pcre'
-brew 'pkg-config'
-brew 'python'
-brew 'readline'
-brew 'sbt'
-brew 'scala'
-brew 'ssh-copy-id'
-brew 'terraform'
-brew 'tree'
-brew 'wget'
-brew 'xctool'
+## caskroom/cask
+tap caskroom/cask
 
-cask 'alfred'
-cask 'appcleaner'
-cask 'appcode'
-cask 'atom'
-cask 'ccmenu'
-cask 'coteditor'
-cask 'disk-inventory-x'
-cask 'dropbox'
-cask 'flash'
-cask 'github'
-cask 'google-chrome'
-cask 'google-japanese-ime'
-cask 'iterm2'
-cask 'karabiner'
-cask 'keyboard-maestro'
-cask 'kobito'
-cask 'lyn'
-cask 'marked'
-cask 'minecraft'
-cask 'mysqlworkbench'
-cask 'osxfuse'
-cask 'seil'
-cask 'sequel-pro'
-cask 'silverlight'
-cask 'sourcetree'
-cask 'vagrant'
-cask 'virtualbox'
-cask 'vlc'
+## homebrew/binary
+tap homebrew/binary
+
+## homebrew/brewdler
+tap homebrew/brewdler
+
+## peco/peco
+tap peco/peco
+
+## pivotal/tap
+tap pivotal/tap
+
+## sanemat/font
+tap sanemat/font
+
+# Other Homebrew packages
+install ack
+install cmigemo
+install csshx
+install emacs
+install fontconfig
+install fontforge --with-python
+install ghi
+install gibo
+install git
+install git-plus
+install gnu-sed
+install gnu-time
+install go
+install heroku-toolbelt
+install htop-osx
+install hub --HEAD
+install imagemagick
+install jq
+install maven
+install memcached
+install mercurial
+install nkf
+install node
+install open-cobol
+install openssl
+install pcre
+install peco
+install pkg-config
+install python
+install rbenv
+install readline
+install ricty
+install ruby-build
+install sbt
+install scala
+install ssh-copy-id
+install terraform
+install tig
+install tmux
+install tree
+install wget
+install xctool
+install zsh
+
+# Cask applications
+cask install alfred
+cask install appcleaner
+cask install appcode
+cask install atom
+cask install ccmenu
+cask install coteditor
+cask install disk-inventory-x
+cask install dropbox
+cask install flash
+cask install github
+cask install google-chrome
+cask install google-japanese-ime
+cask install iterm2
+cask install karabiner
+cask install keyboard-maestro
+cask install kobito
+cask install lyn
+cask install marked
+cask install minecraft
+cask install mysqlworkbench
+cask install osxfuse
+cask install seil
+cask install sequel-pro
+cask install silverlight
+cask install sourcetree
+cask install vagrant
+cask install virtualbox
+cask install vlc
