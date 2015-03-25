@@ -130,6 +130,11 @@ if [ -d "${PYENV_ROOT}" ]; then
 	eval "$(pyenv init -)"
 fi
 
+# brew-file
+if [ -f $(brew --prefix)/etc/brew-wrap ];then
+    source $(brew --prefix)/etc/brew-wrap
+fi
+
 # tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
@@ -137,3 +142,6 @@ fi
 perl -wle \
     'do { print qq/(setenv "$_" "$ENV{$_}")/ if exists $ENV{$_} } for @ARGV' \
     PATH > ~/.emacs.d/shellenv.el
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/Users/horimislime/.gvm/bin/gvm-init.sh" ]] && source "/Users/horimislime/.gvm/bin/gvm-init.sh"
