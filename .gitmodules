@@ -19,3 +19,6 @@
 [submodule ".zsh.d/zaw"]
 	path = .zsh.d/zaw
 	url = git://github.com/zsh-users/zaw.git
+[submodule ".iterm/color-themes"]
+	path = .iterm/color-themes
+	url = git@github.com:mbadolato/iTerm2-Color-Schemes.git
