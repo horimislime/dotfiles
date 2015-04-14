@@ -113,35 +113,5 @@ if [[ -f "${HOME}/.zsh.local" ]]; then
 fi
 
 
-if [[ -f "${HOME}/bin/.pvm/pvm.sh" ]]; then
-    . /Users/horimislime/bin/.pvm/pvm.sh
-fi
-
-if [[ -e "$HOME/.rbenv" ]]; then
-    export PATH="$HOME/.rbenv/shims:$PATH"
-    eval "$(rbenv init -)"
-fi
-
-export PYTHONSTARTUP="$HOME/.pyrc"
-
-export PYENV_ROOT="${HOME}/.pyenv"
-if [ -d "${PYENV_ROOT}" ]; then
-	export PATH=${PYENV_ROOT}/bin:$PATH
-	eval "$(pyenv init -)"
-fi
-
-# brew-file
-if [ -f $(brew --prefix)/etc/brew-wrap ];then
-    source $(brew --prefix)/etc/brew-wrap
-fi
-
-# tmuxinator
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
-
-## create emacs env file
-perl -wle \
-    'do { print qq/(setenv "$_" "$ENV{$_}")/ if exists $ENV{$_} } for @ARGV' \
-    PATH > ~/.emacs.d/shellenv.el
-
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/horimislime/.gvm/bin/gvm-init.sh" ]] && source "/Users/horimislime/.gvm/bin/gvm-init.sh"
