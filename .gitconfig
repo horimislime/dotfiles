@@ -36,3 +36,6 @@
 #[init]
 #	templatedir = ~/.git_template
 
+[user]
+	name = horimislime
+	email = horimislime@gmail.com
