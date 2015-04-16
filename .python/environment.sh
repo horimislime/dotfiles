@@ -1,4 +1,4 @@
-export PYTHONSTARTUP="$HOME/.pyrc"
+export PYTHONSTARTUP="${HOME}/.python/"
 
 export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
