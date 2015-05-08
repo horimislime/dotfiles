@@ -16,18 +16,17 @@
 	p = !git push origin `git rev-parse --abbrev-ref HEAD`
 	pick = cherry-pick -rn
 	pbcopy = !printf "$1" | pbcopy
-	up = !git pull origin `git rev-parse --abbrev-ref HEAD`
 	j = !hub browse
 
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/horimislime/.gitignore_global
 	editor = vim
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.0.5.2/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 
 [include]
@@ -39,3 +38,13 @@
 [user]
 	name = horimislime
 	email = horimislime@gmail.com
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
+[github]
+	user = horimislime
+[ghi]
+	token = !security find-internet-password -a  -s github.com -l 'ghi token' -w
+[git-up "fetch"]
+	all = true
