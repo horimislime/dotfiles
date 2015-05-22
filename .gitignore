@@ -10,3 +10,8 @@
 .gitconfig.local
 .vim/bundle/*
 .tmux.d/tmux.local
+
+.emacs.d/ac-comphist.dat
+.emacs.d/el-get
+.emacs.d/recentf
+.emacs.d/url/cookies
