@@ -5,22 +5,26 @@
 [alias]
 	wdiff = diff --color-words
 	pbcopy = !printf "$1" | pbcopy
-        ldiff = difftool -t latex 
-	st = status
-	l = log
+	ldiff = difftool -t latex
+	s = stash
+	po = pop
+	stat = status -sb
+	l = log --oneline
 	pu = push origin 
 	c = commit
 	cb = checkout -b 
 	ch = checkout 
-	branches = branch -a
 	p = !git push origin `git rev-parse --abbrev-ref HEAD`
 	pick = cherry-pick -rn
-	pbcopy = !printf "$1" | pbcopy
-	j = !hub browse
+	pr-branch = "!f() { git rev-parse --abbrev-ref $(git name-rev --name-only $(git ls-remote origin refs/pull/$1/head | cut -f1)) | sed s/^origin\\\\///; }; f"
+	top = !hub browse
+	prs = !hub-pr list
+	cur-pr = browse-remote --pr
+	issues = !ghi list
 
 [core]
 	excludesfile = /Users/horimislime/.gitignore_global
-	editor = vim
+	editor = "emacsclient -t"
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
