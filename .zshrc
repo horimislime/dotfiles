@@ -94,6 +94,11 @@ source ${HOME}/.zsh.d/zshalias
 source ${HOME}/.zsh.d/zshenv
 
 #========================================
+# Languages
+#========================================
+source ${HOME}/.python/environment.sh
+
+#========================================
 # Platform specific settings
 #========================================
 case "${OSTYPE}" in

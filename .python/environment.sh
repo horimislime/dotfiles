@@ -1,4 +1,4 @@
-export PYTHONSTARTUP="${HOME}/.python/"
+export PYTHONSTARTUP="${HOME}/.python/config.py"
 
 export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then

@@ -1,0 +1,6 @@
+# place this under ~/.rbenv/
+bundler
+cocoapods
+git-browse-remote
+git-up
+termtter
