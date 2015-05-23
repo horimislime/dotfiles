@@ -4,9 +4,11 @@
     (server-start))
 
 (prefer-coding-system 'utf-8)
+(setq split-width-threshold nil)
 (setq-default indent-tabs-mode nil)
 (setq mac-emulate-three-button-mouse nil)
 (global-auto-revert-mode 1)
+(setq vc-follow-symlinks t)
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
@@ -115,5 +117,7 @@
 ;; Key binding
 (global-set-key (kbd "C-x C-r") 'eval-buffer)
 (bind-key "\C-x\C-g" 'goto-line)
-(bind-key "\C-c\C-f" 'anything-custom-filelist)
+(global-set-key (kbd "\C-c \C-f") 'anything-custom-filelist)
 (global-set-key (kbd "C-x b") 'anything-for-files)
+(global-set-key (kbd "C-c t") 'term+mux-new-other-window)
+                
