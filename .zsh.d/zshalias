@@ -31,3 +31,4 @@ alias t="tig status"
 alias copy=pbcopy
 
 alias tmux='TERM=xterm-256color tmux'
+alias find=gfind
