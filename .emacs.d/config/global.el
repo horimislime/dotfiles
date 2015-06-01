@@ -51,6 +51,10 @@
   (load-library "migemo")
   (migemo-init))
 
+(require 'quickrun)
+(require 'popwin)
+(push '("*quickrun*") popwin:special-display-config)
+
 ;; Anything
 (require 'anything-startup)
 (when (require 'recentf nil t)

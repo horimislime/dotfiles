@@ -12,6 +12,8 @@
 (el-get-bundle migemo)
 (el-get-bundle open-junk-file)
 (el-get-bundle popup)
+(el-get-bundle popwin)
+(el-get-bundle quickrun)
 (el-get-bundle rainbow-delimiters)
 (el-get-bundle recentf-ext)
 (el-get-bundle ruby-block)
