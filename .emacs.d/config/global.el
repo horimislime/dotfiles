@@ -55,6 +55,9 @@
 (require 'popwin)
 (push '("*quickrun*") popwin:special-display-config)
 
+(require 'powerline)
+(powerline-default-theme)
+
 ;; Anything
 (require 'anything-startup)
 (when (require 'recentf nil t)
