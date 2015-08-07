@@ -19,3 +19,5 @@ esac
 
 chflags nohidden ~/Library
 defaults write com.apple.Finder FXPreferredViewStyle Nlsv
+# Show all files
+defaults write com.apple.finder AppleShowAllFiles -boolean true
