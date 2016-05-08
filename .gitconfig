@@ -4,40 +4,29 @@
         prompt = false
 [alias]
 	wdiff = diff --color-words
-	pbcopy = !printf "$1" | pbcopy
 	ldiff = difftool -t latex
 	s = stash
-	po = pop
-	stat = status -sb
-	l = log --oneline
-	pu = push origin 
-	c = commit
-	cb = checkout -b 
-	ch = checkout 
+	b = checkout -b
+	c = checkout
 	p = !git push origin `git rev-parse --abbrev-ref HEAD`
-	pick = cherry-pick -rn
+	push-f = !git push --force-with-lease origin `git rev-parse --abbrev-ref HEAD`
+	pick = cherry-pick
 	pr-branch = "!f() { git rev-parse --abbrev-ref $(git name-rev --name-only $(git ls-remote origin refs/pull/$1/head | cut -f1)) | sed s/^origin\\\\///; }; f"
-	top = !hub browse
 	prs = !hub-pr list
 	cur-pr = browse-remote --pr
 	issues = !ghi list
+	push-f = !git push -f origin `git rev-parse --abbrev-ref HEAD`
+	pr = "!hub browse -- compare/develop...$(git symbolic-ref --short HEAD)?body=%0A%23$(echo $(git symbolic-ref --short\
+ HEAD) |awk -F'[/_-]' '{print $2}')%0A%0A%23%20Before%0A%0A%23%20After%20%0A%0A"
+	issue = "!ghi show $(echo $(git symbolic-ref --short HEAD) |awk -F "/" '{print $2}')"
+	showpr = "!f() { git log --merges --oneline --reverse --ancestry-path $1...master | grep 'Merge pull request #' | head -n 1; }; f"
 
 [core]
 	excludesfile = /Users/horimislime/.gitignore_global
 	editor = "emacsclient -t"
 
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.0.5.2/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-
 [include]
 	path = ~/.gitconfig.local
-
-#[init]
-#	templatedir = ~/.git_template
 
 [user]
 	name = horimislime
@@ -48,7 +37,23 @@
 	required = true
 [github]
 	user = horimislime
-[ghi]
-	token = !security find-internet-password -a  -s github.com -l 'ghi token' -w
+	token = c3c94fcd1a500ac56f8463699ef46d85e573ab93
+
 [git-up "fetch"]
 	all = true
+
+[diff]
+	tool = echo
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[merge "mergepbx"]
+	name = Xcode project files merger
+	driver = mergepbx %O %A %B
+[ghi]
+	token = !security find-internet-password -a horimislime -s github.com -l 'ghi token' -w
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.0.5.2/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
