@@ -6,6 +6,6 @@ antigen-bundles <<EOBUNDLES
 zsh-users/zsh-syntax-highlighting
 EOBUNDLES
 
-antigen theme cloud
+antigen theme xxf
 
 antigen-apply

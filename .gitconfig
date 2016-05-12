@@ -3,6 +3,7 @@
 [difftool]
         prompt = false
 [alias]
+	pbcopy = !printf "$1" | pbcopy
 	wdiff = diff --color-words
 	ldiff = difftool -t latex
 	s = stash

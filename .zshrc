@@ -1,7 +1,7 @@
 #========================================
 # General settings
 #========================================
-
+zmodload zsh/zprof
 typeset -U fpath
 fpath=(
     $HOME/.zsh.d/*(/N)
@@ -120,3 +120,11 @@ fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/horimislime/.gvm/bin/gvm-init.sh" ]] && source "/Users/horimislime/.gvm/bin/gvm-init.sh"
+
+
+#if type zprof > /dev/null 2>&1; then
+#    zprof | less
+#fi
+
+autoload -U promptinit && promptinit
+prompt pure
