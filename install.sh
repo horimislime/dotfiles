@@ -13,6 +13,9 @@ git submodule update
 # install gvm
 curl -s get.gvmtool.net | bash
 
+# install git-completion
+curl -O https://raw.github.com/git/git/master/contrib/completion/git-completion.zsh ./.zsh.d
+
 # install alcatraz
 curl -fsSL https://raw.github.com/supermarin/Alcatraz/master/Scripts/install.sh | sh
 
