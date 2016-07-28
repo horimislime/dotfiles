@@ -6,10 +6,11 @@ tap 'homebrew/binary'
 tap 'homebrew/brewdler'
 tap 'peco/peco'
 tap 'pivotal/tap'
-
+tap 'thoughtbot/formulae'
 tap 'sanemat/font'
 
-# cask 'applications
+# cask applications
+
 cask 'alfred'
 cask 'karabiner'
 cask 'seil'
@@ -24,7 +25,8 @@ cask 'marked'
 cask 'qlmarkdown'
 cask 'sourcetree'
 
-# Other Homebrew 'packages
+# Other Homebrew packages
+
 brew 'ack'
 brew 'bison'
 brew 'binutils'
@@ -33,12 +35,14 @@ brew 'caskroom/cask/brew-cask'
 brew 'Caskroom/cask/xquartz'
 brew 'cmigemo'
 brew 'csshx'
+brew 'cvs'
 brew 'emacs'
 brew 'entr'
 brew 'fontconfig'
 brew 'fontforge', args: ['--with-python']
 brew 'gibo'
 brew 'git'
+brew 'gitsh'
 brew 'git-plus'
 brew 'gnu-sed'
 brew 'gnu-time'
@@ -48,6 +52,7 @@ brew 'htop-osx'
 brew 'hub', args: ['HEAD']
 brew 'imagemagick'
 brew 'jq'
+brew 'migemogrep'
 brew 'nkf'
 brew 'node'
 brew 'openssl'
