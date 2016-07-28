@@ -13,5 +13,8 @@
 
 .emacs.d/ac-comphist.dat
 .emacs.d/el-get
+.emacs.d/el-get-recipes
+.emacs.d/elpa
 .emacs.d/recentf
-.emacs.d/url/cookies
+.emacs.d/url/
+
