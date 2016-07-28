@@ -5,6 +5,8 @@ bind generic G move-last-line
 bind main G !@hub browse -- commit/%(commit)
 # Copy commit sha
 bind main c !@git pbcopy %(commit)
+# Rebase
+bind main R !git rebase -i %(commit)
 # --amend
 bind generic + !git commit --amend
 
