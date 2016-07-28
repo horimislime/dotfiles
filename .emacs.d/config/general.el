@@ -65,3 +65,13 @@
 
 (tool-bar-mode 0)
 (set-scroll-bar-mode nil)
+
+;; No initial message on scratch buffer
+(setq initial-scratch-message nil)
+
+(require 'popwin)
+;(setq display-buffer-function 'popwin:display-buffer)
+(setq popwin:popup-window-position 'bottom)
+
+(push "*Buffer List*" popwin:special-display-config)
+(push "*scratch*" popwin:special-display-config)
