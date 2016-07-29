@@ -75,3 +75,4 @@
 
 (push "*Buffer List*" popwin:special-display-config)
 (push "*scratch*" popwin:special-display-config)
+(push "*Warnings*" popwin:special-display-config)

@@ -9,6 +9,7 @@
 (el-get-bundle git-modes)
 (el-get-bundle git-gutter)
 (el-get-bundle helm)
+(el-get-bundle helm-ghq)
 (el-get-bundle js2-mode)
 (el-get-bundle json)
 (el-get-bundle magit)
