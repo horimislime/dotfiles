@@ -26,6 +26,7 @@
 (el-get-bundle ruby-block)
 (el-get-bundle ruby-end)
 (el-get-bundle ruby-mode)
+(el-get-bundle smart-cursor-color)
 (el-get-bundle swift-mode)
 (el-get-bundle term+)
 (el-get-bundle term+ki)

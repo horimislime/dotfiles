@@ -25,7 +25,7 @@
 
 ;; Appearance
 (load-theme 'misterioso t)
-
+(require 'smart-cursor-color)
 (defface hlline-face
   '((((class color)
       (background dark))
@@ -37,7 +37,8 @@
      ()))
   "*Face used by hl-line.")
 (setq hl-line-face 'hlline-face)
-(global-hl-line-mode)
+(global-hl-line-mode +1)
+(smart-cursor-color-mode +1)
 
 (when (and (executable-find "cmigemo")
            (require 'migemo nil t))
