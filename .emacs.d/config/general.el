@@ -71,9 +71,10 @@
 (setq initial-scratch-message nil)
 
 (require 'popwin)
-;(setq display-buffer-function 'popwin:display-buffer)
+(setq display-buffer-function 'popwin:display-buffer)
 (setq popwin:popup-window-position 'bottom)
-
 (push "*Buffer List*" popwin:special-display-config)
 (push "*scratch*" popwin:special-display-config)
 (push "*Warnings*" popwin:special-display-config)
+
+(require 'highlight-symbol)
