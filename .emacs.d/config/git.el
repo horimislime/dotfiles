@@ -1,2 +1,4 @@
-;(setq auto-mode-alist (remove (rassoc 'git-rebase-mode auto-mode-alist) auto-mode-alist))
 (require 'magit)
+(require 'git-modes)
+(require 'git-gutter-fringe)
+(global-git-gutter-mode)

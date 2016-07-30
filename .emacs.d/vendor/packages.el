@@ -1,4 +1,3 @@
-(el-get-bundle anything)
 (el-get-bundle auto-complete)
 (el-get-bundle coffee-mode)
 (el-get-bundle editorconfig)
@@ -7,7 +6,7 @@
 (el-get-bundle fuzzy)
 (el-get-bundle gist)
 (el-get-bundle git-modes)
-(el-get-bundle git-gutter)
+(el-get-bundle git-gutter-fringe)
 (el-get-bundle helm)
 (el-get-bundle helm-ghq)
 (el-get-bundle js2-mode)

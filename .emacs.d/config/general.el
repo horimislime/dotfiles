@@ -40,6 +40,8 @@
 (global-hl-line-mode +1)
 (smart-cursor-color-mode +1)
 
+(global-linum-mode t)
+
 (when (and (executable-find "cmigemo")
            (require 'migemo nil t))
   (setq migemo-command "/usr/local/bin/cmigemo")
