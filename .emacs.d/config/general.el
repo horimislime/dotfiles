@@ -52,17 +52,11 @@
   (load-library "migemo")
   (migemo-init))
 
-(require 'quickrun)
-(require 'popwin)
-(push '("*quickrun*") popwin:special-display-config)
-
 (require 'powerline)
 (powerline-default-theme)
 
 (require 'neotree)
 (global-set-key (kbd "C-x t") 'neotree-toggle)
-
-(add-to-list 'auto-mode-alist '("\\Fastfile\\'" . ruby-mode))
 
 (tool-bar-mode 0)
 (set-scroll-bar-mode nil)
@@ -76,5 +70,3 @@
 (push "*Buffer List*" popwin:special-display-config)
 (push "*scratch*" popwin:special-display-config)
 (push "*Warnings*" popwin:special-display-config)
-
-(require 'highlight-symbol)
