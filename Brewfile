@@ -12,6 +12,7 @@ tap 'sanemat/font'
 # cask applications
 
 cask 'alfred'
+cask 'java' unless system '/usr/libexec/java_home --failfast'
 cask 'karabiner'
 cask 'seil'
 cask 'iterm2'
@@ -35,7 +36,7 @@ brew 'caskroom/cask/brew-cask'
 brew 'cmigemo'
 brew 'csshx'
 brew 'cvs'
-brew 'emacs'
+brew 'emacs', args: ['with-cocoa', 'with-gnutls']
 brew 'entr'
 brew 'fontconfig'
 brew 'fontforge', args: ['--with-python']
