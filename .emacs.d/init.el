@@ -10,7 +10,6 @@
     (eval-print-last-sexp)))
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
-(el-get-bundle wakatime-mode)
 
 (add-to-list 'load-path "~/.emacs.d/vendor/")
 (load "packages")

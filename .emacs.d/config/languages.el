@@ -22,10 +22,6 @@
   (save-excursion
     (insert ")")))
 
-(setq w3m-command "/usr/local/bin/w3m")
-(require 'w3m)
-(require 'markdown-mode)
-
 (defun w3m-browse-url-other-window (url &optional newwin)
   (let ((w3m-pop-up-windows t))
     (if (one-window-p) (split-window))
