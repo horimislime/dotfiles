@@ -22,3 +22,7 @@
 [submodule ".xcode/xcode-themes"]
 	path = .xcode/xcode-themes
 	url = git@github.com:hdoria/xcode-themes.git
+
+[submodule ".tmux/plugins/tpm"]
+	path = .tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
