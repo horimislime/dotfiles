@@ -72,3 +72,14 @@
 (push "*Buffer List*" popwin:special-display-config)
 (push "*scratch*" popwin:special-display-config)
 (push "*Warnings*" popwin:special-display-config)
+
+;; Delete current buffer
+(defun delete-buffer ()
+  "clear current buffer"
+  (interactive)
+  (let ((start (point-min))
+        (end   (point-max)))
+    (delete-region start end)))
+
+;; Fullscreen at launch
+(toggle-frame-maximized)
