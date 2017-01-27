@@ -1,12 +1,3 @@
-;; term+
-(use-package term+
-  :config
-  (progn
-    (use-package term+key-intercept)
-    (use-package term+mux)
-    (require 'xterm-256color)))
-(setq explicit-shell-file-name "/usr/local/bin/zsh")
-
 ;; editorconfig
 (setq edconf-exec-path "/usr/local/bin/editorconfig")
 (require 'editorconfig)

@@ -24,12 +24,7 @@ else
 fi
 
 # golang installation
-brew install go
 mkdir ~/.go
-go get github.com/motemen/ghq
 export PATH=$PATH:~/.go/bin
 
-ghq get -p horimislime/dotfiles
-
-brew tap Homebrew/brewdler
-echo "Finished."
+echo "Finished🍺"

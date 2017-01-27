@@ -24,7 +24,7 @@
       kept-old-versions 5)
 
 ;; Appearance
-(load-theme 'misterioso t)
+(load-theme 'heroku t)
 (require 'smart-cursor-color)
 (defface hlline-face
   '((((class color)
@@ -55,7 +55,7 @@
   (migemo-init))
 
 (require 'powerline)
-(powerline-default-theme)
+(powerline-center-theme)
 
 (require 'neotree)
 (global-set-key (kbd "C-x t") 'neotree-toggle)
@@ -83,3 +83,5 @@
 
 ;; Fullscreen at launch
 (toggle-frame-maximized)
+
+(emoji-fontset-enable "Symbola")

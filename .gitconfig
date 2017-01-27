@@ -10,6 +10,7 @@
 	b = checkout -b
 	c = checkout
 	p = !git push origin `git rev-parse --abbrev-ref HEAD`
+	pull = pull --rebase --autostash
 	push-f = !git push --force-with-lease origin `git rev-parse --abbrev-ref HEAD`
 	pick = cherry-pick
 	list-pr = !hub-pr list
@@ -47,20 +48,9 @@
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 	
-[merge "mergepbx"]
-	name = Xcode project files merger
-	driver = mergepbx %O %A %B
-
 [github]
 	user = horimislime
 	
 [ghi]
 	token = !security find-internet-password -a horimislime -s github.com -l 'ghi token' -w
-	
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-	
-[mergetool "sourcetree"]
-	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.0.5.2/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+

@@ -1,12 +1,7 @@
-;; Swift
-(require 'swift-mode)
 
 ;; Markdown
-(setq w3m-command "/usr/local/bin/w3m")
-(require 'w3m)
-(require 'markdown-mode)
-;(use-package markdown-mode
-;  :mode ("\\.md\\'" . gfm-mode))
+(use-package markdown-mode
+  :mode ("\\.md\\'" . gfm-mode))
 
 (defun markdown-insert-link ()
   "Insert link tag template"
@@ -22,23 +17,14 @@
   (save-excursion
     (insert ")")))
 
-(defun w3m-browse-url-other-window (url &optional newwin)
-  (let ((w3m-pop-up-windows t))
-    (if (one-window-p) (split-window))
-    (other-window 1)
-    (w3m-browse-url url newwin)))
-
-(defun markdown-render-w3m (n)
-  (interactive "p")
-  (message (buffer-file-name))
-  (call-process "/usr/local/bin/grip" nil nil nil
-                "--gfm" "--export"
-                (buffer-file-name)
-                "/tmp/grip.html")
-  (w3m-browse-url-other-window "file:///tmp/grip.html")
-  )
-(define-key markdown-mode-map "\C-c p" 'markdown-render-w3m)
-
+(defun markdown-preview-file ()
+  "run Marked on the current file and revert the buffer"
+  (interactive)
+  (shell-command
+   (format "open -a /opt/homebrew-cask/Caskroom/marked/latest/Marked2.app %s"
+       (shell-quote-argument (buffer-file-name))))
+)
+(global-set-key "\C-cm" 'markdown-preview-file)
 
 ;; JavaScript
 (require 'js2-mode)

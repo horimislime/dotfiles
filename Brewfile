@@ -1,6 +1,4 @@
-
-# tap repositories and their packages
-
+cask_args appdir: '/Applications'
 tap 'caskroom/cask'
 tap 'homebrew/binary'
 tap 'homebrew/brewdler'
@@ -9,24 +7,52 @@ tap 'pivotal/tap'
 tap 'thoughtbot/formulae'
 tap 'sanemat/font'
 
-# cask applications
+# AppStore apps
+
+mas '1Password',  id: 443987910
+mas 'DayOne',     id: 847496013
+mas 'Deckset',    id: 847496013
+mas 'Divvy',      id: 413857545
+mas 'iAWriter',   id: 847496013
+mas 'LINE',       id: 539883307
+mas 'Pocket',     id: 568494494
+mas 'PixelMator', id: 407963104
+mas 'Reeder3',    id: 880001334
+mas 'Skitch',     id: 425955336
+mas 'Slack',      id: 803453959
+mas 'Tweetbot',   id: 557168941
+mas 'そら案内',   id: 599799247
+
+# Apps
 
 cask 'alfred'
-cask 'java' unless system '/usr/libexec/java_home --failfast'
-cask 'karabiner'
-cask 'seil'
-cask 'iterm2'
-cask 'bettertouchtool'
+cask 'appcleaner'
+cask 'appcode'
+cask 'atom'
+cask 'bartender'
+cask 'clipy'
+cask 'coteditor'
+cask 'dash'
+cask 'geekbench'
+cask 'gitscout'
 cask 'google-chrome'
 cask 'google-japanese-ime'
-cask 'appcleaner'
-cask 'atom'
-cask 'coteditor'
+cask 'google-photos-backup'
+cask 'iterm2'
+cask 'java' unless system '/usr/libexec/java_home --failfast'
+cask 'kindle'
+cask 'licecap'
 cask 'marked'
 cask 'qlmarkdown'
+cask 'quitter'
+cask 'rescuetime'
+cask 'reveal'
+cask 'sketch'
+cask 'sketch-toolbox'
 cask 'sourcetree'
+cask 'zeplin'
 
-# Other Homebrew packages
+# brew packages
 
 brew 'ack'
 brew 'bison'
@@ -40,6 +66,7 @@ brew 'emacs', args: ['with-cocoa', 'with-gnutls']
 brew 'entr'
 brew 'fontconfig'
 brew 'fontforge', args: ['--with-python']
+brew 'ghq'
 brew 'gibo'
 brew 'git'
 brew 'gitsh'
