@@ -27,4 +27,11 @@ fi
 mkdir ~/.go
 export PATH=$PATH:~/.go/bin
 
+brew install ghq
+ghq get -p horimislime/dotfiles
+cd $HOME/.ghq/github.com/horimislime/dotfiles
+
+brew bundle
+./install.sh
+
 echo "Finished🍺"
