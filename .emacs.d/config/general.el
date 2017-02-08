@@ -84,4 +84,3 @@
 ;; Fullscreen at launch
 (toggle-frame-maximized)
 
-(emoji-fontset-enable "Symbola")
