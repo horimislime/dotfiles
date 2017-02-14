@@ -92,6 +92,7 @@ source ~/.peco/pecorc
 source ${HOME}/.zsh.d/keybinding.zsh
 source ${HOME}/.zsh.d/zshalias
 source ${HOME}/.zsh.d/zshenv
+source ${HOME}/.zsh.d/oh-my-zsh-node-theme/node.zsh-theme
 
 #========================================
 # Platform specific settings

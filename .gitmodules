@@ -29,3 +29,6 @@
 [submodule ".tmux.d/themepack"]
 	path = .tmux.d/themepack
 	url = https://github.com/jimeh/tmux-themepack.git
+[submodule ".zsh.d/oh-my-zsh-node-theme"]
+	path = .zsh.d/oh-my-zsh-node-theme
+	url = git@github.com:skuridin/oh-my-zsh-node-theme.git
