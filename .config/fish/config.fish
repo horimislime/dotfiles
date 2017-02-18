@@ -3,6 +3,8 @@ set -x LANG ja_JP.UTF-8
 set -x GOPATH $HOME/.go
 set -x TERM xterm-256color
 
+set -x PATH /usr/local/share/git-core/contrib/diff-highlight/ $PATH
+
 alias cp 'cp -i'
 alias e 'emacsclient -t'
 alias find 'gfind' # prefer GNU find

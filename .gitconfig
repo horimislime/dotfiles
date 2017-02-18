@@ -55,3 +55,10 @@
 [ghi]
 	token = !security find-internet-password -a horimislime -s github.com -l 'ghi token' -w
 
+[diff]
+	compactionHeuristic = true
+
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less

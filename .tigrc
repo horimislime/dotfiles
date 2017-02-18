@@ -12,3 +12,4 @@ bind generic + !git commit --amend
 
 # Always split horizontally
 set vertical-split = false
+set diff-highlight = true
