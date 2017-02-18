@@ -11,6 +11,7 @@
 	c = checkout
 	p = !git push origin `git rev-parse --abbrev-ref HEAD`
 	pull = pull --rebase --autostash
+	up = pull --all
 	push-f = !git push --force-with-lease origin `git rev-parse --abbrev-ref HEAD`
 	pick = cherry-pick
 	list-pr = !hub-pr list
