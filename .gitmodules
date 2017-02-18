@@ -1,34 +1,18 @@
-[submodule ".zsh.d/zsh-syntax-highlighting"]
-	path = .zsh.d/zsh-syntax-highlighting
-	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule ".zsh.d/z"]
-	path = .zsh.d/z
-	url = git://github.com/rupa/z
-[submodule ".tmux.d/powerline-fonts"]
-	path = .tmux.d/powerline-fonts
-	url = https://github.com/powerline/fonts.git
-[submodule ".zsh.d/antigen"]
-	path = .zsh.d/antigen
-	url = https://github.com/zsh-users/antigen.git
-[submodule ".tmux.d/tmux-colors-solarized"]
-	path = .tmux.d/tmux-colors-solarized
-	url = https://github.com/seebi/tmux-colors-solarized.git
-[submodule ".zsh.d/zaw"]
-	path = .zsh.d/zaw
-	url = git://github.com/zsh-users/zaw.git
 [submodule ".iterm/color-themes"]
 	path = .iterm/color-themes
 	url = https://github.com/mbadolato/iTerm2-Color-Schemes.git
-[submodule ".xcode/xcode-themes"]
-	path = .xcode/xcode-themes
-	url = git@github.com:hdoria/xcode-themes.git
-
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule ".tmux.d/powerline-fonts"]
+	path = .tmux.d/powerline-fonts
+	url = https://github.com/powerline/fonts.git
 [submodule ".tmux.d/themepack"]
 	path = .tmux.d/themepack
 	url = https://github.com/jimeh/tmux-themepack.git
-[submodule ".zsh.d/oh-my-zsh-node-theme"]
-	path = .zsh.d/oh-my-zsh-node-theme
-	url = git@github.com:skuridin/oh-my-zsh-node-theme.git
+[submodule ".tmux.d/tmux-colors-solarized"]
+	path = .tmux.d/tmux-colors-solarized
+	url = https://github.com/seebi/tmux-colors-solarized.git
+[submodule ".xcode/xcode-themes"]
+	path = .xcode/xcode-themes
+	url = git@github.com:hdoria/xcode-themes.git

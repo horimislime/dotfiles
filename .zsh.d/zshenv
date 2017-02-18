@@ -1,8 +1,0 @@
-export LANG=ja_JP.UTF-8
-export ALTERNATE_EDITOR=""
-export EDITOR="/usr/local/bin/emacsclient -nw"
-# for golang
-export GOPATH=$HOME/.go
-export PATH=$GOPATH/bin:$PATH
-
-export PATH=$GOPATH/bin:$PATH
