@@ -1,15 +1,16 @@
 bind generic g move-first-line
 bind generic G move-last-line
-
-# Open commit on Github
+bind generic c !@git pbcopy %(commit) # copy commit sha
+bind status + !git commit --amend
+bind status P !git p
 bind main G !@hub browse -- commit/%(commit)
-# Copy commit sha
-bind main c !@git pbcopy %(commit)
-# Rebase
 bind main R !git rebase -i %(commit)
-# --amend
-bind generic + !git commit --amend
 
-# Always split horizontally
+
+set ignore-space = all
+set blob-view-line-number = yes
+set blame-view-line-number = yes
 set vertical-split = false
 set diff-highlight = true
+set main-view = id date author:email-user commit-title:graph=yes,refs=yes
+set blame-view = date:default author:email-user id:yes,color line-number:yes,interval=1 text
