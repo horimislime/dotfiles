@@ -1,4 +1,5 @@
 (el-get-bundle auto-complete)
+(el-get-bundle color-theme-zenburn)
 (el-get-bundle editorconfig)
 (el-get-bundle emoji-fontset)
 (el-get-bundle exec-path-from-shell)

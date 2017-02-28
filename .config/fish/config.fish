@@ -1,3 +1,4 @@
+set -x ALTERNATE_EDITOR ''
 set -x EDITOR '/usr/local/bin/emacsclient -nw'
 set -x LANG ja_JP.UTF-8
 set -x GOPATH $HOME/.go

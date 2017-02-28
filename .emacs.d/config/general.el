@@ -24,18 +24,18 @@
       kept-old-versions 5)
 
 ;; Appearance
-(load-theme 'heroku t)
+(load-theme 'zenburn t)
 (require 'smart-cursor-color)
 (defface hlline-face
   '((((class color)
       (background dark))
-     (:background "dark slate gray"))
-    (((class color)
-      (background light))
-     (:background  "#98FB98"))
-    (t
-     ()))
-  "*Face used by hl-line.")
+      (:background "dark slate gray"))
+     (((class color)
+       (background light))
+      (:background  "#939595"))
+     (t
+      ()))
+   "*Face used by hl-line.")
 (setq hl-line-face 'hlline-face)
 (global-hl-line-mode +1)
 (smart-cursor-color-mode +1)
