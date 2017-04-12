@@ -17,20 +17,17 @@ mas 'LINE',       id: 539883307
 mas 'Pocket',     id: 568494494
 mas 'PixelMator', id: 407963104
 mas 'Reeder3',    id: 880001334
-mas 'Skitch',     id: 425955336
 mas 'Slack',      id: 803453959
 mas 'Tweetbot',   id: 557168941
 mas 'そら案内',   id: 599799247
 
 # Apps
 
-cask 'alfred'
 cask 'appcleaner'
-cask 'appcode'
 cask 'atom'
 cask 'bartender'
-cask 'clipy'
-cask 'coteditor'
+cask 'cloud'
+cask 'contexts'
 cask 'dash'
 cask 'font-fira-code'
 cask 'geekbench'
@@ -38,18 +35,22 @@ cask 'gitscout'
 cask 'google-chrome'
 cask 'google-japanese-ime'
 cask 'google-photos-backup'
+cask 'hyper'
 cask 'iterm2'
 cask 'java' unless system '/usr/libexec/java_home --failfast'
+cask 'jetbrains-toolbox'
 cask 'kindle'
-cask 'licecap'
+cask 'launchbar'
 cask 'marked'
+cask 'paw'
+cask 'provisioning'
 cask 'qlmarkdown'
 cask 'quitter'
 cask 'rescuetime'
 cask 'reveal'
 cask 'sketch'
 cask 'sketch-toolbox'
-cask 'sourcetree'
+cask 'taskpaper'
 cask 'zeplin'
 
 # brew packages
@@ -97,4 +98,3 @@ brew 'tmux'
 brew 'tree'
 brew 'w3m'
 brew 'wget'
-brew 'zsh'
