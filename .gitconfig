@@ -10,13 +10,8 @@
 	b = checkout -b
 	c = checkout
 	p = !git push origin `git rev-parse --abbrev-ref HEAD`
-	pull = pull --rebase --autostash
-	up = pull --all
 	push-f = !git push --force-with-lease origin `git rev-parse --abbrev-ref HEAD`
 	pick = cherry-pick
-	list-pr = !hub-pr list
-	show-pr = browse-remote --pr
-	push-f = !git push -f origin `git rev-parse --abbrev-ref HEAD`
 	pr = "!hub browse -- compare/develop...$(git symbolic-ref --short HEAD)?body=%0A%23$(echo $(git symbolic-ref --short\
  HEAD) |awk -F'[/_-]' '{print $2}')%0A%0A%23%20Before%0A%0A%23%20After%20%0A%0A"
 	issue = "!ghi show $(echo $(git symbolic-ref --short HEAD) |awk -F '[/_-]' '{print $2}')"
@@ -37,7 +32,7 @@
 [user]
 	name = horimislime
 	email = horimislime@gmail.com
-	
+
 [filter "lfs"]
 	clean = git lfs clean %f
 	smudge = git lfs smudge %f
@@ -48,10 +43,10 @@
 
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
-	
+
 [github]
 	user = horimislime
-	
+
 [ghi]
 	token = !security find-internet-password -a horimislime -s github.com -l 'ghi token' -w
 
