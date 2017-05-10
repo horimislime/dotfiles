@@ -9,7 +9,7 @@ link:
 	echo "🔌 Symlink created."
 
 install:
-	./macos/init.sh
+	for FILE in `find ./macos -name "*.sh"`; do $$FILE & done
 	brew bundle
 	pip install -r ./etc/requirements.txt
 	echo "📦 Packages and settings are successfuly installed."
