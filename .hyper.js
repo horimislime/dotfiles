@@ -54,9 +54,17 @@ module.exports = {
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
     // if left empty, your system's login shell will be used by default
-    shell: ''
+    shell: '/usr/local/bin/fish',
 
-    // for advanced config flags please refer to https://hyperterm.org/#cfg
+    hyperTabs: {
+      tabIcons: true,
+      tabIconsColored: true
+    },
+
+    hyperStatusLine: {
+      dirtyColor: 'salmon',
+      fontSize: 16,
+    }
   },
 
   // a list of plugins to fetch and install from npm
@@ -65,7 +73,12 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: ["hyper-dracula", "hyperline", "hyperlinks"],
+  plugins: [
+    "hyperlinks",
+    "hyper-statusline",
+    "hyper-chesterish",
+    "hyper-tabs-enhanced"
+  ],
 
   // in development, you can create a directory under
   // `~/.hyperterm_plugins/local/` and include it here
