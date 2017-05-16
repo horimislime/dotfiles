@@ -7,7 +7,7 @@ module.exports = {
     fontFamily: 'Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: 'rgba(248,28,229,0.75)',
+    cursorColor: 'rgba(255,255,255,0.75)',
 
     // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █
     cursorShape: 'BLOCK',
@@ -64,6 +64,7 @@ module.exports = {
     hyperStatusLine: {
       dirtyColor: 'salmon',
       fontSize: 16,
+      footerTransparent: false
     }
   },
 

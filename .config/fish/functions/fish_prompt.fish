@@ -1,0 +1,1 @@
+/Users/horimislime/.config/fisherman/nai/fish_prompt.fish
