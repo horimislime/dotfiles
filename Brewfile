@@ -28,6 +28,7 @@ mas 'そら案内',      id: 599799247
 cask 'appcleaner'
 cask 'atom'
 cask 'bartender'
+cask 'bitbar'
 cask 'cloud'
 cask 'contexts'
 cask 'dash'
