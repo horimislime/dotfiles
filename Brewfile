@@ -9,15 +9,16 @@ tap 'caskroom/fonts'
 # AppStore apps
 
 mas '1Password',    id: 443987910
-mas 'Bitcoin Info', id: 1237809495
 mas 'DayOne',       id: 847496013
 mas 'Deckset',      id: 847496013
 mas 'Divvy',        id: 413857545
 mas 'iAWriter',     id: 847496013
 mas 'LINE',         id: 539883307
+mas 'Pastebot'	    id: 1179623856
 mas 'Pocket',       id: 568494494
 mas 'PixelMator',   id: 407963104
 mas 'Reeder3',      id: 880001334
+mac 'MdLinker'      id: 1289119450 
 mas 'Slack',        id: 803453959
 mas 'Things 3',	    id: 904280696
 mas 'Tweetbot',     id: 557168941
