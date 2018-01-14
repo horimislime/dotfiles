@@ -17,3 +17,8 @@ alias oo 'open .'
 alias reload-fish 'source $HOME/.config/fish/config.fish'
 alias sudo 'sudo -E ' # to inherit user defined env-vars
 alias t 'tig status'
+
+# iTerm dark window bar
+echo -e "\033]6;1;bg;red;brightness;40\a"
+echo -e "\033]6;1;bg;green;brightness;44\a"
+echo -e "\033]6;1;bg;blue;brightness;52\a"
