@@ -1,10 +1,12 @@
 cask_args appdir: '/Applications'
-tap 'homebrew/binary'
-tap 'pivotal/tap'
-tap 'thoughtbot/formulae'
-tap 'sanemat/font'
+
 tap 'caskroom/cask'
 tap 'caskroom/fonts'
+tap 'd12frosted/emacs-plus'
+tap 'homebrew/binary'
+tap 'pivotal/tap'
+tap 'sanemat/font'
+tap 'thoughtbot/formulae'
 
 # AppStore apps
 
@@ -14,15 +16,13 @@ mas 'Deckset',      id: 847496013
 mas 'Divvy',        id: 413857545
 mas 'iAWriter',     id: 847496013
 mas 'LINE',         id: 539883307
+mas 'Md Linker'     id: 1289119450
 mas 'Pastebot'	    id: 1179623856
 mas 'Pocket',       id: 568494494
-mas 'PixelMator',   id: 407963104
 mas 'Reeder3',      id: 880001334
-mac 'MdLinker'      id: 1289119450 
 mas 'Slack',        id: 803453959
 mas 'Things 3',	    id: 904280696
 mas 'Tweetbot',     id: 557168941
-mas 'そら案内',      id: 599799247
 
 # Apps
 
@@ -30,31 +30,30 @@ cask 'appcleaner'
 cask 'atom'
 cask 'bartender'
 cask 'bitbar'
-cask 'cloud'
 cask 'contexts'
 cask 'dash'
+cask 'docker'
 cask 'font-fira-code'
 cask 'geekbench'
-cask 'gitscout'
 cask 'google-chrome'
-cask 'google-japanese-ime'
 cask 'google-photos-backup'
 cask 'hyper'
 cask 'iterm2'
 cask 'java' unless system '/usr/libexec/java_home --failfast'
 cask 'jetbrains-toolbox'
 cask 'kindle'
-cask 'launchbar'
-cask 'marked'
+cask 'licecap'
+cask 'opensim'
 cask 'paw'
 cask 'provisioning'
 cask 'qlmarkdown'
 cask 'quitter'
+cask 'realm-browser'
 cask 'rescuetime'
 cask 'reveal'
 cask 'sketch'
 cask 'sketch-toolbox'
-cask 'taskpaper'
+cask 'teensy'
 cask 'zeplin'
 
 # brew packages
@@ -74,7 +73,6 @@ brew 'fzf'
 brew 'ghq'
 brew 'gibo'
 brew 'git'
-brew 'gitsh'
 brew 'git-plus'
 brew 'gnu-sed'
 brew 'gnu-time'
