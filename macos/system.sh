@@ -8,15 +8,6 @@ fi
 # Screenshot directory
 defaults write com.apple.screencapture location ~/Pictures/screenshots
 
-echo "SystemUIServer needs to be restarted. Press [y] to continue."
-read key
-case ${key} in
-  "y" )
-  killall SystemUIServer;;
-  * )
-  echo "Not restarted."
-esac
-
 defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 
 # Dock
@@ -80,3 +71,5 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 ## Key repeat
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
+
+killall SystemUIServer

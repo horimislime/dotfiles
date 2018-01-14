@@ -14,10 +14,11 @@ mas '1Password',    id: 443987910
 mas 'DayOne',       id: 847496013
 mas 'Deckset',      id: 847496013
 mas 'Divvy',        id: 413857545
+mas 'GeekBench 4',  id: 1175706108
 mas 'iAWriter',     id: 847496013
 mas 'LINE',         id: 539883307
-mas 'Md Linker'     id: 1289119450
-mas 'Pastebot'	    id: 1179623856
+mas 'Md Linker',    id: 1289119450
+mas 'Pastebot',     id: 1179623856
 mas 'Pocket',       id: 568494494
 mas 'Reeder3',      id: 880001334
 mas 'Slack',        id: 803453959
@@ -34,9 +35,8 @@ cask 'contexts'
 cask 'dash'
 cask 'docker'
 cask 'font-fira-code'
-cask 'geekbench'
+cask 'google-backup-and-sync'
 cask 'google-chrome'
-cask 'google-photos-backup'
 cask 'hyper'
 cask 'iterm2'
 cask 'java' unless system '/usr/libexec/java_home --failfast'
@@ -79,7 +79,6 @@ brew 'gnu-time'
 brew 'go'
 brew 'ghq'
 brew 'heroku-toolbelt'
-brew 'htop-osx'
 brew 'hub', args: ['HEAD']
 brew 'imagemagick'
 brew 'jq'

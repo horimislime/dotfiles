@@ -2,21 +2,21 @@ all: bootstrap update install link
 
 bootstrap:
 	./etc/bootstrap.sh
-	echo "🔧 Bootstrap completed."
+	@echo 🔧 Bootstrap completed.
 
 link:
 	./etc/symlink.sh
-	echo "🔌 Symlink created."
+	@echo 🔌 Symlink created.
 
 install:
 	for FILE in `find ./macos -name "*.sh"`; do $$FILE & done
 	brew bundle
 	pip install -r ./etc/requirements.txt
-	echo "📦 Packages and settings are successfuly installed."
+	@echo 📦 Packages and settings are successfuly installed.
 
 update:
 	git pull origin master
 	git submodule init
 	git submodule update
 	git submodule foreach git pull origin master
-	echo "✨ Everything is up to date."
+	@echo ✨ Everything is up to date.
