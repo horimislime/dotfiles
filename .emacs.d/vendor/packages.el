@@ -1,3 +1,4 @@
+(el-get-bundle atom-one-dark-theme :type elpa)
 (el-get-bundle auto-complete)
 (el-get-bundle color-theme-zenburn)
 (el-get-bundle editorconfig)
