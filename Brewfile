@@ -3,6 +3,7 @@ cask_args appdir: '/Applications'
 tap 'caskroom/cask'
 tap 'caskroom/fonts'
 tap 'd12frosted/emacs-plus'
+tap 'eddieantonio/eddieantonio'
 tap 'homebrew/binary'
 tap 'pivotal/tap'
 tap 'sanemat/font'
@@ -21,12 +22,12 @@ mas 'Md Linker',    id: 1289119450
 mas 'Pastebot',     id: 1179623856
 mas 'Pocket',       id: 568494494
 mas 'Reeder3',      id: 880001334
-mas 'Slack',        id: 803453959
 mas 'Things 3',	    id: 904280696
 mas 'Tweetbot',     id: 557168941
 
 # Apps
 
+cask 'adobe-creative-cloud'
 cask 'appcleaner'
 cask 'atom'
 cask 'bartender'
@@ -64,7 +65,7 @@ brew 'binutils'
 brew 'carthage'
 brew 'csshx'
 brew 'cvs'
-brew 'emacs', args: ['with-cocoa', 'with-gnutls']
+brew 'emacs', args: ['HEAD', 'use-git-head', 'with-cocoa', 'with-gnutls']
 brew 'entr'
 brew 'fish'
 brew 'fontconfig'
@@ -81,6 +82,7 @@ brew 'ghq'
 brew 'heroku-toolbelt'
 brew 'hub', args: ['HEAD']
 brew 'imagemagick'
+brew 'imgcat'
 brew 'jq'
 brew 'nkf'
 brew 'node'
