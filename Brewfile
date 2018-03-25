@@ -12,11 +12,10 @@ tap 'thoughtbot/formulae'
 # AppStore apps
 
 mas '1Password',    id: 443987910
+mas 'Bear',         id: 1091189122
 mas 'DayOne',       id: 847496013
-mas 'Deckset',      id: 847496013
 mas 'Divvy',        id: 413857545
 mas 'GeekBench 4',  id: 1175706108
-mas 'iAWriter',     id: 847496013
 mas 'LINE',         id: 539883307
 mas 'Md Linker',    id: 1289119450
 mas 'Pastebot',     id: 1179623856
