@@ -10,12 +10,14 @@
 	b = checkout -b
 	c = checkout
 	p = !git push origin `git rev-parse --abbrev-ref HEAD`
+	rm-merged = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
 	push-f = !git push --force-with-lease origin `git rev-parse --abbrev-ref HEAD`
 	pick = cherry-pick
 	pr = "!hub browse -- compare/develop...$(git symbolic-ref --short HEAD)?body=%0A%23$(echo $(git symbolic-ref --short\
  HEAD) |awk -F'[/_-]' '{print $2}')%0A%0A%23%20Before%0A%0A%23%20After%20%0A%0A"
 	issue = "!ghi show $(echo $(git symbolic-ref --short HEAD) |awk -F '[/_-]' '{print $2}')"
-	up = pull --all --rebase --autostash
+	up = pull --all --rebase --autostash --prune
+
 [core]
 	editor = "emacsclient -t"
 	excludesfile = ~/.gitignore

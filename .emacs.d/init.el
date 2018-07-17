@@ -3,6 +3,7 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
+(setq package-enable-at-startup nil)
 (package-initialize)
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -41,6 +42,7 @@
 	        (load (file-name-sans-extension fullpath)))))))
 
 (load-directory "~/.emacs.d/config")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/el-get/atom-one-dark-theme/")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

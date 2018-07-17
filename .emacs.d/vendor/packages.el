@@ -1,4 +1,5 @@
-(el-get-bundle atom-one-dark-theme :type elpa)
+(el-get-bundle smart-cursor-color :url "https://raw.githubusercontent.com/syohex/smart-cursor-color-mode/master/smart-cursor-color-mode.el")
+;(el-get-bundle atom-one-dark-theme :url "https://raw.githubusercontent.com/jonathanchu/atom-one-dark-theme/master/atom-one-dark-theme.el")
 (el-get-bundle auto-complete)
 (el-get-bundle color-theme-zenburn)
 (el-get-bundle editorconfig)
@@ -10,7 +11,6 @@
 (el-get-bundle git-gutter-fringe)
 (el-get-bundle helm)
 (el-get-bundle helm-ghq)
-(el-get-bundle heroku-theme)
 (el-get-bundle js2-mode)
 (el-get-bundle json)
 (el-get-bundle magit)
@@ -25,7 +25,7 @@
 (el-get-bundle ruby-block)
 (el-get-bundle ruby-end)
 (el-get-bundle ruby-mode)
-(el-get-bundle smart-cursor-color)
 (el-get-bundle use-package)
 (el-get-bundle xterm-color)
 (el-get-bundle yaml-mode)
+

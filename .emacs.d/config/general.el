@@ -24,14 +24,9 @@
       Kept-old-versions 5)
 
 ;; Appearance
-(if (display-graphic-p)
-    (progn
-    ;; if Cocoa
-      (load-file "~/.emacs.d/config/cocoa.el"))   
-    ;; if terminal
-    (load-theme 'zenburn t))
+(load-theme 'zenburn t)
 
-(require 'smart-cursor-color)
+(require 'smart-cursor-color-mode)
 (defface hlline-face
   '((((class color)
       (background dark))
@@ -47,9 +42,6 @@
 (smart-cursor-color-mode +1)
 
 (global-linum-mode t)
-
-(require 'powerline)
-(powerline-center-theme)
 
 (require 'neotree)
 (global-set-key (kbd "C-x t") 'neotree-toggle)
