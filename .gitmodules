@@ -4,3 +4,4 @@
 [submodule "dotfiles/.tmux.d/themepack"]
 	path = .tmux.d/themepack
 	url = https://github.com/jimeh/tmux-themepack.git
+
