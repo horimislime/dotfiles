@@ -39,6 +39,7 @@ brew 'carthage'
 brew 'cvs'
 brew 'dfu-programmer'
 brew 'emacs', args: ['HEAD', 'use-git-head', 'with-cocoa', 'with-gnutls']
+brew 'findutils', args: ['with-default-names']
 brew 'fish'
 brew 'fzf'
 brew 'gcc-arm-none-eabi'

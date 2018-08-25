@@ -1,22 +1,14 @@
-all: bootstrap update install link
-
-bootstrap:
-	./etc/bootstrap.sh
+setup:
+	./dotfiles/setup.sh
+	./fish/setup.sh
+	./homebrew/setup.sh
+	./macos/setup.sh
+	./python/setup.sh
+	./ruby/setup.sh
+	./ssh/setup.sh
 	@echo 🔧 Bootstrap completed.
 
-link:
-	./etc/symlink.sh
-	@echo 🔌 Symlink created.
-
-install:
-	for FILE in `find ./macos -name "*.sh"`; do $$FILE & done
-	brew bundle
-	pip install -r ./etc/requirements.txt
-	@echo 📦 Packages and settings are successfuly installed.
-
 update:
-	git pull origin master
-	git submodule init
-	git submodule update
-	git submodule foreach git pull origin master
+	./dotfiles/update-symlink.sh
+	./homebrew/update-packages.sh
 	@echo ✨ Everything is up to date.

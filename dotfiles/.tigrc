@@ -11,6 +11,6 @@ set ignore-space = all
 set blob-view-line-number = yes
 set blame-view-line-number = yes
 set vertical-split = false
-set diff-highlight = true
+set diff-highlight = false
 set main-view = id date author:email-user commit-title:graph=yes,refs=yes
 set blame-view = date:default author:email-user id:yes,color line-number:yes,interval=1 text
