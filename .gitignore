@@ -11,12 +11,12 @@
 .vim/bundle/*
 .tmux.d/tmux.local
 
-.emacs.d/ac-comphist.dat
-.emacs.d/el-get
-.emacs.d/el-get-recipes
-.emacs.d/elpa
-.emacs.d/recentf
-.emacs.d/url/
+dotfiles/.emacs.d/ac-comphist.dat
+dotfiles/.emacs.d/el-get
+dotfiles/.emacs.d/el-get-recipes
+dotfiles/.emacs.d/elpa
+dotfiles/.emacs.d/recentf
+dotfiles/.emacs.d/url/
 
 .config/fish/conf.d
 .config/fish/completions
