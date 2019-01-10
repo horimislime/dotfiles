@@ -59,7 +59,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (nil smart-cursor-color))))
+ '(package-selected-packages (quote (darcula-theme nil smart-cursor-color))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -95,6 +95,21 @@
       kept-new-versions 20
       Kept-old-versions 5)
 
+
+; Interact with macOS clipboard
+(defun copy-from-clipboard ()
+  (shell-command-to-string "pbpaste"))
+(defun paste-to-clipboard (text &optional push)
+  (let ((process-connection-type nil))
+    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+      (process-send-string proc text)
+      (process-send-eof proc))))
+(setq interprogram-cut-function 'paste-to-clipboard)
+(setq interprogram-paste-function 'copy-from-clipboard)
+
+; Clear contents using erase-buffer
+(put 'erase-buffer 'disabled nil)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Appearance
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -115,7 +130,11 @@
 (global-hl-line-mode +1)
 (smart-cursor-color-mode +1)
 
-(global-linum-mode t)
+; Prefer global-display-line-number-mode over global-linum-mode
+(if (version<= "26.0" emacs-version)
+    (global-display-line-numbers-mode)
+  (global-linum-mode)
+)
 
 (require 'neotree)
 (global-set-key (kbd "C-x t") 'neotree-toggle)
@@ -144,7 +163,7 @@
 
 (require 'magit)
 (require 'git-modes)
-(global-git-gutter-mode)
+(global-git-gutter-mode t)
 (setq vc-handled-backends ())
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -221,3 +240,4 @@
        (shell-quote-argument (buffer-file-name))))
 )
 (global-set-key "\C-cm" 'markdown-preview-file)
+
