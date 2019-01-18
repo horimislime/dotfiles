@@ -91,17 +91,13 @@
       kept-new-versions 20
       Kept-old-versions 5)
 
-
-; Interact with macOS clipboard
-(defun copy-from-clipboard ()
-  (shell-command-to-string "pbpaste"))
+;; Interact with macOS clipboard
 (defun paste-to-clipboard (text &optional push)
   (let ((process-connection-type nil))
     (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
       (process-send-string proc text)
       (process-send-eof proc))))
 (setq interprogram-cut-function 'paste-to-clipboard)
-(setq interprogram-paste-function 'copy-from-clipboard)
 
 ; Clear contents using erase-buffer
 (put 'erase-buffer 'disabled nil)
@@ -111,7 +107,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package darcula-theme)
-(use-package smart-cursor-color-mode)
+;(require 'smart-cursor-color-mode)
 (defface hlline-face
   '((((class color)
       (background dark))
@@ -170,6 +166,13 @@
 (require 'helm-for-files)
 (helm-mode 1)
 (setq helm-ff-file-name-history-use-recentf t)
+
+(setq helm-display-function #'display-buffer)
+(when (require 'popwin)
+  (setq display-buffer-function 'popwin:display-buffer)
+  (setq popwin:special-display-config
+    '(("*complitation*" :noselect t)
+      ("helm" :regexp t :height 0.4))))
 
 (defun custom-helm-sources ()
   (interactive)
