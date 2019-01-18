@@ -10,7 +10,7 @@
 	b = checkout -b
 	c = checkout
 	p = !git push origin `git rev-parse --abbrev-ref HEAD`
-	rm-merged = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+	rm-merged = "!git branch --merged | grep  -v '\\(master\\|develop\\|qa\\|epic\\)' | xargs -n 1 git branch -d"
 	push-f = !git push --force-with-lease origin `git rev-parse --abbrev-ref HEAD`
 	pick = cherry-pick
 	pr = "!hub browse -- compare/develop...$(git symbolic-ref --short HEAD)?body=%0A%23$(echo $(git symbolic-ref --short\

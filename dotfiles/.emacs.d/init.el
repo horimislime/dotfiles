@@ -23,14 +23,12 @@
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
 
 (package-install 'darcula-theme)
-(el-get-bundle smart-cursor-color :url "https://raw.githubusercontent.com/syohex/smart-cursor-color-mode/master/smart-cursor-color-mode.el")
+(package-install 'smart-cursor-color)
 (el-get-bundle auto-complete)
-(el-get-bundle color-theme-zenburn)
 (el-get-bundle editorconfig)
 (el-get-bundle emoji-fontset)
 (el-get-bundle exec-path-from-shell)
 (el-get-bundle fuzzy)
-(el-get-bundle gist)
 (el-get-bundle git-modes)
 (el-get-bundle git-gutter-fringe)
 (el-get-bundle helm)
@@ -40,7 +38,6 @@
 (el-get-bundle magit)
 (el-get-bundle markdown-mode)
 (el-get-bundle neotree)
-(el-get-bundle open-junk-file)
 (el-get-bundle popup)
 (el-get-bundle popwin)
 (el-get-bundle powerline)
@@ -53,13 +50,12 @@
 (el-get-bundle xterm-color)
 (el-get-bundle yaml-mode)
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/el-get/atom-one-dark-theme/")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (darcula-theme nil smart-cursor-color))))
+ '(package-selected-packages (quote (helm-core darcula-theme nil smart-cursor-color))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -115,7 +111,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package darcula-theme)
-(require 'smart-cursor-color-mode)
+(use-package smart-cursor-color-mode)
 (defface hlline-face
   '((((class color)
       (background dark))
@@ -171,7 +167,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'helm-config)
+(require 'helm-for-files)
 (helm-mode 1)
+(setq helm-ff-file-name-history-use-recentf t)
 
 (defun custom-helm-sources ()
   (interactive)
@@ -241,3 +239,14 @@
 )
 (global-set-key "\C-cm" 'markdown-preview-file)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Ruby
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun custom-fastfile-mode ()
+  (when (and (stringp buffer-file-name)
+             (string-match "\\Fastfile\\'" buffer-file-name))
+    (insert "OK")
+    (ruby-mode)))
+
+(add-hook 'find-file-hook 'custom-fastfile-mode)
