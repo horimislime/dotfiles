@@ -1,3 +1,17 @@
+function __ghq_crtl_c -d 'Checkout branch'
+    if not test -e  .git
+        return 0
+    end
+
+    git branch -a --format='%(refname:short)' | fzf | read select
+    if test -n "$select"
+        echo
+        git checkout $select
+    end
+    
+    commandline -f repaint
+end
+
 function fish_user_key_bindings
     ### fzf ###
     bind \cr '__fzf_reverse_isearch'
@@ -19,4 +33,9 @@ function fish_user_key_bindings
         bind -M insert \cg '__ghq_crtl_g'
     end
     ### ghq ###
+
+    bind \cc '__ghq_crtl_c'
+    if bind -M insert >/dev/null ^/dev/null
+        bind -M insert \cc '__ghq_crtl_c'
+    end
 end
