@@ -135,7 +135,7 @@
 (setq initial-scratch-message nil)
 
 (require 'popwin)
-(setq display-buffer-function 'popwin:display-buffer)
+(popwin-mode 1)
 (setq popwin:popup-window-position 'bottom)
 (push "*Buffer List*" popwin:special-display-config)
 (push "*scratch*" popwin:special-display-config)
@@ -169,7 +169,6 @@
 
 (setq helm-display-function #'display-buffer)
 (when (require 'popwin)
-  (setq display-buffer-function 'popwin:display-buffer)
   (setq popwin:special-display-config
     '(("*complitation*" :noselect t)
       ("helm" :regexp t :height 0.4))))
