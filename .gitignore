@@ -16,6 +16,7 @@ dotfiles/.emacs.d/el-get
 dotfiles/.emacs.d/el-get-recipes
 dotfiles/.emacs.d/elpa
 dotfiles/.emacs.d/recentf
+dotfiles/.emacs.d/.scratch-backup
 dotfiles/.emacs.d/url/
 
 .config/fish/conf.d

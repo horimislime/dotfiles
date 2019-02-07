@@ -55,7 +55,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (helm-core darcula-theme nil smart-cursor-color))))
+ '(package-selected-packages
+   (quote
+    (auto-save-buffers-enhanced ivy undo-tree markdown-mode helm-core darcula-theme nil smart-cursor-color))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -101,6 +103,19 @@
 
 ; Clear contents using erase-buffer
 (put 'erase-buffer 'disabled nil)
+
+;; Do not create .#lockfile
+(setq create-lockfiles nil)
+;; Automatically backup scratch buffer
+(use-package auto-save-buffers-enhanced
+  :ensure t
+  :init
+  (auto-save-buffers-enhanced t)
+  :config
+  (setq auto-save-buffers-enhanced-interval 3600)
+  (setq auto-save-buffers-enhanced-exclude-regexps '(".+"))
+  (setq auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
+  (setq auto-save-buffers-enhanced-file-related-with-scratch-buffer (locate-user-emacs-file ".scratch-backup")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Appearance
@@ -216,7 +231,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package markdown-mode
-  :mode ("\\.md\\'" . gfm-mode))
+  :ensure t
+  :mode (("\\.md\\'" . gfm-mode)
+         ("\\.markdown\\'" . gfm-mode)))
 
 (defun markdown-insert-link ()
   "Insert link tag template"
