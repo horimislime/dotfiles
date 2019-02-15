@@ -22,6 +22,10 @@
 
 ;;;; General / Appearance
 
+(use-package benchmark-init
+  :hook
+  (after-init . benchmark-init/deactivate))
+
 (use-package server
   :if (unless (server-running-p))
   :config
