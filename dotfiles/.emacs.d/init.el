@@ -8,6 +8,8 @@
     ("melpa" . "https://melpa.org/packages/")))
 
 (require 'package)
+(require 'server)
+(require 'uniquify)
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -20,14 +22,10 @@
 
 ;;;; General / Appearance
 
-(require 'server)
-(require 'uniquify)
-
-(unless (server-running-p)
-    (server-start))
-
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+(use-package server
+  :if (unless (server-running-p))
+  :config
+  (server-start))
 
 (prefer-coding-system 'utf-8)
 (setq indent-tabs-mode nil) ;; Use soft tab
@@ -63,8 +61,7 @@
 ;; Prefer global-display-line-number-mode over global-linum-mode
 (if (version<= "26.0" emacs-version)
     (global-display-line-numbers-mode)
-  (global-linum-mode)
-)
+  (global-linum-mode))
 
 ;; Automatically backup scratch buffer
 (use-package auto-save-buffers-enhanced
@@ -76,12 +73,12 @@
   (setq auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
   (setq auto-save-buffers-enhanced-file-related-with-scratch-buffer (locate-user-emacs-file ".scratch-backup")))
 
-(use-package exec-path-from-shell
-  :config
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
-
 (use-package darcula-theme)
+
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
+  :config
+  (exec-path-from-shell-initialize))
 
 (use-package smart-cursor-color
   :config
@@ -170,7 +167,7 @@
   (require 'color)
   (setq rainbow-delimiters-outermost-only-face-count 1)
   :config
-  (rainbow-delimiters-mode 1)
+  (rainbow-delimiters-mode +1)
   (set-face-foreground 'rainbow-delimiters-depth-1-face "#9a4040")
   (set-face-foreground 'rainbow-delimiters-depth-2-face "#ff5e5e")
   (set-face-foreground 'rainbow-delimiters-depth-3-face "#ffaa77")
@@ -180,8 +177,9 @@
   (set-face-foreground 'rainbow-delimiters-depth-7-face "#da6bda")
   (set-face-foreground 'rainbow-delimiters-depth-8-face "#afafaf")
   (set-face-foreground 'rainbow-delimiters-depth-9-face "#f0f0f0")
-  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'js2-mode-hook 'rainbow-delimiters-mode))
+  :hook
+  ((emacs-lisp-mode . rainbow-delimiters-mode)
+   (js2-mode-hook . rainbow-delimiters-mode)))
 
 (use-package ruby-mode
   :mode
