@@ -62,10 +62,7 @@
 (setq hl-line-face 'hlline-face)
 (global-hl-line-mode +1)
 
-;; Prefer global-display-line-number-mode over global-linum-mode
-(if (version<= "26.0" emacs-version)
-    (global-display-line-numbers-mode)
-  (global-linum-mode))
+(global-display-line-numbers-mode t)
 
 ;; Automatically backup scratch buffer
 (use-package auto-save-buffers-enhanced
