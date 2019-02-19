@@ -108,6 +108,10 @@
   :config
   (popwin-mode +1))
 
+(use-package powerline
+  :config
+  (powerline-nano-theme))
+
 (use-package auto-complete
   :config
   (require 'auto-complete-config))
