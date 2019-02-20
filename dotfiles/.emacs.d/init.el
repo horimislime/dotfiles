@@ -40,6 +40,7 @@
 (setq split-width-threshold nil) ;; Always split window vertically
 (put 'erase-buffer 'disabled nil) ;; Clear contents using erase-buffer
 (setq initial-scratch-message nil) ;; No initial message on scratch buffer
+(menu-bar-mode 0) ;; Hide menu bar
 
 ;; Interact with macOS clipboard
 (defun paste-to-clipboard (text &optional push)
@@ -80,6 +81,23 @@
   :if (memq window-system '(mac ns))
   :config
   (exec-path-from-shell-initialize))
+
+(use-package flycheck
+  :config
+  (flycheck-define-checker textlint
+    "textlint"
+    :command ("textlint" "--format" "unix" source-inplace)
+    :error-patterns
+    ((warning line-start (file-name) ":" line ":" column ": "
+              (id (one-or-more (not (any " "))))
+              (message (one-or-more not-newline)
+		       (zero-or-more "\n" (any " ") (one-or-more not-newline)))
+              line-end))
+    :modes (text-mode markdown-mode gfm-mode))
+  (add-to-list 'flycheck-checkers 'textlint)
+  :hook
+  ((gfm-mode . flycheck-mode)
+   (text-mode . flycheck-mode)))
 
 (use-package smart-cursor-color
   :config
