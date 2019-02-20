@@ -3,13 +3,8 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
-(setq package-archives
-  '(("gnu" . "https://elpa.gnu.org/packages/")
-    ("melpa" . "https://melpa.org/packages/")))
-
 (require 'package)
-(require 'server)
-(require 'uniquify)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -27,9 +22,11 @@
   (after-init . benchmark-init/deactivate))
 
 (use-package server
-  :if (unless (server-running-p))
   :config
-  (server-start))
+  (unless (server-running-p)
+    (server-start)))
+
+(require 'uniquify)
 
 (prefer-coding-system 'utf-8)
 (setq indent-tabs-mode nil) ;; Use soft tab
