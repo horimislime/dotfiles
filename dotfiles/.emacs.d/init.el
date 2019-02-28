@@ -18,8 +18,8 @@
 ;;;; General / Appearance
 
 (use-package benchmark-init
-  :hook
-  (after-init . benchmark-init/deactivate))
+  :config
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
 (use-package server
   :config
