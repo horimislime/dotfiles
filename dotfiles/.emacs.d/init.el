@@ -172,8 +172,6 @@
 
 ;;;; Language
 
-(use-package js2-mode)
-
 (use-package markdown-mode
   :mode
   (("\\.md\\'" . gfm-mode)
