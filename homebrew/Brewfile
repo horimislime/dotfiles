@@ -17,6 +17,7 @@ mas 'Tweetbot3',    id: 1384080005
 
 cask 'adobe-creative-cloud'
 cask 'appcleaner'
+cask 'clipy'
 cask 'docker'
 cask 'google-backup-and-sync'
 cask 'google-chrome'
