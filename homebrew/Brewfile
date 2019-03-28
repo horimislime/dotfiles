@@ -8,10 +8,10 @@ tap 'PX4/homebrew-px4'
 
 mas '1Password',    id: 443987910
 mas 'Bear',         id: 1091189122
-mas 'Divvy',        id: 413857545
+mas 'Magnet',	    id: 441258766
 mas 'Md Linker',    id: 1289119450
 mas 'Reeder3',      id: 880001334
-mas 'Tweetbot2',    id: 557168941
+mas 'Tweetbot3',    id: 1384080005
 
 # Apps outside AppStore
 
