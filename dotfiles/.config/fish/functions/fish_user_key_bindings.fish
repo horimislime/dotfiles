@@ -14,6 +14,7 @@ end
 
 function fish_user_key_bindings
     ### fzf ###
+    bind \cf 'forward-char'
     bind \cr '__fzf_reverse_isearch'
     bind \eo '__fzf_cd'
     bind \eO '__fzf_cd --hidden'
