@@ -15,12 +15,13 @@ setopt no_tify
 setopt nobeep
 setopt share_history
 
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
 # Environment variables
 PATH=/usr/local/bin:$PATH
 PATH=$PATH:$HOME/.homebrew/bin
 PATH=$PATH:$HOME/.rbenv/shims
 
-ALTERNATE_EDITOR=''
 EDITOR='/usr/local/bin/emacsclient -nw'
 GOPATH=$HOME/.go
 LANG=ja_JP.UTF-8
@@ -32,7 +33,7 @@ SAVEHIST=10000
 
 # aliases
 alias cp='cp -i'
-alias e='emacsclient -t'
+alias e='/usr/local/bin/emacsclient -a "" -t'
 alias find='gfind' # prefer GNU version over BSD's find
 alias grep='grep --color=auto'
 alias ll='ls -la'
