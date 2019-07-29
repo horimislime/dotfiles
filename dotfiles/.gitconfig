@@ -44,14 +44,8 @@
 [git-up "fetch"]
 	all = true
 
-[url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
-
 [github]
 	user = horimislime
-
-[ghi]
-	token = !security find-internet-password -a horimislime -s github.com -l 'ghi token' -w
 
 [diff]
 	compactionHeuristic = true
