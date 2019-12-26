@@ -18,14 +18,14 @@ setopt share_history
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # Environment variables
+PATH=$HOME/bin:$PATH
 PATH=/usr/local/bin:$PATH
-PATH=$PATH:$HOME/.homebrew/bin
-PATH=$PATH:$HOME/.rbenv/shims
-
-EDITOR='/usr/local/bin/emacsclient -nw'
+PATH=$HOME/.homebrew/bin:$PATH
+PATH=$HOME/.rbenv/shims:$PATH
 GOPATH=$HOME/.go
 LANG=ja_JP.UTF-8
 TERM=xterm-256color
+export VISUAL='emacsclient -a "" -t'
 
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
@@ -33,7 +33,7 @@ SAVEHIST=10000
 
 # aliases
 alias cp='cp -i'
-alias e='/usr/local/bin/emacsclient -a "" -t'
+alias e='emacsclient -a "" -t'
 alias find='gfind' # prefer GNU version over BSD's find
 alias grep='grep --color=auto'
 alias ll='ls -la'
@@ -69,7 +69,7 @@ function select-git-branch() {
     zle reset-prompt
 }
 zle -N select-git-branch
-bindkey '^b' select-git-branch
+bindkey '^s' select-git-branch
 
 function select-git-repo() {
     local selected_dir=$(ghq list -p | fzf --no-sort +m --query "$LBUFFER" --prompt="repos > ")
