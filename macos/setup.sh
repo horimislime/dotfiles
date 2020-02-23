@@ -2,7 +2,6 @@
 
 cd $(dirname $0)
 
-$PWD/contexts.sh
-$PWD/launchbar.sh
-$PWD/pastebot.sh
-$PWD/system.sh
+defaults import com.crowdcafe.windowmagnet com.crowdcafe.windowmagnet.plist
+defaults import net.shinyfrog.bear net.shinyfrog.bear.plist
+defaults import com.tapbots.Pastebot2Mac com.tapbots.Pastebot2Mac.plist
