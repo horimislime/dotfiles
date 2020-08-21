@@ -33,6 +33,7 @@
 [user]
 	name = horimislime
 	email = horimislime@gmail.com
+	signingkey = 741C501623181233
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -49,3 +50,5 @@
 [diff]
 	compactionHeuristic = true
 
+[gpg]
+	program = gpg

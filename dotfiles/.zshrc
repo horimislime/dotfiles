@@ -22,6 +22,7 @@ PATH=$HOME/bin:$PATH
 PATH=/usr/local/bin:$PATH
 PATH=$HOME/.homebrew/bin:$PATH
 PATH=$HOME/.rbenv/shims:$PATH
+PATH=$HOME/.ghq/github.com/flutter/flutter/bin:$PATH
 GOPATH=$HOME/.go
 LANG=ja_JP.UTF-8
 TERM=xterm-256color
@@ -43,6 +44,7 @@ alias oo='open .'
 alias reloadrc='source $HOME/.zshrc'
 alias sudo='sudo -E ' # inherit user defined env-vars
 alias t='tig status'
+alias code='code-insiders'
 
 # pure theme
 prompt pure

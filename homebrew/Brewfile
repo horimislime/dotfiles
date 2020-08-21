@@ -1,52 +1,57 @@
 cask_args appdir: '/Applications'
 
 tap 'caskroom/cask'
-tap 'osx-cross/avr'
-tap 'PX4/homebrew-px4'
+tap 'dart-lang/dart'
 
 # AppStore apps
+# `mas list` to find id of installed apps
 
-mas '1Password',    id: 443987910
+mas '1Blocker',     id: 1107421413
+mas '1Password',    id: 1333542190
 mas 'Bear',         id: 1091189122
+mas 'CCMenu',       id: 603117688
+mas 'Day One',      id: 1055511498
+mas 'Kindle',       id: 405399194
 mas 'Magnet',	    id: 441258766
 mas 'Md Linker',    id: 1289119450
-mas 'Reeder3',      id: 880001334
+mas 'Pastebot',     id: 1179623856
+mas 'Reeder',       id: 1449412482
+mas 'Slack',        id: 803453959
 mas 'Tweetbot3',    id: 1384080005
 
 # Apps outside AppStore
 
 cask 'adobe-creative-cloud'
+cask 'alacritty'
 cask 'appcleaner'
-cask 'clipy'
+cask 'cmd-eikana'
 cask 'docker'
 cask 'google-backup-and-sync'
 cask 'google-chrome'
 cask 'java' unless system '/usr/libexec/java_home --failfast'
 cask 'jetbrains-toolbox'
+cask 'licecap'
+cask 'notion'
 cask 'paw'
-cask 'reveal'
 cask 'sketch'
 cask 'sketch-toolbox'
-cask 'visual-studio-code'
+cask 'visual-studio-code-insiders'
 
 # brew packages
 
 brew 'ack'
-brew 'avrdude'
-brew 'avr-gcc'
 brew 'bison'
 brew 'binutils'
 brew 'carthage'
 brew 'cvs'
-brew 'dfu-programmer'
+brew 'dart'
 brew 'emacs', args: ['HEAD', 'use-git-head', 'with-cocoa', 'with-gnutls']
 brew 'findutils', args: ['with-default-names']
-brew 'fish'
 brew 'fzf'
-brew 'gcc-arm-none-eabi'
 brew 'ghq'
 brew 'gibo'
 brew 'git'
+brew 'github/gh/gh'
 brew 'gnu-sed'
 brew 'gnu-time'
 brew 'imagemagick'
