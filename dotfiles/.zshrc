@@ -22,11 +22,18 @@ PATH=$HOME/bin:$PATH
 PATH=/usr/local/bin:$PATH
 PATH=$HOME/.homebrew/bin:$PATH
 PATH=$HOME/.rbenv/shims:$PATH
-PATH=$HOME/.ghq/github.com/flutter/flutter/bin:$PATH
+PATH=$HOME/.nodenv/shims:$PATH
+PATH=$HOME/ghq/github.com/flutter/flutter/bin:$PATH
+PATH=$HOME/.pub-cache/bin:$PATH
 GOPATH=$HOME/.go
 LANG=ja_JP.UTF-8
 TERM=xterm-256color
 export VISUAL='emacsclient -a "" -t'
+
+# google-cloud-sdk
+export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
