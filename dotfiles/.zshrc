@@ -59,34 +59,32 @@ PURE_GIT_UNTRACKED_DIRTY=0
 
 # fzf
 function select-history() {
-  BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="history > ")
+  BUFFER=$(history -n -r 1 | fzf -e --no-sort)
   CURSOR=$#BUFFER
 }
 zle -N select-history
 bindkey '^r' select-history
 
 function select-git-branch() {
-    if [ ! -d $PWD/.git ]; then
-	zle reset-prompt
-	return
-    fi
-    local selected_branch=$(git branch -a --format='%(refname:short)' | fzf --no-sort +m --query "$LBUFFER" --prompt="branches > ")
+    local selected_branch=$(git branch -a --format='%(refname:short)' | fzf -e --preview "git log {}")
     if [ -n "$selected_branch" ]; then
 	BUFFER="git checkout ${selected_branch}"
 	zle accept-line
-    fi
-    zle reset-prompt
+   fi
+   zle reset-prompt
 }
 zle -N select-git-branch
-bindkey '^s' select-git-branch
+bindkey '^t' select-git-branch
 
 function select-git-repo() {
-    local selected_dir=$(ghq list -p | fzf --no-sort +m --query "$LBUFFER" --prompt="repos > ")
+    local selected_dir=$(ghq list |fzf -e --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
     if [ -n "$selected_dir" ]; then
-	BUFFER="cd ${selected_dir}"
+	BUFFER="cd $HOME/ghq/${selected_dir}"
 	zle accept-line
     fi
     zle reset-prompt
 }
 zle -N select-git-repo
 bindkey '^g' select-git-repo
+
+eval "$(nodenv init -)"
