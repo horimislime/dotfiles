@@ -66,7 +66,7 @@ zle -N select-history
 bindkey '^r' select-history
 
 function select-git-branch() {
-    local selected_branch=$(git branch -a --format='%(refname:short)' | fzf -e --preview "git log {}")
+    local selected_branch=$(git branch --format='%(refname:short)' | fzf -e --preview "git log {}")
     if [ -n "$selected_branch" ]; then
 	BUFFER="git checkout ${selected_branch}"
 	zle accept-line
