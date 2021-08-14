@@ -1,0 +1,14 @@
+{
+	"name": "Dev Environment",
+	"image": "mcr.microsoft.com/vscode/devcontainers/base",
+    "extensions": [
+        "eamodio.gitlens",
+        "oderwat.indent-rainbow",
+        "visualstudioexptteam.vscodeintellicode",
+        "github.copilot"
+    ],
+    "settings": {
+        "terminal.integrated.shell.*": "/usr/bin/zsh"
+    },
+    "postCreateCommand": "setup.sh"
+}
