@@ -18,6 +18,7 @@ setopt share_history
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # Environment variables
+JAVA_HOME=/Applications/Android\ Studio.app/Contents/jre/Contents/Home
 PATH=$HOME/bin:$PATH
 PATH=/usr/local/bin:$PATH
 PATH=$HOME/.homebrew/bin:$PATH

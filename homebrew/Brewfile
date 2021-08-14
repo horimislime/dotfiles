@@ -23,6 +23,7 @@ mas 'Todoist', 	    id: 585829637
 cask '1password-cli'
 cask 'adobe-creative-cloud'
 cask 'alfred'
+cask 'android-studio'
 cask 'appcleaner'
 cask 'cmd-eikana'
 cask 'contexts'
