@@ -8,7 +8,12 @@
         "github.copilot"
     ],
     "settings": {
-        "terminal.integrated.shell.*": "/usr/bin/zsh"
+        "terminal.integrated.profiles.linux": {
+            "zsh (login)": {
+                "path": "zsh",
+                "args": ["-l"]
+            }
+        }
     },
     "postCreateCommand": "setup.sh"
 }
