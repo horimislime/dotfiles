@@ -1,6 +1,6 @@
 {
-	"name": "Dev Environment",
-	"image": "mcr.microsoft.com/vscode/devcontainers/base",
+    "name": "Dev Environment",
+    "image": "mcr.microsoft.com/vscode/devcontainers/base",
     "extensions": [
         "eamodio.gitlens",
         "oderwat.indent-rainbow",
@@ -11,7 +11,9 @@
         "terminal.integrated.profiles.linux": {
             "zsh (login)": {
                 "path": "zsh",
-                "args": ["-l"]
+                "args": [
+                    "-l"
+                ]
             }
         }
     },
