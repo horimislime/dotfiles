@@ -32,8 +32,10 @@ export VISUAL='emacsclient -a "" -t'
 
 # google-cloud-sdk
 export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+if [ -d "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk" ]; then
+    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+fi
 
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
@@ -87,4 +89,7 @@ function select-git-repo() {
 zle -N select-git-repo
 bindkey '^g' select-git-repo
 
-eval "$(nodenv init -)"
+if command -v nodenv &> /dev/null; then
+    echo "nodenv initialized"
+    eval "$(nodenv init -)"
+fi
