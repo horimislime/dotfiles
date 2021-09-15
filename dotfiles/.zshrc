@@ -91,6 +91,5 @@ zle -N select-git-repo
 bindkey '^g' select-git-repo
 
 if command -v nodenv &> /dev/null; then
-    echo "nodenv initialized"
     eval "$(nodenv init -)"
 fi
