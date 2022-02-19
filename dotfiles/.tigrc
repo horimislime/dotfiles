@@ -1,6 +1,6 @@
 bind generic g move-first-line
 bind generic G move-last-line
-bind generic c !@git pbcopy %(commit) # copy commit sha
+bind generic c !@sh -c "git rev-parse --short=7 %(commit) | perl -pe chomp | pbcopy" # Copy short hash
 bind status + !git commit --amend
 bind status C !git commit -S
 bind status P !git p
