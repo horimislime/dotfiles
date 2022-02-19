@@ -29,7 +29,16 @@ PATH=$HOME/.pub-cache/bin:$PATH
 GOPATH=$HOME/.go
 LANG=ja_JP.UTF-8
 TERM=xterm-256color
-export VISUAL='emacsclient -a "" -t'
+# Use Python package in gcloud sdk
+CLOUDSDK_PYTHON_SITEPACKAGES=1
+
+if [ "$VSCODE_PID" = "" ] && [ "$TERM_PROGRAM" != "vscode" ]; then
+    export VISUAL='emacsclient -a "" -t'
+#    printenv >> ~/Desktop/envlist.txt
+    #    echo "----" >>  ~/Desktop/envlist.txt
+else
+    export VISUAL='code --wait'
+fi
 
 # google-cloud-sdk
 export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
@@ -54,7 +63,6 @@ alias oo='open .'
 alias reloadrc='source $HOME/.zshrc'
 alias sudo='sudo -E ' # inherit user defined env-vars
 alias t='tig status'
-alias code='code-insiders'
 
 # pure theme
 prompt pure
@@ -90,6 +98,34 @@ function select-git-repo() {
 zle -N select-git-repo
 bindkey '^g' select-git-repo
 
+# nodenv
 if command -v nodenv &> /dev/null; then
     eval "$(nodenv init -)"
 fi
+
+# nvm
+if command -v nvm &> /dev/null; then
+    autoload -U add-zsh-hook
+    load-nvmrc() {
+	local node_version="$(nvm version)"
+	local nvmrc_path="$(nvm_find_nvmrc)"
+
+	if [ -n "$nvmrc_path" ]; then
+	    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+	    if [ "$nvmrc_node_version" = "N/A" ]; then
+		nvm install
+	    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+		nvm use
+	    fi
+	elif [ "$node_version" != "$(nvm version default)" ]; then
+	    echo "Reverting to nvm default version"
+	    nvm use default
+	fi
+    }
+    add-zsh-hook chpwd load-nvmrc
+    load-nvmrc
+fi
+
+# ssh-agent
+ssh-add -A &> /dev/null
