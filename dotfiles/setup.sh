@@ -8,7 +8,8 @@ ln -fsn $PWD/.emacs.d/init.el $HOME/.emacs.d/init.el
 ln -fsn $PWD/.emacs.d/custom.el $HOME/.emacs.d/custom.el
 
 # Git
-ln -fsn $PWD/.gitconfig $HOME/.gitconfig
+mkdir -p $HOME/.config/git
+ln -fsn $PWD/.gitconfig $HOME/.config/git/config
 ln -fsn $PWD/.tigrc $HOME/.tigrc
 
 # tmux

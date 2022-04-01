@@ -24,8 +24,8 @@
 [pull]
 	rebase = true
 
-[include]
-	path = ~/.gitconfig.local
+[init]
+	defaultBranch = main
 
 [user]
 	name = horimislime
