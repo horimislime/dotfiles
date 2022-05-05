@@ -72,7 +72,32 @@
   (setq auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
   (setq auto-save-buffers-enhanced-file-related-with-scratch-buffer (locate-user-emacs-file ".scratch-backup")))
 
-(use-package darcula-theme)
+;(use-package darcula-theme)
+(use-package doom-themes
+    :custom
+    (doom-themes-enable-italic t)
+    (doom-themes-enable-bold t)
+    :custom-face
+    (doom-modeline-bar ((t (:background "#6272a4"))))
+    :config
+    (load-theme 'doom-dracula t)
+    (doom-themes-neotree-config)
+    (doom-themes-org-config))
+
+(use-package doom-modeline
+  :custom
+  (doom-modeline-buffer-file-name-style 'truncate-with-project)
+  (doom-modeline-icon t)
+  (doom-modeline-major-mode-icon nil)
+  (doom-modeline-minor-modes nil)
+  :hook
+  (after-init . doom-modeline-mode)
+  :config
+  (line-number-mode 0)
+  (column-number-mode 0)
+  (doom-modeline-def-modeline 'main
+                              '(bar evil-state god-state ryo-modal xah-fly-keys matches buffer-info remote-host buffer-position parrot selection-info)
+                              '(misc-info persp-name lsp github debug minor-modes input-method major-mode process vcs checker)))
 
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
@@ -140,9 +165,9 @@
 
 (use-package magit)
 
-(use-package git-gutter
-  :config
-  (global-git-gutter-mode t))
+;; (use-package git-gutter
+;;   :config
+;;   (global-git-gutter-mode t))
 
 ;;;; Helm
 
@@ -207,4 +232,86 @@
   (setq ruby-block-highlight-toggle t))
 
 (use-package ruby-end)
-(use-package yaml-mode)
+(use-package yaml-mode
+  :hook (js2-mode . prettier-js)
+  )
+
+(use-package prettier-js)
+
+(use-package vscode-dark-plus-theme
+  :config
+  (load-theme 'vscode-dark-plus t))
+
+(use-package lsp-mode)
+(use-package lsp-dart
+  :hook (dart-mode . lsp))
+
+(with-eval-after-load 'projectile
+  (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
+  (add-to-list 'projectile-project-root-files-bottom-up "BUILD"))
+
+(use-package projectile)
+(use-package lsp-ui)
+(use-package company)
+
+(use-package yasnippet
+  :config (yas-global-mode)) ;; snipets
+
+
+;; Optional Flutter packages
+;(use-package hover)
+
+;(prefer-coding-system 'utf-8)
+(set-default 'buffer-file-coding-system 'utf-8)
+
+(use-package persistent-scratch
+  :config
+  (persistent-scratch-setup-default))
+
+(setq initial-major-mode 'org-mode)
+
+;;(setq org-directory "~/Documents/org")
+(setq org-use-speed-commands t)
+(setq org-todo-keywords
+      '((type "TODO" "WAITING" "|" "DONE")))
+;(add-to-list 'org-speed-commands '("t" org-todo "TODO"))
+;(add-to-list 'org-speed-commands '("d" org-todo "DONE"))
+(define-key global-map (kbd "C-c c") 'org-capture)
+(setq org-capture-templates
+      '(
+        ("a" "Archive" plain (file (lambda ()
+                                     (let* ((slug (read-string "slug: "))
+                                            (dir "~/Documents/org"))
+                                       (require 'org-id)
+                                       (make-directory dir t)
+                                       (concat dir "/" slug ".org"))))
+         "#+TITLE: %?\n#+DATE: %T\n#+TAGS: draft\n#+EID: %(org-id-uuid)\n\n")
+        ("b" "Blog" plain (file (lambda ()
+                                  (let* ((slug (read-string "slug: "))
+                                         (dir (concat "~/Documents/org")))
+                                    (require 'org-id)
+                                    (make-directory dir t)
+                                    (concat dir "/" (format-time-string "%Y-%m-%d_") slug ".org"))))
+         "#+TITLE: %?\n#+DATE: %T\n#+TZ: %(format-time-string \"%z (%Z)\")\n#+TAGS: draft\n#+EID: %(org-id-uuid)\n\n")
+        ))
+
+(with-eval-after-load "icons-in-terminal"
+  (setq-default prettify-symbols-alist '(;;("#+begin_src" . "")
+                                         ("#+begin_src" . "▨")
+                                         ("#+end_src" . "▨")
+                                         ("#+RESULTS:" . "")
+                                         ("[ ]" .  "") ;; ☐ 
+                                         ("[X]" . "✅" ) ;; ☑ 
+                                         ("[-]" . "" ))) ;; 
+  (add-hook 'org-mode-hook 'prettify-symbols-mode))
+
+(with-eval-after-load "org"
+  (custom-set-faces
+   '(org-block-begin-line
+     ((((background dark))
+       (:foreground "#669966" :weight bold)) ;; :background "#444444"
+      (t (:foreground "#CC3333" :weight bold)))) ;; :background "#EFEFEF"
+   '(org-block-end-line
+     ((((background dark)) (:foreground "#CC3333" :weight bold))
+      (t (:foreground "#669966" :weight bold))))
+   ))

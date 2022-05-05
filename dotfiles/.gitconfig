@@ -6,8 +6,8 @@
 	pbcopy = !printf "$1" | pbcopy
 	wdiff = diff --color-words
 	ldiff = difftool -t latex
-	s = stash
-	b = checkout -b
+	s = switch
+	b = switch -c
 	c = checkout
 	p = !git push -u origin `git rev-parse --abbrev-ref HEAD`
 	rm-merged = !git branch --format='%(refname:short)' --merged | egrep -v 'master|develop' | xargs git branch -d
