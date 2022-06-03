@@ -21,6 +21,11 @@ curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
 sudo apt update
 sudo apt install 1password
 sudo apt install 1password-cli
+sudo apt install fzf
 sudo apt install jq
+sudo apt install zsh
 
 go install github.com/x-motemen/ghq@latest
+
+
+chsh -s $(which zsh)
