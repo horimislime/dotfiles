@@ -7,8 +7,7 @@ dotfiles/setup.sh
 
 # install packages
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    sudo apt-get update
-    xargs -a ./linux/pkg-list sudo apt-get install -y
+    linux/setup.sh
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     homebrew/setup.sh
 else

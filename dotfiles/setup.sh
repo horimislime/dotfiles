@@ -12,6 +12,9 @@ mkdir -p $HOME/.config/git
 ln -fsn $PWD/.gitconfig $HOME/.config/git/config
 ln -fsn $PWD/.tigrc $HOME/.tigrc
 
+# Go
+mkdir -p $HOME/.go
+
 # tmux
 mkdir -p $HOME/.tmux.d
 
