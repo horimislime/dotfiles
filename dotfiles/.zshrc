@@ -66,6 +66,9 @@ alias t='tig status'
 
 # pure theme
 prompt pure
+prompt_newline='%666v' # single line prompt
+PROMPT=" $PROMPT"
+zstyle :prompt:pure:path color cyan # tweak for dark background
 PURE_GIT_UNTRACKED_DIRTY=0
 
 # fzf
