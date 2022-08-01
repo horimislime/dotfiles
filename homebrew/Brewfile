@@ -36,6 +36,7 @@ cask "docker"
 cask "google-chrome"
 cask "google-cloud-sdk"
 cask "raycast"
+cask "visual-studio-code"
 
 # brew packages
 
@@ -48,7 +49,7 @@ brew "binutils"
 brew "carthage"
 brew "cvs"
 brew "dart-lang/dart/dart"
-brew "emacs", args: ["HEAD", "use-git-head", "with-cocoa", "with-gnutls"]
+brew "emacs", args: ["with-cocoa", "with-gnutls"]
 brew "findutils", args: ["with-default-names"]
 brew "fzf"
 brew "gh"
