@@ -17,30 +17,28 @@ mas 'Reeder',       id: 1449412482
 mas 'Slack',        id: 803453959
 mas 'Streaks',	    id: 1493327990
 mas 'Todoist', 	    id: 585829637
+mas 'Tweetbot',     id: 1384080005
+mas 'Twitter',      id: 1482454543
 
 # Apps outside AppStore
 
 cask '1password-cli'
 cask 'adobe-creative-cloud'
-cask 'alfred'
 cask 'android-studio'
 cask 'appcleaner'
+cask 'bartender'
+cask 'choosy'
 cask 'cmd-eikana'
 cask 'contexts'
 cask 'discord'
 cask 'docker'
-cask 'finicky'
 cask 'google-chrome'
 cask 'google-cloud-sdk'
-cask 'java' unless system '/usr/libexec/java_home --failfast'
-cask 'licecap'
-cask 'paw'
-cask 'visual-studio-code-insiders'
+cask 'raycast'
 
 # brew packages
 
 tap 'dart-lang/dart'
-tap 'github/gh'
 
 brew 'ack'
 brew 'bluetoothconnector'
@@ -56,7 +54,6 @@ brew 'gh'
 brew 'ghq'
 brew 'gibo'
 brew 'git'
-brew 'github/gh/gh'
 brew 'gnu-sed'
 brew 'gnu-time'
 brew 'imagemagick'
