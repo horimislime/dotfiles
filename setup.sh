@@ -9,6 +9,7 @@ dotfiles/setup.sh
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     linux/setup.sh
 elif [[ "$OSTYPE" == "darwin"* ]]; then
+    macos/setup.sh
     homebrew/setup.sh
 else
     echo "$OSTYPE is not supported."
