@@ -5,19 +5,17 @@ tap "caskroom/cask"
 # AppStore apps
 # `mas list` to find id of installed apps
 
-mas "1Blocker",     id: 1107421413
 mas "Bear",         id: 1091189122
 mas "Buffer", 	    id: 1474298973
 mas "CotEditor",    id: 1024640650
-mas "Day One",      id: 1055511498
+mas "DayOne",       id: 1055511498
 mas "Magnet",	    id: 441258766
-mas "Md Linker",    id: 1289119450
+mas "URLLinker",    id: 1289119450
 mas "Reeder",       id: 1449412482
 mas "Slack",        id: 803453959
 mas "Streaks",	    id: 1493327990
 mas "Todoist", 	    id: 585829637
 mas "Tweetbot",     id: 1384080005
-mas "Twitter",      id: 1482454543
 
 # Apps outside AppStore
 
@@ -46,7 +44,6 @@ brew "ack"
 brew "bluetoothconnector"
 brew "bison"
 brew "binutils"
-brew "carthage"
 brew "cvs"
 brew "dart-lang/dart/dart"
 brew "emacs", args: ["with-cocoa", "with-gnutls"]
@@ -58,6 +55,7 @@ brew "gibo"
 brew "git"
 brew "gnu-sed"
 brew "gnu-time"
+brew "gpg"
 brew "imagemagick"
 brew "jq"
 brew "mas"
