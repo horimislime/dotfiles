@@ -1,6 +1,6 @@
 cask_args appdir: "/Applications"
 
-tap "caskroom/cask"
+tap "homebrew/cask"
 
 # AppStore apps
 # `mas list` to find id of installed apps
@@ -33,6 +33,7 @@ cask "discord"
 cask "docker"
 cask "google-chrome"
 cask "google-cloud-sdk"
+cask "karabiner-elements"
 cask "raycast"
 cask "visual-studio-code"
 
@@ -46,8 +47,8 @@ brew "bison"
 brew "binutils"
 brew "cvs"
 brew "dart-lang/dart/dart"
-brew "emacs", args: ["with-cocoa", "with-gnutls"]
-brew "findutils", args: ["with-default-names"]
+brew "emacs", args: ["with-gnutls"]
+brew "findutils"
 brew "fzf"
 brew "gh"
 brew "ghq"
@@ -71,8 +72,8 @@ brew "readline"
 brew "reattach-to-user-namespace"
 brew "ruby-build"
 brew "ssh-copy-id", link: true
-brew "sshpass"
 brew "tig"
 brew "tmux"
 brew "tree"
 brew "wget"
+brew "yq"

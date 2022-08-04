@@ -25,6 +25,5 @@ ln -fsn $PWD/.zsh.d/theme-pure/pure.zsh $HOME/.zfunctions/prompt_pure_setup
 ln -fsn $PWD/.zsh.d/theme-pure/async.zsh $HOME/.zfunctions/async
 
 # etc.
-mkdir -p $HOME/.homebrew/bin
 mkdir -p $HOME/.local/bin
 ln -fsn $PWD/.textlintrc $HOME/.textlintrc

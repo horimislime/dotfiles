@@ -24,6 +24,7 @@ PATH=/usr/local/bin:$PATH
 PATH=$HOME/.homebrew/bin:$PATH
 PATH=$HOME/.rbenv/shims:$PATH
 PATH=$HOME/.nodenv/shims:$PATH
+PATH=$HOME/.pyenv/shims:$PATH
 PATH=$HOME/ghq/github.com/flutter/flutter/bin:$PATH
 PATH=$HOME/.pub-cache/bin:$PATH
 GOPATH=$HOME/.go
@@ -41,7 +42,7 @@ else
 fi
 
 # google-cloud-sdk
-export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
+export CLOUDSDK_PYTHON=$(which python3)
 if [ -d "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk" ]; then
     source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
     source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
