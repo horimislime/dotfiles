@@ -15,6 +15,9 @@
 	pick = cherry-pick
 	up = pull --all --rebase --autostash --prune
 
+[commit]
+	gpgsign = true
+
 [core]
 	excludesfile = ~/.gitignore
 
@@ -30,7 +33,7 @@
 [user]
 	name = horimislime
 	email = horimislime@gmail.com
-	signingkey = 48B32FA32F5FD6C9CBD0EF16741C501623181233
+	signingkey = 741C501623181233
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f

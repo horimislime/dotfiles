@@ -2,7 +2,7 @@ bind generic g move-first-line
 bind generic G move-last-line
 bind generic c !@sh -c "git rev-parse --short=7 %(commit) | perl -pe chomp | pbcopy" # Copy short hash
 bind status + !git commit --amend
-bind status C !git commit -S
+bind status C !git commit
 bind status P !git p
 bind main G !@hub browse -- commit/%(commit)
 bind main R !git rebase -i %(commit)
