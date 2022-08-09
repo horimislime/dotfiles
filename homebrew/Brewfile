@@ -72,6 +72,7 @@ brew "readline"
 brew "reattach-to-user-namespace"
 brew "ruby-build"
 brew "ssh-copy-id", link: true
+brew "terraform"
 brew "tig"
 brew "tmux"
 brew "tree"

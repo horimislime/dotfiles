@@ -64,6 +64,7 @@ alias oo='open .'
 alias reloadrc='source $HOME/.zshrc'
 alias sudo='sudo -E ' # inherit user defined env-vars
 alias t='tig status'
+alias tf='terraform'
 
 # pure theme
 prompt pure
