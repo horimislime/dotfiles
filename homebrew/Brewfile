@@ -33,22 +33,28 @@ cask "discord"
 cask "docker"
 cask "google-chrome"
 cask "google-cloud-sdk"
+cask "google-drive"
 cask "karabiner-elements"
+cask "quitter"
 cask "raycast"
+cask "via"
 cask "visual-studio-code"
 
 # brew packages
 
 tap "dart-lang/dart"
+tap "leoafarias/fvm"
 
 brew "ack"
 brew "bluetoothconnector"
 brew "bison"
 brew "binutils"
+brew "conftest"
 brew "cvs"
 brew "dart-lang/dart/dart"
 brew "emacs", args: ["with-gnutls"]
 brew "findutils"
+brew "fvm"
 brew "fzf"
 brew "gh"
 brew "ghq"
