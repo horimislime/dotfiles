@@ -33,7 +33,7 @@
 [user]
 	name = horimislime
 	email = horimislime@gmail.com
-	signingkey = 741C501623181233
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEWdJRpJP2SvsNjsS/Ax413o0Z4kzY1aOiin4vQ0iQ7h
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -50,9 +50,14 @@
 [diff]
 	compactionHeuristic = true
 
-[gpg]
-	program = gpg
 [color]
 	ui = always
+
 [fetch]
 	prune = true
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
