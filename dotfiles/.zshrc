@@ -5,6 +5,7 @@ autoload -U promptinit; promptinit
 setopt auto_cd
 setopt auto_pushd
 setopt correct
+setopt extended_history
 setopt hist_ignore_all_dups
 setopt hist_ignore_dups
 setopt hist_no_store
@@ -19,6 +20,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # Environment variables
 JAVA_HOME=/Applications/Android\ Studio.app/Contents/jre/Contents/Home
+PATH=/Applications/Android\ Studio.app/Contents/jre/Contents/Home/bin:$PATH
 PATH=$HOME/bin:$PATH
 PATH=/usr/local/bin:$PATH
 PATH=$HOME/.homebrew/bin:$PATH
@@ -32,6 +34,7 @@ LANG=ja_JP.UTF-8
 TERM=xterm-256color
 # Use Python package in gcloud sdk
 CLOUDSDK_PYTHON_SITEPACKAGES=1
+USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 if [ "$VSCODE_PID" = "" ] && [ "$TERM_PROGRAM" != "vscode" ]; then
     export VISUAL='emacsclient -a "" -t'
@@ -134,3 +137,9 @@ fi
 
 # ssh-agent
 ssh-add -A &> /dev/null
+
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
