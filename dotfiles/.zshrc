@@ -32,6 +32,7 @@ PATH=$HOME/.pub-cache/bin:$PATH
 GOPATH=$HOME/.go
 LANG=ja_JP.UTF-8
 TERM=xterm-256color
+PYENV_ROOT=$HOME/.pyenv
 # Use Python package in gcloud sdk
 CLOUDSDK_PYTHON_SITEPACKAGES=1
 USE_GKE_GCLOUD_AUTH_PLUGIN=True
@@ -59,6 +60,7 @@ SAVEHIST=10000
 alias cp='cp -i'
 alias e='emacsclient -a "" -t'
 alias find='gfind' # prefer GNU version over BSD's find
+alias xargs='gxargs'
 alias grep='grep --color=auto'
 alias ll='ls -la'
 alias mv='mv -i'
@@ -112,34 +114,38 @@ if command -v nodenv &> /dev/null; then
 fi
 
 # nvm
-if command -v nvm &> /dev/null; then
-    autoload -U add-zsh-hook
-    load-nvmrc() {
-	local node_version="$(nvm version)"
-	local nvmrc_path="$(nvm_find_nvmrc)"
+# if command -v nvm &> /dev/null; then
+#     autoload -U add-zsh-hook
+#     load-nvmrc() {
+# 	local node_version="$(nvm version)"
+# 	local nvmrc_path="$(nvm_find_nvmrc)"
 
-	if [ -n "$nvmrc_path" ]; then
-	    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+# 	if [ -n "$nvmrc_path" ]; then
+# 	    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
 
-	    if [ "$nvmrc_node_version" = "N/A" ]; then
-		nvm install
-	    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-		nvm use
-	    fi
-	elif [ "$node_version" != "$(nvm version default)" ]; then
-	    echo "Reverting to nvm default version"
-	    nvm use default
-	fi
-    }
-    add-zsh-hook chpwd load-nvmrc
-    load-nvmrc
-fi
+# 	    if [ "$nvmrc_node_version" = "N/A" ]; then
+# 		nvm install
+# 	    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+# 		nvm use
+# 	    fi
+# 	elif [ "$node_version" != "$(nvm version default)" ]; then
+# 	    echo "Reverting to nvm default version"
+# 	    nvm use default
+# 	fi
+#     }
+#     add-zsh-hook chpwd load-nvmrc
+#     load-nvmrc
+# fi
 
 # ssh-agent
 ssh-add -A &> /dev/null
 
 export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# pyenv
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
