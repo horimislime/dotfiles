@@ -62,13 +62,17 @@
 
 (global-display-line-numbers-mode t)
 
+;; Automatically save opening files
+(auto-save-visited-mode t)
+(setq auto-save-visited-interval 60)
+
 ;; Automatically backup scratch buffer
 (use-package auto-save-buffers-enhanced
   :init
   (auto-save-buffers-enhanced t)
   :config
   (setq auto-save-buffers-enhanced-interval 3600)
-  (setq auto-save-buffers-enhanced-exclude-regexps '(".+"))
+  (setq auto-save-buffers-enhanced-include-regexps '("\*custom-scratch\*"))
   (setq auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
   (setq auto-save-buffers-enhanced-file-related-with-scratch-buffer (locate-user-emacs-file ".scratch-backup")))
 
@@ -269,11 +273,18 @@
   (persistent-scratch-setup-default))
 
 (setq initial-major-mode 'org-mode)
+(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 
 ;;(setq org-directory "~/Documents/org")
 (setq org-use-speed-commands t)
 (setq org-todo-keywords
-      '((type "TODO" "WAITING" "|" "DONE")))
+      '((type "TODO" "WAITING" "DOING"  "|" "DONE")))
+
+(defun org-set-status-to-doing ()
+  (if (org-clocking-p)
+      (org-todo "DOING")))
+(setq org-clock-in-hook 'org-set-status-to-doing)
+
 ;(add-to-list 'org-speed-commands '("t" org-todo "TODO"))
 ;(add-to-list 'org-speed-commands '("d" org-todo "DONE"))
 (define-key global-map (kbd "C-c c") 'org-capture)
@@ -315,3 +326,6 @@
      ((((background dark)) (:foreground "#CC3333" :weight bold))
       (t (:foreground "#669966" :weight bold))))
    ))
+
+(use-package org-pomodoro)
+(setq org-pomodoro-play-sounds nil)
