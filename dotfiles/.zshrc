@@ -20,6 +20,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # Environment variables
 JAVA_HOME=/Applications/Android\ Studio.app/Contents/jre/Contents/Home
+PYENV_ROOT=$HOME/.pyenv
 PATH=/Applications/Android\ Studio.app/Contents/jre/Contents/Home/bin:$PATH
 PATH=$HOME/bin:$PATH
 PATH=/usr/local/bin:$PATH
@@ -32,7 +33,6 @@ PATH=$HOME/.pub-cache/bin:$PATH
 GOPATH=$HOME/.go
 LANG=ja_JP.UTF-8
 TERM=xterm-256color
-PYENV_ROOT=$HOME/.pyenv
 # Use Python package in gcloud sdk
 CLOUDSDK_PYTHON_SITEPACKAGES=1
 USE_GKE_GCLOUD_AUTH_PLUGIN=True
@@ -137,14 +137,16 @@ fi
 #     load-nvmrc
 # fi
 
-# ssh-agent
-ssh-add -A &> /dev/null
-
-export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+# Use ssh-agent of 1password for Mac
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+fi
 
 # pyenv
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+if command -v pyenv &> /dev/null; then
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
 
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
