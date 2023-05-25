@@ -17,10 +17,6 @@ mkdir  -p $HOME/Pictures/screenshots
 defaults write com.apple.screencapture location $HOME/Pictures/screenshots
 killall SystemUIServer
 
-# ssh
-mkdir -p $HOME/.ssh
-ln -fsn $PWD/ssh_config $HOME/.ssh/config
-
 # Karabiner
 mkdir -p $HOME/.config/karabiner/assets/complex_modifications/
 
