@@ -1,12 +1,6 @@
 {
   "name": "Dev Environment",
   "image": "mcr.microsoft.com/vscode/devcontainers/base",
-  "extensions": [
-    "eamodio.gitlens",
-    "oderwat.indent-rainbow",
-    "visualstudioexptteam.vscodeintellicode",
-    "github.copilot"
-  ],
   "remoteEnv": {
     "TZ": "Asia/Tokyo"
   },
@@ -16,16 +10,26 @@
   "mounts": [
     "source=/run/host-services/ssh-auth.sock,target=/run/host-services/ssh-auth.sock,type=bind"
   ],
-  "settings": {
-    "terminal.integrated.profiles.linux": {
-      "zsh": {
-        "path": "zsh",
-        "args": [
-          "-l"
-        ]
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "eamodio.gitlens",
+        "oderwat.indent-rainbow",
+        "visualstudioexptteam.vscodeintellicode",
+        "github.copilot"
+      ],
+      "settings": {
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "zsh",
+            "args": [
+              "-l"
+            ]
+          }
+        },
+        "terminal.integrated.defaultProfile.linux": "zsh"
       }
-    },
-    "terminal.integrated.defaultProfile.linux": "zsh"
+    }
   },
   "postCreateCommand": "./setup.sh"
 }
