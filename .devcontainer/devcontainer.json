@@ -10,6 +10,12 @@
   "remoteEnv": {
     "TZ": "Asia/Tokyo"
   },
+  "containerEnv": {
+    "SSH_AUTH_SOCK": "/run/host-services/ssh-auth.sock"
+  },
+  "mounts": [
+    "source=/run/host-services/ssh-auth.sock,target=/run/host-services/ssh-auth.sock,type=bind"
+  ],
   "settings": {
     "terminal.integrated.profiles.linux": {
       "zsh": {
