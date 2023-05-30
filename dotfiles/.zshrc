@@ -67,6 +67,7 @@ alias mv='mv -i'
 alias o='open'
 alias oo='open .'
 alias reloadrc='source $HOME/.zshrc'
+alias sed='gsed'
 alias sudo='sudo -E ' # inherit user defined env-vars
 alias t='tig status'
 alias tf='terraform'
