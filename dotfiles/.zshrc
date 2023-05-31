@@ -144,6 +144,19 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 fi
 
+# Allow access to key on 1Password for Windows from WSL2
+if [ -e "/proc/sys/fs/binfmt_misc/WSLInterop" ]; then
+    export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+    ALREADY_RUNNING=$(ps -auxww | grep -q "[n]piperelay.exe -ei -s //./pipe/openssh-ssh-agent"; echo $?)
+    if [[ $ALREADY_RUNNING != "0" ]]; then
+        if [[ -S $SSH_AUTH_SOCK ]]; then
+            rm $SSH_AUTH_SOCK
+        fi
+        # launch ssh-agent relay
+        (setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork &) >/dev/null 2>&1
+    fi
+fi
+
 # pyenv
 if command -v pyenv &> /dev/null; then
     export PATH="$PYENV_ROOT/bin:$PATH"
