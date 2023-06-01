@@ -331,5 +331,5 @@
 (setq org-pomodoro-play-sounds nil)
 
 (use-package tempel
-  :bind (("M-+" . tempel-complete)
+  :bind (("TAB" . tempel-complete)
          ("M-*" . tempel-insert)))
