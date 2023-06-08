@@ -63,16 +63,6 @@
 (setq auto-save-visited-interval 60) ;; should be set before enabling the mode
 (auto-save-visited-mode t)
 
-;; Automatically backup scratch buffer
-(use-package auto-save-buffers-enhanced
-  :init
-  (auto-save-buffers-enhanced t)
-  :config
-  (setq auto-save-buffers-enhanced-interval 3600)
-  (setq auto-save-buffers-enhanced-include-regexps '("\*custom-scratch\*"))
-  (setq auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
-  (setq auto-save-buffers-enhanced-file-related-with-scratch-buffer (locate-user-emacs-file ".scratch-backup")))
-
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
   :config
