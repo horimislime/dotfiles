@@ -6,6 +6,7 @@ cd $(dirname $0)
 mkdir -p $HOME/.emacs.d
 ln -fsn $PWD/.emacs.d/init.el $HOME/.emacs.d/init.el
 ln -fsn $PWD/.emacs.d/custom.el $HOME/.emacs.d/custom.el
+ln -fsn $PWD/.emacs.d/config $HOME/.emacs.d/config
 
 # Git
 mkdir -p $HOME/.config/git
