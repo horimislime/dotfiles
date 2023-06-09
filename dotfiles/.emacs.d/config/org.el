@@ -1,6 +1,6 @@
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 
-(defun my-org-screenshot ()
+(defun my/org-screenshot ()
   (interactive)
   (setq filename
         (concat
@@ -12,7 +12,7 @@
 
 (use-package org
   :bind
-  ("C-c C-x i" . my-org-screenshot)
+  ("C-c C-x i" . my/org-screenshot)
   :config
   (custom-set-faces
    '(org-block-begin-line
@@ -58,10 +58,7 @@
 (use-package org-pomodoro)
 (setq org-pomodoro-play-sounds nil)
 
-;; (use-package org-journal
-;;   :custom
-;;   (org-journal-dir "~/Google Drive/My Drive/Org/journal")
-;;   ;; (org-journal-dir (concat
-;;   ;; 		    (getenv "HOME")
-;;   ;;                   "/Google Drive/My Drive/Org/journal"))
-;;   (org-journal-date-format "%A, %d %B %Y"))
+(use-package org-journal
+  :custom
+  (org-journal-dir "~/Google Drive/My Drive/Org/journal")
+  (org-journal-date-format "%A, %d %B %Y"))
