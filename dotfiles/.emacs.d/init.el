@@ -28,6 +28,7 @@
 
 (require 'uniquify)
 
+(set-default 'buffer-file-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 (setq indent-tabs-mode nil) ;; Use soft tab
 (global-auto-revert-mode 1) ;; Reload if opening file is modified by other program
@@ -38,9 +39,18 @@
 (put 'erase-buffer 'disabled nil) ;; Clear contents using erase-buffer
 (setq initial-scratch-message nil) ;; No initial message on scratch buffer
 (menu-bar-mode 0) ;; Hide menu bar
+;;(setq backup-directory-alist '(("." . user-emacs-directory)))
 
-(when (display-graphic-p)
-  (tool-bar-mode -1))
+;; Interact with macOS clipboard
+(defun my/paste-to-clipboard (text &optional push)
+  (let ((process-connection-type nil))
+    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+      (process-send-string proc text)
+      (process-send-eof proc))))
+
+(if (display-graphic-p)
+    (tool-bar-mode -1)
+  (setq interprogram-cut-function 'my/paste-to-clipboard))
 
 (when (memq window-system '(mac ns))
   (setq initial-frame-alist
@@ -50,14 +60,6 @@
            (vertical-scroll-bars . nil)
            (internal-border-width . 0)))))
 (setq default-frame-alist initial-frame-alist)
-
-;; Interact with macOS clipboard
-(defun paste-to-clipboard (text &optional push)
-  (let ((process-connection-type nil))
-    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-      (process-send-string proc text)
-      (process-send-eof proc))))
-(setq interprogram-cut-function 'paste-to-clipboard)
 
 ;; Automatically save opening files
 (setq auto-save-visited-interval 60) ;; should be set before enabling the mode
@@ -164,12 +166,6 @@
 (use-package projectile)
 (use-package lsp-ui)
 (use-package company)
-
-;; Optional Flutter packages
-;(use-package hover)
-
-;(prefer-coding-system 'utf-8)
-(set-default 'buffer-file-coding-system 'utf-8)
 
 (use-package persistent-scratch
   :config
