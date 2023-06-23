@@ -155,9 +155,23 @@
 
 (use-package prettier-js)
 
-(use-package lsp-mode)
+(use-package terraform-mode
+  :custom
+  (setq terraform-format-on-save-mode t))
+(use-package lsp-mode
+  :custom
+  ;; terraform
+  (setq lsp-enable-links t)
+  (setq lsp-terraform-ls-enable-show-reference t)
+  (setq lsp-terraform-ls-prefill-required-fields t)
+  (setq lsp-terraform-ls-validate-on-save t)
+  (setq lsp-semantic-tokens-enable t)
+  (setq lsp-semantic-tokens-honor-refresh-requests t)
+  :hook
+  ((terraform-mode . lsp-deferred)))
 (use-package lsp-dart
-  :hook (dart-mode . lsp))
+  :hook
+  ((dart-mode . lsp)))
 
 (with-eval-after-load 'projectile
   (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
@@ -167,11 +181,10 @@
 (use-package lsp-ui)
 (use-package company)
 
-(use-package persistent-scratch
-  :config
-  (persistent-scratch-setup-default))
-
 (use-package tempel
   :bind (("M-+" . tempel-complete)
          ("M-*" . tempel-insert)))
 
+(use-package nov
+  :mode
+  (("\\.epub\\'" . nov-mode)))
