@@ -1,4 +1,5 @@
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+(setq my/org-base-dir "~/Google Drive/My Drive/Org")
 
 (defun my/org-screenshot ()
   (interactive)
@@ -28,10 +29,23 @@
 (setq org-todo-keywords
       '((type "TODO" "WAITING" "DOING"  "|" "DONE")))
 
+(defun my/write-to-task-file (content)
+  (write-region content
+              nil "~/.emacs.d/clock-task.txt"
+              nil 'quiet)
+  )
+
 (defun org-set-status-to-doing ()
   (if (org-clocking-p)
-      (org-todo "DOING")))
+      (org-todo "DOING"))
+  (my/write-to-task-file (substring-no-properties org-clock-current-task))
+  )
+
+(defun my/org-empty-current-task-file ()
+  (my/write-to-task-file "")
+  )
 (setq org-clock-in-hook 'org-set-status-to-doing)
+(setq org-clock-out-hook 'my/org-empty-current-task-file)
 
 ;(add-to-list 'org-speed-commands '("t" org-todo "TODO"))
 ;(add-to-list 'org-speed-commands '("d" org-todo "DONE"))
@@ -40,18 +54,16 @@
 (setq org-capture-templates
       '(
         ("a" "Archive" plain (file (lambda ()
-                                     (let* ((slug (read-string "slug: "))
-                                            (dir "~/Documents/org"))
+                                     (let* ((slug (read-string "slug: ")))
                                        (require 'org-id)
                                        (make-directory dir t)
-                                       (concat dir "/" slug ".org"))))
+                                       (concat my/org-base-dir "/" slug ".org"))))
          "#+TITLE: %?\n#+DATE: %T\n#+TAGS: draft\n#+EID: %(org-id-uuid)\n\n")
         ("b" "Blog" plain (file (lambda ()
-                                  (let* ((slug (read-string "slug: "))
-                                         (dir (concat "~/Documents/org")))
+                                  (let* ((slug (read-string "slug: ")))
                                     (require 'org-id)
                                     (make-directory dir t)
-                                    (concat dir "/" (format-time-string "%Y-%m-%d_") slug ".org"))))
+                                    (concat my/org-base-dir "/" (format-time-string "%Y-%m-%d_") slug ".org"))))
          "#+TITLE: %?\n#+DATE: %T\n#+TZ: %(format-time-string \"%z (%Z)\")\n#+TAGS: draft\n#+EID: %(org-id-uuid)\n\n")
         ))
 
