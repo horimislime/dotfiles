@@ -68,6 +68,7 @@
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
   :config
+  (add-to-list 'exec-path-from-shell-variables "SSH_AUTH_SOCK")
   (exec-path-from-shell-initialize))
 
 (defun my/load (configs)
