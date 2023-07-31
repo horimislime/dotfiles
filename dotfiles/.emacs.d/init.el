@@ -210,3 +210,6 @@
   (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
   )
 
+(setq chatgpt-shell-openai-key
+      (shell-command-to-string "echo -n `op item get chatgpt-token --fields label=credential`"))
+(use-package chatgpt-shell)
