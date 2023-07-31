@@ -38,6 +38,7 @@
 (setq split-width-threshold nil) ;; Always split window vertically
 (put 'erase-buffer 'disabled nil) ;; Clear contents using erase-buffer
 (setq initial-scratch-message nil) ;; No initial message on scratch buffer
+(setq large-file-warning-threshold nil)
 (menu-bar-mode 0) ;; Hide menu bar
 ;;(setq backup-directory-alist '(("." . user-emacs-directory)))
 
@@ -189,3 +190,23 @@
 (use-package nov
   :mode
   (("\\.epub\\'" . nov-mode)))
+
+(use-package pdf-tools
+  :config
+  (pdf-tools-install)
+  (add-hook 'pdf-view-mode-hook (lambda ()
+				  (global-display-line-numbers-mode -1)
+				  (display-line-numbers-mode -1)))
+;  (add-hook 'pdf-view-mode-hook (lambda() (display-line-numbers-mode -1)))
+  (setq pdf-annot-activate-created-annotations t)
+  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
+  (setq pdf-view-resize-factor 0.6)
+  )
+
+(use-package pdf-view-restore
+  :after pdf-tools
+  :config
+  (setq pdf-view-restore-filename "~/.emacs.d/.pdf-view-restore")
+  (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
+  )
+
