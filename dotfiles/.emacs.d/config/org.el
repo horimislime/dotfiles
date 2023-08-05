@@ -15,6 +15,7 @@
   :bind
   ("C-c C-x i" . my/org-screenshot)
   :config
+  (setq  org-clock-idle-time 60)
   (custom-set-faces
    '(org-block-begin-line
      ((((background dark))
