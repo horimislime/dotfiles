@@ -13,7 +13,13 @@
 
 (use-package org
   :bind
-  ("C-c C-x i" . my/org-screenshot)
+  (("C-c C-c" . org-capture)
+   ("C-c C-j" . org-journal-new-entry)
+   :map org-mode-map
+   ("C-c C-c" . org-capture)
+   ("C-c C-j" . org-journal-new-entry)
+   ("C-c C-x C-v" . my/org-screenshot)
+   )
   :config
   (setq  org-clock-idle-time 60)
   (custom-set-faces
@@ -48,10 +54,6 @@
 (setq org-clock-in-hook 'org-set-status-to-doing)
 (setq org-clock-out-hook 'my/org-empty-current-task-file)
 
-;(add-to-list 'org-speed-commands '("t" org-todo "TODO"))
-;(add-to-list 'org-speed-commands '("d" org-todo "DONE"))
-(define-key global-map (kbd "C-c c") 'org-capture)
-(define-key global-map (kbd "C-c C-x M") 'org-insert-todo-heading)
 (setq org-capture-templates
       '(
         ("a" "Archive" plain (file (lambda ()

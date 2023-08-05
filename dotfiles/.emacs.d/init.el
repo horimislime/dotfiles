@@ -102,7 +102,10 @@
   ((gfm-mode . flycheck-mode)
    (text-mode . flycheck-mode)))
 
+(use-package all-the-icons)
 (use-package neotree
+  :after
+  (all-the-icons)
   :config
   (setq neo-show-hidden-files t)
   (setq neo-persist-show t)
@@ -114,7 +117,8 @@
               (lambda () (setq neo-persist-show nil)))
     (add-hook 'popwin:after-popup-hook
               (lambda () (setq neo-persist-show t))))
-  :bind (("C-x C-t" . neotree-toggle))
+  :bind
+  (("C-c C-t" . neotree-toggle))
   )
 
 (use-package popwin
@@ -184,8 +188,9 @@
 (use-package company)
 
 (use-package tempel
-  :bind (("M-+" . tempel-complete)
-         ("M-*" . tempel-insert)))
+  :bind
+  (("C-c TAB" . tempel-complete)
+   ("C-c C-t" . tempel-insert)))
 
 (use-package nov
   :mode

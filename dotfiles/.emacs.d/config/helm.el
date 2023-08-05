@@ -4,10 +4,10 @@
   (setq helm-display-function #'display-buffer)
   :bind
   (("M-x" . 'helm-M-x)
-   ("C-x C-f" . helm-find-files)
-   ("C-x C-r" . helm-for-files)
-   ("C-x C-y" . helm-show-kill-ring)
-   ("C-x C-b" . helm-buffers-list)
+   ("C-c C-f" . helm-find-files)
+   ("C-c C-r" . helm-for-files)
+   ("C-c C-y" . helm-show-kill-ring)
+   ("C-c C-b" . helm-buffers-list)
    :map helm-map
    ("C-h" . delete-backward-char)
    :map helm-find-files-map
@@ -20,4 +20,4 @@
 
 (use-package helm-ghq
   :bind
-  (("C-x C-g" . helm-ghq)))
+  (("C-c C-g" . helm-ghq)))
