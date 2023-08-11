@@ -1,14 +1,18 @@
-(setq my/org-base-dir "~/Google Drive/My Drive/Org")
+(use-package pcre2el)
+(use-package org-find-file
+  :load-path "packages/"
+  :after (pcre2el))
 
 (use-package org
   :preface
   (defun my/org-screenshot ()
     (interactive)
     (setq image-file-name (concat (make-temp-name (format-time-string "%Y%m%d_%H%M%S_")) ".png")
-	  image-full-path (concat (file-name-directory buffer-file-name) image-file-name)
-	  image-relative-path (concat "./images/" image-file-name))
+	  image-relative-path (concat "images/" image-file-name)
+	  image-full-path (concat (file-name-directory buffer-file-name) image-relative-path))
     (call-process "~/.homebrew/bin/pngpaste" nil nil nil image-full-path)
-    (insert (concat "[[" image-relative-path "]]")))
+    (insert (format "[[./%s]]" image-relative-path))
+    (org-redisplay-inline-images))
 
   (defun my/write-to-task-file (content)
     (write-region content
@@ -30,19 +34,18 @@
    ("C-c C-v" . my/org-screenshot)
    )
   :hook
-  (org-mode-hook . (lambda () (setq truncate-lines nil)))
+  ((org-mode . visual-line-mode)
+   (org-clock-in . org-set-status-to-doing)
+   (org-clock-out . my/org-empty-current-task-file))
   :custom
+  (org-directory "~/Google Drive/My Drive/Org")
   (org-image-actual-width 900)
   (org-clock-idle-time 60)
   (org-startup-folded 'content)
   (org-startup-with-inline-images t)
   (org-use-speed-commands t)
   (org-todo-keywords '((type "TODO" "WAITING" "DOING"  "|" "DONE")))
-  (org-clock-in-hook org-set-status-to-doing)
-  (org-clock-out-hook my/org-empty-current-task-file)  
   :config
-  (setq org-clock-in-hook 'org-set-status-to-doing)
-  (setq org-clock-out-hook 'my/org-empty-current-task-file)
   (custom-set-faces
    '(org-block-begin-line
      ((((background dark))
@@ -54,17 +57,13 @@
 
 (setq org-capture-templates
       '(
-        ("a" "Archive" plain (file (lambda ()
-                                     (let* ((slug (read-string "slug: ")))
-                                       (require 'org-id)
-                                       (make-directory dir t)
-                                       (concat my/org-base-dir "/" slug ".org"))))
-         "#+TITLE: %?\n#+DATE: %T\n#+TAGS: draft\n#+EID: %(org-id-uuid)\n\n")
+        ("n" "Note" plain (file (lambda ()
+                                  (let* ((slug (read-string "slug: ")))
+				    (format "%s/%s.org" org-directory slug))))
+         "#+TITLE: %?\n#+DATE: %T\n#+TAGS: note\n#+EID: %(org-id-uuid)\n\n")
         ("b" "Blog" plain (file (lambda ()
                                   (let* ((slug (read-string "slug: ")))
-                                    (require 'org-id)
-                                    (make-directory dir t)
-                                    (concat my/org-base-dir "/" (format-time-string "%Y-%m-%d_") slug ".org"))))
+                                    (concat org-directory "/" (format-time-string "%Y-%m-%d_") slug ".org"))))
          "#+TITLE: %?\n#+DATE: %T\n#+TZ: %(format-time-string \"%z (%Z)\")\n#+TAGS: draft\n#+EID: %(org-id-uuid)\n\n")
         ))
 
@@ -74,7 +73,7 @@
 
 (use-package org-journal
   :custom
-  (org-journal-dir (concat my/org-base-dir  "/journal"))
+  (org-journal-dir (concat org-directory  "/journal"))
   (org-journal-date-format "%A, %d %B %Y"))
 
 (use-package org-modern
