@@ -199,31 +199,43 @@
 (use-package tempel
   :bind
   (("C-c TAB" . tempel-complete)
-   ("C-c C-t" . tempel-insert)))
+   ("M-*" . tempel-insert)))
 
 (use-package nov
   :mode
   (("\\.epub\\'" . nov-mode)))
 
 (use-package pdf-tools
-  :config
+  :bind
+  (:map pdf-view-mode-map
+        ("C-s" . isearch-forward))
+  :hook
+  (pdf-view-mode . (lambda ()
+        	     (display-line-numbers-mode 0)))
+  :init
   (pdf-tools-install)
-  (add-hook 'pdf-view-mode-hook (lambda ()
-				  (global-display-line-numbers-mode -1)
-				  (display-line-numbers-mode -1)))
-;  (add-hook 'pdf-view-mode-hook (lambda() (display-line-numbers-mode -1)))
-  (setq pdf-annot-activate-created-annotations t)
-  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
-  (setq pdf-view-resize-factor 0.6)
-  )
+  :custom
+  (pdf-annot-activate-created-annotations t)
+  (pdf-view-resize-factor 0.6))
 
 (use-package pdf-view-restore
   :after pdf-tools
-  :config
-  (setq pdf-view-restore-filename "~/.emacs.d/.pdf-view-restore")
+  :hook
+  ((pdf-view-mode . pdf-view-restore-mode))
+   :config
   (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
-  )
+  :custom
+  (pdf-view-restore-filename "~/.emacs.d/.pdf-view-restore"))
 
 (setq chatgpt-shell-openai-key
       (shell-command-to-string "echo -n `op item get chatgpt-token --fields label=credential`"))
 (use-package chatgpt-shell)
+
+(use-package vterm
+  :bind
+  (:map vterm-mode-map
+	("C-g" . vterm--self-insert))
+  :hook
+  ((vterm-mode . (lambda ()
+        	   (display-line-numbers-mode 0)
+		   (setq-local global-hl-line-mode nil)))))
