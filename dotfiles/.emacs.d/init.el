@@ -66,6 +66,15 @@
 (setq auto-save-visited-interval 60) ;; should be set before enabling the mode
 (auto-save-visited-mode t)
 
+(setq
+ backup-directory-alist '(("." . "~/.emacs.d/backup"))
+ backup-by-copying t 
+ version-control t
+ delete-old-versions t
+ kept-new-versions 5
+ kept-old-versions 2
+ )
+
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
   :config
@@ -118,7 +127,7 @@
     (add-hook 'popwin:after-popup-hook
               (lambda () (setq neo-persist-show t))))
   :bind
-  (("C-c C-t" . neotree-toggle))
+  (("C-c t" . neotree-toggle))
   )
 
 (use-package popwin
