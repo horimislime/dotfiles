@@ -28,14 +28,7 @@
   (defun my/get-title-from-url (url)
     (let ((title))
       (with-current-buffer (url-retrieve-synchronously url)
-	(goto-char (point-min))
-	(re-search-forward "<title>\\([^<]*\\)</title>" nil t 1)
-;	(match-string 1)
-	(setq title (match-string 1))
-	(goto-char (point-min))
-	(re-search-forward "charset=\\([-0-9a-zA-Z]*\\)" nil t 1)
-	(decode-coding-string title (intern (match-string 1))))))
-
+	(car (dom-strings (dom-by-tag (libxml-parse-html-region) 'title))))))
   (defun my/paste-url-with-title ()
     (interactive)
     (insert (format "[[%s][%s]]"
