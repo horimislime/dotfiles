@@ -21,7 +21,7 @@
     (line-number-mode 0)
     (column-number-mode 0)
     (doom-modeline-def-modeline 'main
-      '(bar window-number ryo-modal xah-fly-keys matches buffer-info remote-host buffer-position parrot selection-info)
+      '(bar window-number matches buffer-info remote-host buffer-position parrot selection-info)
       '(misc-info persp-name lsp github debug minor-modes input-method major-mode process vcs checker))))
 
 (use-package minions
