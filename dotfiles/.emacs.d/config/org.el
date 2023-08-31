@@ -49,7 +49,10 @@
    (org-clock-out . my/org-empty-current-task-file))
 
   :init
+  (require 'org-protocol)
   (setq org-directory "~/Google Drive/My Drive/Org"
+	org-backlog-file (format "%s/inbox.org" org-directory)
+	org-bookmark-file (format "%s/bookmark.org" org-directory)
 	org-daily-tasks-file (format "%s/tasks.org" org-directory))
 
   :custom
@@ -60,9 +63,14 @@
   (org-use-speed-commands t)
   (org-todo-keywords '((type "TODO" "WAITING" "DOING"  "|" "DONE")))
   (org-capture-templates
-   '(("d" "Weekdays TODO" entry (file org-daily-tasks-file) "%[~/.emacs.d/assets/org-templates/weekdays-todo.org]")
-     ("w" "Weekends TODO" entry (file org-daily-tasks-file) "%[~/.emacs.d/assets/org-templates/weekends-todo.org]")
-     ("n" "Note" plain (file my/create-org-file-with-name) "%[~/.emacs.d/assets/org-templates/note.org]"))))
+   '(("d" "Weekdays TODO" entry (file org-daily-tasks-file) "%[~/.emacs.d/assets/org-templates/weekdays-todo.org]" :prepend t)
+     ("w" "Weekends TODO" entry (file org-daily-tasks-file) "%[~/.emacs.d/assets/org-templates/weekends-todo.org]" :prepend t)
+     ("n" "Create Note" plain (file my/create-org-file-with-name) "%[~/.emacs.d/assets/org-templates/note.org]")
+     ("t" "Put task into inbox" entry (file+headline org-backlog-file "Work") "* TODO %?\n" :prepend t)
+     ("p" "Put task into inbox" entry (file+headline org-backlog-file "Private") "* TODO %?\n" :prepend t)
+     ("b" "Bookmark" entry (file+headline org-bookmark-file "Bookmarks") "* %? \nCREATED: %U\n %i")
+     )
+   ))
 
 (use-package org-pomodoro
   :custom
