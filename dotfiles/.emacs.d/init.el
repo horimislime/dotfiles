@@ -234,8 +234,10 @@
 (use-package vterm
   :bind
   (:map vterm-mode-map
-	("C-g" . vterm--self-insert))
+	("C-g" . vterm--self-insert)
+	("C-x C-c" . vterm--self-insert))
   :hook
   ((vterm-mode . (lambda ()
         	   (display-line-numbers-mode 0)
 		   (setq-local global-hl-line-mode nil)))))
+
