@@ -68,7 +68,7 @@
      ("n" "Create Note" plain (file my/create-org-file-with-name) "%[~/.emacs.d/assets/org-templates/note.org]")
      ("t" "Put task into inbox" entry (file+headline org-backlog-file "Work") "* TODO %?\n" :prepend t)
      ("p" "Put task into inbox" entry (file+headline org-backlog-file "Private") "* TODO %?\n" :prepend t)
-     ("b" "Bookmark" entry (file+headline org-bookmark-file "Bookmarks") "* %? \nCREATED: %U\n %i")
+     ("b" "Bookmark" entry (file+headline org-bookmark-file "Bookmarks") "%[~/.emacs.d/assets/org-templates/bookmark.org]")
      )
    ))
 
