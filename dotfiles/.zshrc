@@ -39,7 +39,7 @@ CLOUDSDK_PYTHON_SITEPACKAGES=1
 USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 if [ "$VSCODE_PID" = "" ] && [ "$TERM_PROGRAM" != "vscode" ]; then
-    export VISUAL='emacsclient -a "" -c'
+    export VISUAL='emacsclient -a "" -r'
 else
     export VISUAL='code --wait'
 fi
@@ -57,7 +57,7 @@ SAVEHIST=10000
 
 # aliases
 alias cp='cp -i'
-alias e='emacsclient -a "" -t'
+alias e='emacsclient -a "" -r'
 alias find='gfind' # prefer GNU version over BSD's find
 alias xargs='gxargs'
 alias grep='grep --color=auto'
