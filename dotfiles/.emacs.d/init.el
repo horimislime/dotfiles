@@ -227,9 +227,12 @@
   :custom
   (pdf-view-restore-filename "~/.emacs.d/.pdf-view-restore"))
 
-(setq chatgpt-shell-openai-key
-      (shell-command-to-string "echo -n `op item get chatgpt-token --fields label=credential`"))
-(use-package chatgpt-shell)
+(use-package chatgpt-shell
+  :hook
+  ((chatgpt-shell-mode . (lambda ()
+			   (if (not chatgpt-shell-openai-key)
+			       (setq chatgpt-shell-openai-key
+				     (shell-command-to-string "echo -n `op item get chatgpt-token --fields label=credential`")))))))
 
 (use-package vterm
   :bind
