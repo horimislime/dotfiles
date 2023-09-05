@@ -39,9 +39,7 @@ CLOUDSDK_PYTHON_SITEPACKAGES=1
 USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 if [ "$VSCODE_PID" = "" ] && [ "$TERM_PROGRAM" != "vscode" ]; then
-    export VISUAL='emacsclient -a "" -t'
-#    printenv >> ~/Desktop/envlist.txt
-    #    echo "----" >>  ~/Desktop/envlist.txt
+    export VISUAL='emacsclient -a "" -c'
 else
     export VISUAL='code --wait'
 fi
