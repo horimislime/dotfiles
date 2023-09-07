@@ -79,6 +79,14 @@ zstyle :prompt:pure:path color cyan # tweak for dark background
 PURE_GIT_UNTRACKED_DIRTY=0
 
 # fzf
+function gh-runs() {
+    local selected_run=$(gh run list -b $(git symbolic-ref --short HEAD) | fzf -e)
+    if [ -n "$selected_run" ]; then
+	local run_id=$(echo $selected_run | awk -F '\t' '{print $7}')
+	gh run watch $run_id
+    fi
+}
+
 function select-history() {
   BUFFER=$(history -n -r 1 | fzf -e --no-sort)
   CURSOR=$#BUFFER
