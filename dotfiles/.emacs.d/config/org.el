@@ -32,7 +32,7 @@
   (defun my/paste-url-with-title ()
     (interactive)
     (insert (format "[[%s][%s]]"
-		    (car kill-ring)
+		    (current-kill 0)
 		    (my/get-title-from-url (car kill-ring)))))
 
   :bind
