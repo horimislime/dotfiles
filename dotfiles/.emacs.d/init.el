@@ -192,7 +192,15 @@
   (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
   (add-to-list 'projectile-project-root-files-bottom-up "BUILD"))
 
-(use-package projectile)
+(use-package projectile
+  :init
+  (projectile-mode +1)
+  :bind
+  (:map projectile-mode-map
+	("C-c p" . projectile-command-map))
+  :custom
+  (projectile-project-search-path '(("~/ghq/github.com" . 2))))
+
 (use-package lsp-ui)
 (use-package company)
 
