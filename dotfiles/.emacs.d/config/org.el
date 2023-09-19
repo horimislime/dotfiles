@@ -79,7 +79,8 @@
 (use-package org-journal
   :custom
   (org-journal-dir (concat org-directory  "/journal"))
-  (org-journal-date-format "%A, %d %B %Y"))
+  (org-journal-file-format "%Y%m%d/journal.org")
+  (org-journal-date-format "%Y/%m/%d (%a)"))
 
 (use-package org-modern
   :hook
