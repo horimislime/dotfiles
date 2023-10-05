@@ -149,7 +149,13 @@
 
 ;;;; Git
 
-(use-package magit)
+(use-package magit
+  :bind
+  ("C-c g m" . 'magit))
+
+(use-package browse-at-remote
+  :bind
+  ("C-c g g" . 'browse-at-remote))
 
 (use-package git-gutter
    :config
