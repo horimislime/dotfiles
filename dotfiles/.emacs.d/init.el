@@ -178,7 +178,7 @@
 
 (use-package terraform-mode
   :custom
-  (setq terraform-format-on-save-mode t))
+  (terraform-format-on-save t))
 (use-package lsp-mode
   :custom
   ;; terraform
