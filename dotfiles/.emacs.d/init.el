@@ -198,6 +198,8 @@
   (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
   (add-to-list 'projectile-project-root-files-bottom-up "BUILD"))
 
+(use-package rg)
+(use-package ripgrep)
 (use-package projectile
   :init
   (projectile-mode +1)
