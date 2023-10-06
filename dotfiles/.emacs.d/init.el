@@ -49,6 +49,14 @@
       (process-send-string proc text)
       (process-send-eof proc))))
 
+(defun create-parent-directory ()
+  "Create the parent directory of the current buffer's file if it doesn't exist."
+  (when buffer-file-name
+    (let ((dir (file-name-directory buffer-file-name)))
+      (unless (file-exists-p dir)
+        (make-directory dir t)))))
+(add-hook 'find-file-hook 'create-parent-directory)
+
 (if (display-graphic-p)
     (tool-bar-mode -1)
   (setq interprogram-cut-function 'my/paste-to-clipboard))
