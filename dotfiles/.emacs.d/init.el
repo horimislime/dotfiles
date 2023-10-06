@@ -29,6 +29,7 @@
 (require 'uniquify)
 
 (set-default 'buffer-file-coding-system 'utf-8)
+(set-language-environment "Japanese")
 (prefer-coding-system 'utf-8)
 (setq indent-tabs-mode nil) ;; Use soft tab
 (global-auto-revert-mode 1) ;; Reload if opening file is modified by other program
@@ -39,6 +40,8 @@
 (put 'erase-buffer 'disabled nil) ;; Clear contents using erase-buffer
 (setq initial-scratch-message nil) ;; No initial message on scratch buffer
 (setq large-file-warning-threshold nil)
+(setq recentf-max-saved-items 200)
+(setq warning-minimum-level :emergency)
 (menu-bar-mode 0) ;; Hide menu bar
 ;;(setq backup-directory-alist '(("." . user-emacs-directory)))
 
