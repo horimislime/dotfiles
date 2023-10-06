@@ -83,6 +83,8 @@
   (org-journal-date-format "%Y/%m/%d (%a)"))
 
 (use-package org-modern
+  :custom
+  (org-modern-progress '("○" "◔" "◑" "◕" "✅"))
   :hook
   ((org-mode . org-modern-mode)
   (org-agenda-finalize . org-modern-agenda)))
