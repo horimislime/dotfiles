@@ -271,3 +271,8 @@
         	   (display-line-numbers-mode 0)
 		   (setq-local global-hl-line-mode nil)))))
 
+(use-package elfeed
+  :config
+  (let ((custom-private-file-path (format "%s/%s" user-emacs-directory "custom.local.el")))
+    (when (file-exists-p custom-private-file-path)
+      (load-file custom-private-file-path))))
