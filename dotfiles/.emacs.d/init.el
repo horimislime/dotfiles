@@ -261,7 +261,9 @@
   ((chatgpt-shell-mode . (lambda ()
 			   (if (not chatgpt-shell-openai-key)
 			       (setq chatgpt-shell-openai-key
-				     (shell-command-to-string "echo -n `op item get chatgpt-token --fields label=credential`")))))))
+				     (shell-command-to-string "echo -n `op item get chatgpt-token --fields label=credential`"))))))
+  :custom
+  (chatgpt-shell-model-version "gpt-4-1106-preview"))
 
 (use-package vterm
   :bind
