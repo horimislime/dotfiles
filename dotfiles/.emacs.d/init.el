@@ -44,8 +44,8 @@
 (setq warning-minimum-level :emergency)
 (menu-bar-mode 0) ;; Hide menu bar
 ;;(setq backup-directory-alist '(("." . user-emacs-directory)))
-(global-set-key (kbd "M-{") (lambda () (interactive) (select-window (previous-window))))
-(global-set-key (kbd "M-}") (lambda () (interactive) (select-window (next-window))))
+(global-set-key (kbd "s-{") (lambda () (interactive) (select-window (previous-window))))
+(global-set-key (kbd "s-}") (lambda () (interactive) (select-window (next-window))))
 
 ;; Interact with macOS clipboard
 (defun my/paste-to-clipboard (text &optional push)
