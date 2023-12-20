@@ -24,7 +24,7 @@
     (my/write-to-task-file ""))
   (defun my/create-org-file-with-name ()
     (let* ((slug (read-string "slug: ")))
-      (format "%s/%s.org" org-directory slug)))
+      (format "%s/note/%s/content.org" org-directory slug)))
   (defun my/get-title-from-url (url)
     (let ((title))
       (with-current-buffer (url-retrieve-synchronously url)
@@ -50,10 +50,11 @@
 
   :init
   (require 'org-protocol)
-  (setq org-directory "~/Google Drive/My Drive/Org"
+  (setq org-directory "~/Dropbox/org"
 	org-backlog-file (format "%s/inbox.org" org-directory)
 	org-bookmark-file (format "%s/bookmark.org" org-directory)
-	org-daily-tasks-file (format "%s/tasks.org" org-directory))
+	org-daily-tasks-file (format "%s/tasks.org" org-directory)
+	org-kpt-file (format "%s/kpt.org" org-directory))
 
   :custom
   (org-image-actual-width 900)
@@ -66,9 +67,11 @@
    '(("d" "Weekdays TODO" entry (file org-daily-tasks-file) "%[~/.emacs.d/assets/org-templates/weekdays-todo.org]" :prepend t)
      ("w" "Weekends TODO" entry (file org-daily-tasks-file) "%[~/.emacs.d/assets/org-templates/weekends-todo.org]" :prepend t)
      ("n" "Create Note" plain (file my/create-org-file-with-name) "%[~/.emacs.d/assets/org-templates/note.org]")
-     ("t" "Put task into inbox" entry (file+headline org-backlog-file "Work") "* TODO %?\n" :prepend t)
-     ("p" "Put task into inbox" entry (file+headline org-backlog-file "Private") "* TODO %?\n" :prepend t)
+     ("t" "Put work task into inbox" entry (file+headline org-backlog-file "Work") "* TODO %?\n" :prepend t)
+     ("h" "Put private task into inbox" entry (file+headline org-backlog-file "Private") "* TODO %?\n" :prepend t)
      ("b" "Bookmark" entry (file+headline org-bookmark-file "Bookmarks") "%[~/.emacs.d/assets/org-templates/bookmark.org]")
+     ("k" "Keep" entry (file+function org-kpt-file my/find-k-under-headline) "*** %?\n")
+     ("p" "Problem" entry (file+function org-kpt-file my/find-p-under-headline) "*** %?\n")
      )
    ))
 
