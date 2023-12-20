@@ -46,6 +46,7 @@
 ;;(setq backup-directory-alist '(("." . user-emacs-directory)))
 (global-set-key (kbd "s-{") (lambda () (interactive) (select-window (previous-window))))
 (global-set-key (kbd "s-}") (lambda () (interactive) (select-window (next-window))))
+(global-set-key (kbd "C-x C-l") (lambda () (interactive) (load-file buffer-file-name)))
 
 ;; Interact with macOS clipboard
 (defun my/paste-to-clipboard (text &optional push)
@@ -206,10 +207,6 @@
 (use-package lsp-dart
   :hook
   ((dart-mode . lsp)))
-
-(with-eval-after-load 'projectile
-  (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
-  (add-to-list 'projectile-project-root-files-bottom-up "BUILD"))
 
 (use-package rg)
 (use-package ripgrep)
