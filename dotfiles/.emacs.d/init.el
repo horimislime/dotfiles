@@ -42,11 +42,15 @@
 (setq large-file-warning-threshold nil)
 (setq recentf-max-saved-items 200)
 (setq warning-minimum-level :emergency)
+(setq browse-url-browser-function 'eww)
 (menu-bar-mode 0) ;; Hide menu bar
 ;;(setq backup-directory-alist '(("." . user-emacs-directory)))
 (global-set-key (kbd "s-{") (lambda () (interactive) (select-window (previous-window))))
 (global-set-key (kbd "s-}") (lambda () (interactive) (select-window (next-window))))
 (global-set-key (kbd "C-x C-l") (lambda () (interactive) (load-file buffer-file-name)))
+
+(global-set-key (kbd "C-x C-h") 'help-for-help)
+(global-set-key (kbd "C-h") 'delete-backward-char)
 
 ;; Interact with macOS clipboard
 (defun my/paste-to-clipboard (text &optional push)
