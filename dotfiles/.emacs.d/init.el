@@ -242,7 +242,18 @@
   (projectile-project-search-path '(("~/ghq/github.com" . 2))))
 
 (use-package lsp-ui)
-(use-package company)
+
+(use-package corfu
+  :custom
+  (corfu-cycle t)
+  (corfu-auto t)
+  :init
+  (global-corfu-mode))
+
+(use-package emacs
+  :init
+  (setq completion-cycle-threshold 3)
+  (setq tab-always-indent 'complete))
 
 (use-package tempel
   :bind
