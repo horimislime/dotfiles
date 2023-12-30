@@ -212,6 +212,24 @@
   :hook
   ((dart-mode . lsp)))
 
+(use-package treesit-auto
+  :config
+  (setq treesit-auto-install t)
+  (global-treesit-auto-mode))
+
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+
+(use-package eglot
+  :hook
+  ((js-ts-mode . eglot-ensure)
+   (tsx-ts-mode . eglot-ensure)
+   (typescript-ts-mode . eglot-ensure)
+   (dart-mode . eglot-ensure))
+  :bind
+  (:map eglot-mode-map))
+
 (use-package rg)
 (use-package ripgrep)
 (use-package projectile
