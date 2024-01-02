@@ -4,13 +4,31 @@
 
 (use-package org
   :preface
+  (defun my/copy-to-blog-dir ()
+    (interactive)
+    (if (yes-or-no-p "Copy entry to repo?")
+	(let* ((current-directory (file-name-directory buffer-file-name))
+	       (blog-dir-root "~/ghq/github.com/horimislime/horimisli.me")
+	       (blog-post-id (file-name-base (directory-file-name current-directory)))
+	       (blog-post-dir (format "%s/posts/blog/%s/%s" blog-dir-root (format-time-string "%Y") blog-post-id))
+	       (blog-image-dir (format "%s/public/images" blog-dir-root))
+	       (blog-content-file "content.org")
+	       (blog-image-files (directory-files current-directory nil "\\(\\.png\\|\\.jpg\\|\\.jpeg\\|\\.gif\\)$")))
+
+	  (unless (file-exists-p blog-post-dir)
+	    (make-directory blog-post-dir t))
+	  (copy-file (concat current-directory blog-content-file) (format "%s/%s" blog-post-dir blog-content-file) t)
+	  (dolist (file blog-image-files)
+	    (copy-file (concat current-directory file) (format "%s/%s" blog-image-dir file) t))
+	  (message "Successfully copied entry data."))
+      (message "Cancelled")))
+    
   (defun my/org-screenshot ()
     (interactive)
     (setq image-file-name (concat (make-temp-name (format-time-string "%Y%m%d_%H%M%S_")) ".png")
-	  image-relative-path (concat "images/" image-file-name)
-	  image-full-path (concat (file-name-directory buffer-file-name) image-relative-path))
+	  image-full-path (concat (file-name-directory buffer-file-name) image-file-name))
     (call-process "~/.homebrew/bin/pngpaste" nil nil nil image-full-path)
-    (insert (format "[[./%s]]" image-relative-path))
+    (insert (format "[[./%s]]" image-file-name))
     (org-redisplay-inline-images))
   (defun my/write-to-task-file (content)
     (write-region content
