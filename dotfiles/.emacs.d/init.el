@@ -217,11 +217,11 @@
   (setq treesit-auto-install t)
   (global-treesit-auto-mode))
 
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
-
 (use-package eglot
+  :mode
+  (("\\.ts\\'" . typescript-ts-mode)
+   ("\\.js\\'" . js-ts-mode)
+   ("\\.tsx\\'" . tsx-ts-mode))
   :hook
   ((js-ts-mode . eglot-ensure)
    (tsx-ts-mode . eglot-ensure)
