@@ -45,12 +45,17 @@
 (setq browse-url-browser-function 'eww)
 (menu-bar-mode 0) ;; Hide menu bar
 ;;(setq backup-directory-alist '(("." . user-emacs-directory)))
-(global-set-key (kbd "s-{") (lambda () (interactive) (select-window (previous-window))))
-(global-set-key (kbd "s-}") (lambda () (interactive) (select-window (next-window))))
-(global-set-key (kbd "C-x C-l") (lambda () (interactive) (load-file buffer-file-name)))
 
-(global-set-key (kbd "C-x C-h") 'help-for-help)
-(global-set-key (kbd "C-h") 'delete-backward-char)
+(use-package emacs
+  :bind
+  (("s-{" . (lambda () (interactive) (select-window (previous-window))))
+   ("s-}" . (lambda () (interactive) (select-window (next-window))))
+   ("C-x C-l" . (lambda () (interactive) (load-file buffer-file-name)))
+   ("C-x C-h" . 'help-for-help)
+   ("C-h" . 'delete-backward-char))
+  :init
+  (setq completion-cycle-threshold 3)
+  (setq tab-always-indent 'complete))
 
 ;; Interact with macOS clipboard
 (defun my/paste-to-clipboard (text &optional push)
@@ -249,11 +254,6 @@
   (corfu-auto t)
   :init
   (global-corfu-mode))
-
-(use-package emacs
-  :init
-  (setq completion-cycle-threshold 3)
-  (setq tab-always-indent 'complete))
 
 (use-package tempel
   :bind
