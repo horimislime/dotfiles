@@ -28,25 +28,21 @@
 
 (require 'uniquify)
 
-(set-default 'buffer-file-coding-system 'utf-8)
-(set-language-environment "Japanese")
-(prefer-coding-system 'utf-8)
-(setq indent-tabs-mode nil) ;; Use soft tab
-(global-auto-revert-mode 1) ;; Reload if opening file is modified by other program
-(setq vc-follow-symlinks t) ;; Always follow symbolic links
-(setq create-lockfiles nil) ;; Do not create .#lockfile
-(setq vc-handled-backends ()) ;; Disable vc-mode
-(setq split-width-threshold nil) ;; Always split window vertically
-(put 'erase-buffer 'disabled nil) ;; Clear contents using erase-buffer
-(setq initial-scratch-message nil) ;; No initial message on scratch buffer
-(setq large-file-warning-threshold nil)
-(setq recentf-max-saved-items 200)
-(setq warning-minimum-level :emergency)
-(setq browse-url-browser-function 'eww)
-(menu-bar-mode 0) ;; Hide menu bar
-;;(setq backup-directory-alist '(("." . user-emacs-directory)))
-
 (use-package emacs
+  :preface
+  ;; Interact with macOS clipboard
+  (defun my/paste-to-clipboard (text &optional push)
+    (let ((process-connection-type nil))
+      (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+	(process-send-string proc text)
+	(process-send-eof proc))))
+  (defun my/create-parent-directory ()
+    "Create the parent directory of the current buffer's file if it doesn't exist."
+    (when buffer-file-name
+      (let ((dir (file-name-directory buffer-file-name)))
+	(unless (file-exists-p dir)
+          (make-directory dir t)))))
+  (add-hook 'find-file-hook 'my/create-parent-directory)
   :bind
   (("s-{" . (lambda () (interactive) (select-window (previous-window))))
    ("s-}" . (lambda () (interactive) (select-window (next-window))))
@@ -54,49 +50,46 @@
    ("C-x C-h" . 'help-for-help)
    ("C-h" . 'delete-backward-char))
   :init
+  (set-default 'buffer-file-coding-system 'utf-8)
+  (set-language-environment "Japanese")
+  (prefer-coding-system 'utf-8)
+  (setq indent-tabs-mode nil) ;; Use soft tab
+  (global-auto-revert-mode 1) ;; Reload if opening file is modified by other program
+  (setq vc-follow-symlinks t) ;; Always follow symbolic links
+  (setq create-lockfiles nil) ;; Do not create .#lockfile
+  (setq vc-handled-backends ()) ;; Disable vc-mode
+  (setq split-width-threshold nil) ;; Always split window vertically
+  (put 'erase-buffer 'disabled nil) ;; Clear contents using erase-buffer
+  (setq initial-scratch-message nil) ;; No initial message on scratch buffer
+  (setq large-file-warning-threshold nil)
+  (setq recentf-max-saved-items 200)
+  (setq warning-minimum-level :emergency)
+  (setq browse-url-browser-function 'eww)
+  (menu-bar-mode 0) ;; Hide menu bar
   (setq completion-cycle-threshold 3)
-  (setq tab-always-indent 'complete))
+  (setq tab-always-indent 'complete)
+  (if (display-graphic-p)
+      (tool-bar-mode -1)
+    (setq interprogram-cut-function 'my/paste-to-clipboard))
 
-;; Interact with macOS clipboard
-(defun my/paste-to-clipboard (text &optional push)
-  (let ((process-connection-type nil))
-    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-      (process-send-string proc text)
-      (process-send-eof proc))))
-
-(defun create-parent-directory ()
-  "Create the parent directory of the current buffer's file if it doesn't exist."
-  (when buffer-file-name
-    (let ((dir (file-name-directory buffer-file-name)))
-      (unless (file-exists-p dir)
-        (make-directory dir t)))))
-(add-hook 'find-file-hook 'create-parent-directory)
-
-(if (display-graphic-p)
-    (tool-bar-mode -1)
-  (setq interprogram-cut-function 'my/paste-to-clipboard))
-
-(when (memq window-system '(mac ns))
-  (setq initial-frame-alist
-        (append
-         '((ns-transparent-titlebar . t)
-	   (ns-appearance . dark)
-           (vertical-scroll-bars . nil)
-           (internal-border-width . 0)))))
-(setq default-frame-alist initial-frame-alist)
-
-;; Automatically save opening files
-(setq auto-save-visited-interval 60) ;; should be set before enabling the mode
-(auto-save-visited-mode t)
-
-(setq
- backup-directory-alist '(("." . "~/.emacs.d/backup"))
- backup-by-copying t 
- version-control t
- delete-old-versions t
- kept-new-versions 5
- kept-old-versions 2
- )
+  (when (memq window-system '(mac ns))
+    (setq initial-frame-alist
+          (append
+           '((ns-transparent-titlebar . t)
+	     (ns-appearance . dark)
+             (vertical-scroll-bars . nil)
+             (internal-border-width . 0)))))
+  (setq default-frame-alist initial-frame-alist)
+  ;; Automatically save opening files
+  (setq auto-save-visited-interval 60) ;; should be set before enabling the mode
+  (auto-save-visited-mode t)
+  (setq
+   backup-directory-alist '(("." . "~/.emacs.d/backup"))
+   backup-by-copying t 
+   version-control t
+   delete-old-versions t
+   kept-new-versions 5
+   kept-old-versions 2))
 
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
