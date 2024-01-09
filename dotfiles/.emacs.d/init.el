@@ -216,15 +216,20 @@
   (global-treesit-auto-mode))
 
 (use-package eglot
+  :preface
+  (defun my/eglot-organize-imports ()
+    (call-interactively 'eglot-code-action-organize-imports))
   :mode
   (("\\.ts\\'" . typescript-ts-mode)
    ("\\.js\\'" . js-ts-mode)
    ("\\.tsx\\'" . tsx-ts-mode))
   :hook
-  ((js-ts-mode . eglot-ensure)
+  ((dart-mode . eglot-ensure)
+   (js-ts-mode . eglot-ensure)
    (tsx-ts-mode . eglot-ensure)
    (typescript-ts-mode . eglot-ensure)
-   (dart-mode . eglot-ensure))
+   (before-save . eglot-format-buffer)
+   (before-save . my/eglot-organize-imports))
   :bind
   (:map eglot-mode-map))
 
