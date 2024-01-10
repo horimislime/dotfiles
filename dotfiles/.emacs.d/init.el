@@ -304,7 +304,16 @@
 		   (setq-local global-hl-line-mode nil)))))
 
 (use-package elfeed
+  :preface
+  (defun my/elfeed-load-feed ()
+    (interactive)
+    (setq elfeed-feeds
+        (with-temp-buffer
+          (insert-file-contents "~/Dropbox/emacs/elfeed-source.csv")
+          (mapcar
+           (lambda (line) 
+             (let ((items (split-string line ",")))
+               (string-trim (cadr items))))
+           (split-string (buffer-string) "\n" t)))))
   :config
-  (let ((custom-private-file-path (format "%s/%s" user-emacs-directory "custom.local.el")))
-    (when (file-exists-p custom-private-file-path)
-      (load-file custom-private-file-path))))
+  (my/elfeed-load-feed))
