@@ -231,7 +231,8 @@
    (before-save . eglot-format-buffer)
    (before-save . my/eglot-organize-imports))
   :bind
-  (:map eglot-mode-map))
+  (:map eglot-mode-map
+   ("C-c e a" . eglot-code-actions)))
 
 (use-package rg)
 (use-package ripgrep)
