@@ -53,25 +53,32 @@
   (set-default 'buffer-file-coding-system 'utf-8)
   (set-language-environment "Japanese")
   (prefer-coding-system 'utf-8)
-  (setq indent-tabs-mode nil) ;; Use soft tab
+  (auto-save-visited-mode t)
   (global-auto-revert-mode 1) ;; Reload if opening file is modified by other program
-  (setq vc-follow-symlinks t) ;; Always follow symbolic links
-  (setq create-lockfiles nil) ;; Do not create .#lockfile
-  (setq vc-handled-backends ()) ;; Disable vc-mode
-  (setq split-width-threshold nil) ;; Always split window vertically
   (put 'erase-buffer 'disabled nil) ;; Clear contents using erase-buffer
-  (setq initial-scratch-message nil) ;; No initial message on scratch buffer
-  (setq large-file-warning-threshold nil)
-  (setq recentf-max-saved-items 200)
-  (setq warning-minimum-level :emergency)
-  (setq browse-url-browser-function 'eww)
   (menu-bar-mode 0) ;; Hide menu bar
-  (setq completion-cycle-threshold 3)
-  (setq tab-always-indent 'complete)
+  (setq auto-save-visited-interval 60 ;; should be set before enabling the mode
+	backup-by-copying t
+	backup-directory-alist '(("." . "~/.emacs.d/backup"))
+	browse-url-browser-function 'eww
+	completion-cycle-threshold 3
+	create-lockfiles nil ;; Do not create .#lockfile
+	delete-old-versions t
+	indent-tabs-mode nil ;; Use soft tab
+	initial-scratch-message nil ;; No initial message on scratch buffer
+	kept-new-versions 5
+	kept-old-versions 2
+	large-file-warning-threshold nil
+	recentf-max-saved-items 200
+	split-width-threshold nil ;; Always split window vertically
+	tab-always-indent 'complete
+	vc-follow-symlinks t ;; Always follow symbolic links
+	vc-handled-backends () ;; Disable vc-mode
+	version-control t
+	warning-minimum-level :emergency)
   (if (display-graphic-p)
       (tool-bar-mode -1)
     (setq interprogram-cut-function 'my/paste-to-clipboard))
-
   (when (memq window-system '(mac ns))
     (setq initial-frame-alist
           (append
@@ -79,17 +86,7 @@
 	     (ns-appearance . dark)
              (vertical-scroll-bars . nil)
              (internal-border-width . 0)))))
-  (setq default-frame-alist initial-frame-alist)
-  ;; Automatically save opening files
-  (setq auto-save-visited-interval 60) ;; should be set before enabling the mode
-  (auto-save-visited-mode t)
-  (setq
-   backup-directory-alist '(("." . "~/.emacs.d/backup"))
-   backup-by-copying t 
-   version-control t
-   delete-old-versions t
-   kept-new-versions 5
-   kept-old-versions 2))
+  (setq default-frame-alist initial-frame-alist))
 
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
