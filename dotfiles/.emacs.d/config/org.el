@@ -104,7 +104,8 @@
 	org-backlog-file (format "%s/inbox.org" org-directory)
 	org-bookmark-file (format "%s/bookmark.org" org-directory)
 	org-daily-tasks-file (format "%s/tasks.org" org-directory)
-	org-kpt-file (format "%s/kpt.org" org-directory))
+	org-kpt-file (format "%s/kpt.org" org-directory)
+	elfeed-source-csv "~/Dropbox/emacs/elfeed-source.csv")
 
   :custom
   (org-image-actual-width 900)
@@ -120,8 +121,10 @@
      ("t" "Put work task into inbox" entry (file+headline org-backlog-file "Work") "* TODO %?\n" :prepend t)
      ("h" "Put private task into inbox" entry (file+headline org-backlog-file "Private") "* TODO %?\n" :prepend t)
      ("b" "Bookmark" entry (file+headline org-bookmark-file "Bookmarks") "%[~/.emacs.d/assets/org-templates/bookmark.org]" :prepend t)
+     ("r" "Read Later" entry (file+headline org-bookmark-file "Read Later") "%[~/.emacs.d/assets/org-templates/bookmark.org]" :prepend t)
      ("k" "Keep" entry (file+function org-kpt-file my/find-k-under-headline) "*** %?\n")
      ("p" "Problem" entry (file+function org-kpt-file my/find-p-under-headline) "*** %?\n")
+     ("f" "Subscribe Feed" plain (file elfeed-source-csv) "%(my/get-title-from-url \"%:link\"),%:link\n" :prepend t :immediate-finish t)
      )
    ))
 
@@ -141,4 +144,3 @@
   :hook
   ((org-mode . org-modern-mode)
   (org-agenda-finalize . org-modern-agenda)))
-
