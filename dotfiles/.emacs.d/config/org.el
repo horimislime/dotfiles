@@ -52,14 +52,46 @@
     (insert (format "[[%s][%s]]"
 		    (current-kill 0)
 		    (my/get-title-from-url (car kill-ring)))))
+  (defun my/find-location-under-week-headline (type)
+    "Find or create my default journal tree"
+    (setq
+     week-begin-date-string (format-time-string "%Y/%m/%d (\%a)" (org-read-date nil t "-Sun"))
+     week-end-date-string (format-time-string "%Y/%m/%d (\%a)" (org-read-date nil t "Sat"))
+     hd (format "%s - %s" week-begin-date-string week-end-date-string))
+    (goto-char (point-min))
+    (unless (derived-mode-p 'org-mode)
+      (error
+       "Target buffer \"%s\" for jww/find-journal-tree should be in Org mode"
+       (current-buffer)))
+    (if (re-search-forward
+	 (format org-complex-heading-regexp-format (regexp-quote hd))
+	 nil t)
+	(goto-char (point-at-bol))
+      (insert "* " hd "\n")
+      )
+    (org-end-of-subtree)
+    (if (re-search-backward
+	 (format org-complex-heading-regexp-format (regexp-quote type))
+	 nil t)
+	(goto-char (point-at-bol))
+      (or (bolp) (insert "\n"))
+      (org-end-of-subtree)
+      (insert "\n** " type "\n")
+      (beginning-of-line 0))
+    )
+  (defun my/find-k-under-headline ()
+    (my/find-location-under-week-headline "KEEP"))
+  (defun my/find-p-under-headline ()
+    (my/find-location-under-week-headline "PROBLEM"))
 
   :bind
   (("C-c c" . org-capture)
    ("C-c j" . org-journal-new-entry)
-   ("C-c o" . org-find-file)
+   ("C-c o f" . org-find-file)
    :map org-mode-map
    ("C-c C-p C-v" . my/org-screenshot)
-   ("C-c C-u C-v" . my/paste-url-with-title))
+   ("C-c C-u C-v" . my/paste-url-with-title)
+   ("C-c o c" . my/copy-to-blog-dir))
 
   :hook
   ((org-mode . visual-line-mode)
