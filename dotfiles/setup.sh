@@ -3,10 +3,11 @@
 cd $(dirname $0)
 
 # Emacs
-mkdir -p $HOME/.emacs.d
-ln -fsn $PWD/.emacs.d/init.el $HOME/.emacs.d/init.el
-ln -fsn $PWD/.emacs.d/custom.el $HOME/.emacs.d/custom.el
-ln -fsn $PWD/.emacs.d/config $HOME/.emacs.d/config
+EMACS_HOME=$HOME/.config/emacs
+mkdir -p $EMACS_HOME
+ln -fsn $PWD/emacs/init.el $EMACS_HOME/init.el
+ln -fsn $PWD/emacs/custom.el $EMACS_HOME/custom.el
+ln -fsn $PWD/emacs/config $EMACS_HOME/config
 
 # Git
 mkdir -p $HOME/.config/git
