@@ -1,0 +1,3 @@
+#+TITLE: %?
+#+DATE: %<%Y-%m-%d %H:%m>
+#+TAGS:

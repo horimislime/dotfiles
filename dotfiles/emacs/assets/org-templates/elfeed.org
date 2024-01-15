@@ -1,0 +1,1 @@
+%((let ((title)) (with-temp-buffer (url-retrieve-synchronously "%:link") (car (dom-strings (dom-by-tag (libxml-parse-html-region) 'title)))))), %:link

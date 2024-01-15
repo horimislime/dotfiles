@@ -7,7 +7,9 @@ EMACS_HOME=$HOME/.config/emacs
 mkdir -p $EMACS_HOME
 ln -fsn $PWD/emacs/init.el $EMACS_HOME/init.el
 ln -fsn $PWD/emacs/custom.el $EMACS_HOME/custom.el
+ln -fsn $PWD/emacs/assets $EMACS_HOME/assets
 ln -fsn $PWD/emacs/config $EMACS_HOME/config
+ln -fsn $PWD/emacs/packages $EMACS_HOME/packages
 
 # Git
 mkdir -p $HOME/.config/git

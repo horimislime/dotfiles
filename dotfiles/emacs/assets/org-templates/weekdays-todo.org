@@ -1,0 +1,8 @@
+
+* %<%Y/%m/%d (%a)> [/]
+** TODO Daily
+*** done
+
+
+** TODO 
+
