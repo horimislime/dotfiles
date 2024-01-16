@@ -32,7 +32,7 @@
     (org-redisplay-inline-images))
   (defun my/write-to-task-file (content)
     (write-region content
-		  nil "~/.emacs.d/clock-task.txt"
+		  nil "~/.config/emacs/clock-task.txt"
 		  nil 'quiet))
   (defun org-set-status-to-doing ()
     (if (org-clocking-p)
@@ -115,13 +115,13 @@
   (org-use-speed-commands t)
   (org-todo-keywords '((type "TODO" "WAITING" "DOING"  "|" "DONE")))
   (org-capture-templates
-   '(("d" "Weekdays TODO" entry (file org-daily-tasks-file) "%[~/.emacs.d/assets/org-templates/weekdays-todo.org]" :prepend t)
-     ("w" "Weekends TODO" entry (file org-daily-tasks-file) "%[~/.emacs.d/assets/org-templates/weekends-todo.org]" :prepend t)
-     ("n" "Create Note" plain (file my/create-org-file-with-name) "%[~/.emacs.d/assets/org-templates/note.org]")
+   '(("d" "Weekdays TODO" entry (file org-daily-tasks-file) "%[~/.config/emacs/assets/org-templates/weekdays-todo.org]" :prepend t)
+     ("w" "Weekends TODO" entry (file org-daily-tasks-file) "%[~/.config/emacs/assets/org-templates/weekends-todo.org]" :prepend t)
+     ("n" "Create Note" plain (file my/create-org-file-with-name) "%[~/.config/emacs/assets/org-templates/note.org]")
      ("t" "Put work task into inbox" entry (file+headline org-backlog-file "Work") "* TODO %?\n" :prepend t)
      ("h" "Put private task into inbox" entry (file+headline org-backlog-file "Private") "* TODO %?\n" :prepend t)
-     ("b" "Bookmark" entry (file+headline org-bookmark-file "Bookmarks") "%[~/.emacs.d/assets/org-templates/bookmark.org]" :prepend t)
-     ("r" "Read Later" entry (file+headline org-bookmark-file "Read Later") "%[~/.emacs.d/assets/org-templates/bookmark.org]" :prepend t)
+     ("b" "Bookmark" entry (file+headline org-bookmark-file "Bookmarks") "%[~/.config/emacs/assets/org-templates/bookmark.org]" :prepend t)
+     ("r" "Read Later" entry (file+headline org-bookmark-file "Read Later") "%[~/.config/emacs/assets/org-templates/bookmark.org]" :prepend t)
      ("k" "Keep" entry (file+function org-kpt-file my/find-k-under-headline) "*** %?\n")
      ("p" "Problem" entry (file+function org-kpt-file my/find-p-under-headline) "*** %?\n")
      ("f" "Subscribe Feed" plain (file elfeed-source-csv) "%(my/get-title-from-url \"%:link\"),%:link\n" :prepend t :immediate-finish t)

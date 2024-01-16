@@ -280,7 +280,7 @@
    :config
   (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
   :custom
-  (pdf-view-restore-filename "~/.emacs.d/.pdf-view-restore"))
+  (pdf-view-restore-filename "~/.config/emacs/.pdf-view-restore"))
 
 (use-package chatgpt-shell
   :hook
