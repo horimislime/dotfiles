@@ -59,7 +59,7 @@
   (menu-bar-mode 0) ;; Hide menu bar
   (setq auto-save-visited-interval 60 ;; should be set before enabling the mode
 	backup-by-copying t
-	backup-directory-alist '(("." . "~/.emacs.d/backup"))
+	backup-directory-alist '(("." . "~/.config/emacs/backup"))
 	browse-url-browser-function 'eww
 	completion-cycle-threshold 3
 	create-lockfiles nil ;; Do not create .#lockfile
