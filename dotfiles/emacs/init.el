@@ -219,7 +219,8 @@
   :mode
   (("\\.ts\\'" . typescript-ts-mode)
    ("\\.js\\'" . js-ts-mode)
-   ("\\.tsx\\'" . tsx-ts-mode))
+   ("\\.tsx\\'" . tsx-ts-mode)
+   ("Dockerfile" . dockerfile-ts-mode))
   :hook
   ((dart-mode . eglot-ensure)
    (js-ts-mode . eglot-ensure)
