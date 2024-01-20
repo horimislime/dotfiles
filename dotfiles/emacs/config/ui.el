@@ -26,17 +26,10 @@
 
 (use-package minions
     :custom
-    (minions-mode-line-lighter "‚Äö√Ñ¬∂")
+    (minions-mode-line-lighter "...")
     (minions-mode-line-delimiters '("" . ""))
     :config
     (minions-mode +1))
-
-(use-package nyan-mode
-   :custom
-   (nyan-cat-face-number 4)
-   (nyan-animate-nyancat t)
-   :hook
-   (doom-modeline-mode . nyan-mode))
 
 (use-package smart-cursor-color
   :config
@@ -76,3 +69,4 @@
 (global-hl-line-mode +1)
 
 (global-display-line-numbers-mode t)
+
