@@ -17,7 +17,3 @@
    ("TAB" . helm-execute-persistent-action))
   :config
   (helm-mode 1))
-
-(use-package helm-ghq
-  :bind
-  (("C-c C-g" . helm-ghq)))
