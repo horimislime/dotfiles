@@ -54,8 +54,11 @@
 		    (my/get-title-from-url (car kill-ring)))))
   (defun my/find-location-under-week-headline (type)
     "Find or create my default journal tree"
+    (if (string-equal "Sun" (format-time-string "%a"))
+	(setq week-begin-date-string (format-time-string "%Y/%m/%d (\%a)"))
+      (setq week-begin-date-string (format-time-string "%Y/%m/%d (\%a)" (org-read-date nil t "-Sun")))
+      )
     (setq
-     week-begin-date-string (format-time-string "%Y/%m/%d (\%a)" (org-read-date nil t "-Sun"))
      week-end-date-string (format-time-string "%Y/%m/%d (\%a)" (org-read-date nil t "Sat"))
      hd (format "%s - %s" week-begin-date-string week-end-date-string))
     (goto-char (point-min))
@@ -66,10 +69,11 @@
     (if (re-search-forward
 	 (format org-complex-heading-regexp-format (regexp-quote hd))
 	 nil t)
-	(goto-char (point-at-bol))
-      (insert "* " hd "\n")
+	(progn (goto-char (point-at-bol))
+	       (org-end-of-subtree))
+      (progn (insert "* " hd "\n")
+	     (outline-previous-visible-heading 1))
       )
-    (org-end-of-subtree)
     (if (re-search-backward
 	 (format org-complex-heading-regexp-format (regexp-quote type))
 	 nil t)
