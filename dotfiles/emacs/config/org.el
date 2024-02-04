@@ -54,13 +54,12 @@
 		    (my/get-title-from-url (car kill-ring)))))
   (defun my/find-location-under-week-headline (type)
     "Find or create my default journal tree"
-    (if (string-equal "Sun" (format-time-string "%a"))
-	(setq week-begin-date-string (format-time-string "%Y/%m/%d (\%a)"))
-      (setq week-begin-date-string (format-time-string "%Y/%m/%d (\%a)" (org-read-date nil t "-Sun")))
-      )
-    (setq
-     week-end-date-string (format-time-string "%Y/%m/%d (\%a)" (org-read-date nil t "Sat"))
-     hd (format "%s - %s" week-begin-date-string week-end-date-string))
+    (let ((week-begin-date-string (if (string-equal "Sun" (format-time-string "%a"))
+				      (format-time-string "%Y/%m/%d (\%a)")
+				    (format-time-string "%Y/%m/%d (\%a)" (org-read-date nil t "-Sun"))))
+	  (week-end-date-string (format-time-string "%Y/%m/%d (\%a)" (org-read-date nil t "Sat")))
+	  (hd (format "%s - %s" week-begin-date-string week-end-date-string)))
+
     (goto-char (point-min))
     (unless (derived-mode-p 'org-mode)
       (error
@@ -82,7 +81,7 @@
       (org-end-of-subtree)
       (insert "\n** " type "\n")
       (beginning-of-line 0))
-    )
+    ))
   (defun my/find-k-under-headline ()
     (my/find-location-under-week-headline "KEEP"))
   (defun my/find-p-under-headline ()
