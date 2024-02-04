@@ -68,12 +68,12 @@
     (if (re-search-forward
 	 (format org-complex-heading-regexp-format (regexp-quote hd))
 	 nil t)
-	(progn (goto-char (point-at-bol))
-	       (org-end-of-subtree))
-      (progn (insert "* " hd "\n")
-	     (outline-previous-visible-heading 1))
-      )
-    (if (re-search-backward
+	(goto-char (point-at-bol))
+      (progn (org-insert-heading)
+	     (insert hd)))
+
+    (org-narrow-to-subtree)
+    (if (re-search-forward
 	 (format org-complex-heading-regexp-format (regexp-quote type))
 	 nil t)
 	(goto-char (point-at-bol))
@@ -81,6 +81,7 @@
       (org-end-of-subtree)
       (insert "\n** " type "\n")
       (beginning-of-line 0))
+    (widen)
     ))
   (defun my/find-k-under-headline ()
     (my/find-location-under-week-headline "KEEP"))
