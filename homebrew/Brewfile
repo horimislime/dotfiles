@@ -1,89 +1,156 @@
-cask_args appdir: "/Applications"
-
-tap "homebrew/cask"
-
-# AppStore apps
-# `mas list` to find id of installed apps
-
-mas "Bear",         id: 1091189122
-mas "Buffer", 	    id: 1474298973
-mas "CotEditor",    id: 1024640650
-mas "DayOne",       id: 1055511498
-mas "Magnet",	    id: 441258766
-mas "URLLinker",    id: 1289119450
-mas "Reeder",       id: 1449412482
-mas "Slack",        id: 803453959
-mas "Streaks",	    id: 1493327990
-mas "Todoist", 	    id: 585829637
-mas "Tweetbot",     id: 1384080005
-
-# Apps outside AppStore
-
-# cask "1password"
-# cask "1password-cli"
-cask "adobe-creative-cloud"
-cask "android-studio"
-cask "appcleaner"
-cask "bartender"
-cask "brave-browser"
-cask "choosy"
-cask "cmd-eikana"
-cask "contexts"
-cask "discord"
-cask "docker"
-cask "google-chrome"
-cask "google-cloud-sdk"
-cask "google-drive"
-cask "karabiner-elements"
-cask "quitter"
-cask "raycast"
-cask "via"
-cask "visual-studio-code"
-
-# brew packages
-
+tap "d12frosted/emacs-plus"
 tap "dart-lang/dart"
+tap "hashicorp/tap"
+tap "homebrew/bundle"
+tap "homebrew/cask-fonts"
+tap "homeport/tap"
+tap "hudochenkov/sshpass"
 tap "leoafarias/fvm"
-
+tap "minamijoyo/tfupdate"
+tap "robusta-dev/krr"
 brew "ack"
-brew "bluetoothconnector"
-brew "bison"
+brew "little-cms2"
+brew "autoconf"
+brew "automake"
 brew "binutils"
+brew "bison"
+brew "bluetoothconnector"
+brew "buf"
+brew "carthage"
 brew "colordiff"
 brew "conftest"
 brew "cvs"
-brew "dart-lang/dart/dart"
-brew "emacs", args: ["with-gnutls"]
+brew "dive"
+brew "pkg-config"
+brew "emacs"
 brew "findutils"
 brew "firebase-cli"
-brew "fvm"
 brew "fzf"
+brew "gcc"
+brew "libavif"
 brew "gh"
 brew "ghq"
 brew "gibo"
 brew "git"
 brew "gnu-sed"
 brew "gnu-time"
-brew "gpg"
-brew "gsed"
+brew "gnupg"
+brew "go"
+brew "helm"
 brew "imagemagick"
 brew "jq"
+brew "kubernetes-cli"
+brew "libyaml"
 brew "mas"
+brew "netpbm"
 brew "nkf"
-brew "nodenv"
 brew "node-build"
-brew "openssl"
-brew "pcre"
-brew "pkg-config"
-brew "python"
-brew "rbenv"
-brew "readline"
-brew "reattach-to-user-namespace"
+brew "nodenv"
+brew "pandoc"
+brew "pngpaste"
+brew "poppler"
+brew "pyenv"
+brew "python@3.10"
 brew "ruby-build"
+brew "rbenv"
+brew "reattach-to-user-namespace"
+brew "ripgrep"
+brew "shellcheck"
 brew "ssh-copy-id", link: true
+brew "starship"
+brew "stern"
+brew "subversion"
 brew "terraform"
 brew "tig"
 brew "tmux"
 brew "tree"
 brew "wget"
 brew "yq"
+brew "d12frosted/emacs-plus/emacs-plus@29", args: ["with-imagemagick", "with-native-comp", "with-no-frame-refocus", "with-savchenkovaleriy-big-sur-icon", "with-xwidgets"]
+brew "dart-lang/dart/dart"
+brew "hashicorp/tap/terraform-ls"
+brew "homeport/tap/dyff"
+brew "hudochenkov/sshpass/sshpass"
+brew "leoafarias/fvm/fvm"
+brew "robusta-dev/krr/krr"
+cask "adobe-creative-cloud", args: { appdir: "/Applications" }
+cask "android-studio", args: { appdir: "/Applications" }
+cask "appcleaner", args: { appdir: "/Applications" }
+cask "bartender", args: { appdir: "/Applications" }
+cask "brave-browser", args: { appdir: "/Applications" }
+cask "choosy", args: { appdir: "/Applications" }
+cask "cmd-eikana", args: { appdir: "/Applications" }
+cask "contexts", args: { appdir: "/Applications" }
+cask "discord", args: { appdir: "/Applications" }
+cask "docker", args: { appdir: "/Applications" }
+cask "font-hack-nerd-font"
+cask "google-cloud-sdk", args: { appdir: "/Applications" }
+cask "google-drive"
+cask "karabiner-elements"
+cask "meetingbar"
+cask "raycast", args: { appdir: "/Applications" }
+cask "via"
+cask "visual-studio-code", args: { appdir: "/Applications" }
+mas "1Blocker", id: 1365531024
+mas "1Password for Safari", id: 1569813296
+mas "Bear", id: 1091189122
+mas "Buffer", id: 1474298973
+mas "CotEditor", id: 1024640650
+mas "Day One", id: 1055511498
+mas "Developer", id: 640199958
+mas "GarageBand", id: 682658836
+mas "Goodnotes", id: 1444383602
+mas "Keepa - Price Tracker", id: 1533805339
+mas "Kindle", id: 302584613
+mas "LINE", id: 539883307
+mas "Magnet", id: 441258766
+mas "Microsoft Remote Desktop", id: 1295203466
+mas "Streaks", id: 963034692
+mas "TestFlight", id: 899247664
+mas "Todoist", id: 585829637
+mas "URL Linker", id: 1289119450
+mas "WattsConnected", id: 1639692859
+mas "Xcode", id: 497799835
+vscode "alefragnani.project-manager"
+vscode "bradlc.vscode-tailwindcss"
+vscode "bufbuild.vscode-buf"
+vscode "buster.ndjson-colorizer"
+vscode "Dart-Code.dart-code"
+vscode "Dart-Code.flutter"
+vscode "dbaeumer.vscode-eslint"
+vscode "eamodio.gitlens"
+vscode "EditorConfig.EditorConfig"
+vscode "esbenp.prettier-vscode"
+vscode "GitHub.copilot"
+vscode "GitHub.copilot-chat"
+vscode "GitHub.copilot-labs"
+vscode "github.vscode-github-actions"
+vscode "GitHub.vscode-pull-request-github"
+vscode "golang.go"
+vscode "googlecloudtools.cloudcode"
+vscode "Grafana.vscode-jsonnet"
+vscode "hashicorp.terraform"
+vscode "mechatroner.rainbow-csv"
+vscode "ms-azuretools.vscode-docker"
+vscode "MS-CEINTL.vscode-language-pack-ja"
+vscode "ms-edgedevtools.vscode-edge-devtools"
+vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
+vscode "ms-python.debugpy"
+vscode "ms-python.isort"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vscode-remote.remote-wsl"
+vscode "ms-vscode.live-server"
+vscode "octref.vetur"
+vscode "oderwat.indent-rainbow"
+vscode "phplasma.csv-to-table"
+vscode "redhat.vscode-yaml"
+vscode "streetsidesoftware.code-spell-checker"
+vscode "taichi.vscode-textlint"
+vscode "tsandall.opa"
+vscode "VisualStudioExptTeam.intellicode-api-usage-examples"
+vscode "VisualStudioExptTeam.vscodeintellicode"
+vscode "Vue.volar"
+vscode "yzane.markdown-pdf"
+vscode "zxh404.vscode-proto3"

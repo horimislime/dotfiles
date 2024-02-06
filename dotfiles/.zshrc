@@ -1,7 +1,6 @@
 fpath=("$HOME/.zfunctions" $fpath)
 
 autoload -U compinit && compinit
-autoload -U promptinit; promptinit
 setopt auto_cd
 setopt auto_pushd
 setopt correct
@@ -24,7 +23,7 @@ PYENV_ROOT=$HOME/.pyenv
 PATH=/Applications/Android\ Studio.app/Contents/jre/Contents/Home/bin:$PATH
 PATH=$HOME/bin:$PATH
 PATH=/usr/local/bin:$PATH
-PATH=$HOME/.homebrew/bin:$PATH
+#PATH=$HOME/.homebrew/bin:$PATH
 PATH=$HOME/.rbenv/shims:$PATH
 PATH=$HOME/.nodenv/shims:$PATH
 PATH=$HOME/.nodenv/bin:$PATH
@@ -34,6 +33,12 @@ PATH=$HOME/.go/bin:$PATH
 GOPATH=$HOME/.go
 LANG=ja_JP.UTF-8
 TERM=xterm-256color
+HOMEBREW_PREFIX="/opt/homebrew"
+HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+HOMEBREW_REPOSITORY="/opt/homebrew"
+PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}"
+MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:"
+INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
 # Use Python package in gcloud sdk
 CLOUDSDK_PYTHON_SITEPACKAGES=1
 USE_GKE_GCLOUD_AUTH_PLUGIN=True
@@ -70,13 +75,7 @@ alias sed='gsed'
 alias sudo='sudo -E ' # inherit user defined env-vars
 alias t='tig status'
 alias tf='terraform'
-
-# pure theme
-prompt pure
-prompt_newline='%666v' # single line prompt
-PROMPT=" $PROMPT"
-zstyle :prompt:pure:path color cyan # tweak for dark background
-PURE_GIT_UNTRACKED_DIRTY=0
+alias kubectl-slice='kubectl slice'
 
 # fzf
 function gh-runs() {
@@ -144,3 +143,5 @@ if command -v pyenv &> /dev/null; then
     export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
 fi
+
+eval "$(starship init zsh)"
