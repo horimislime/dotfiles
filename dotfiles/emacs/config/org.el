@@ -54,7 +54,7 @@
 		    (my/get-title-from-url (car kill-ring)))))
   (defun my/find-location-under-week-headline (type)
     "Find or create my default journal tree"
-    (let ((week-begin-date-string (if (string-equal "Sun" (format-time-string "%a"))
+    (let* ((week-begin-date-string (if (string-equal "Sun" (format-time-string "%a"))
 				      (format-time-string "%Y/%m/%d (\%a)")
 				    (format-time-string "%Y/%m/%d (\%a)" (org-read-date nil t "-Sun"))))
 	  (week-end-date-string (format-time-string "%Y/%m/%d (\%a)" (org-read-date nil t "Sat")))
