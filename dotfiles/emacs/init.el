@@ -300,7 +300,9 @@
   :hook
   ((vterm-mode . (lambda ()
         	   (display-line-numbers-mode 0)
-		   (setq-local global-hl-line-mode nil)))))
+		   (setq-local global-hl-line-mode nil)
+		   (set (make-local-variable 'buffer-face-mode-face) '(:family "Hack Nerd Font"))
+		   (buffer-face-mode t)))))
 
 (use-package elfeed
   :preface

@@ -31,3 +31,5 @@ ln -fsn $PWD/.zsh.d/theme-pure/async.zsh $HOME/.zfunctions/async
 # etc.
 mkdir -p $HOME/.local/bin
 ln -fsn $PWD/.textlintrc $HOME/.textlintrc
+
+ln -fsn $PWD/starship.toml $HOME/.config/starship.toml
