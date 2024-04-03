@@ -87,6 +87,8 @@
     (my/find-location-under-week-headline "KEEP"))
   (defun my/find-p-under-headline ()
     (my/find-location-under-week-headline "PROBLEM"))
+  (defun my/org-update-statistics-cookies-after-refile ()
+    (run-at-time "0.01 sec" nil (lambda () (org-update-statistics-cookies 'all))))
 
   :bind
   (("C-c c" . org-capture)
@@ -100,14 +102,15 @@
   :hook
   ((org-mode . visual-line-mode)
    (org-clock-in . org-set-status-to-doing)
-   (org-clock-out . my/org-empty-current-task-file))
+   (org-clock-out . my/org-empty-current-task-file)
+   (org-after-refile-insert . my/org-update-statistics-cookies-after-refile))
 
   :init
   (require 'org-protocol)
   (setq org-directory "~/Dropbox/org"
 	org-backlog-file (format "%s/inbox.org" org-directory)
 	org-bookmark-file (format "%s/bookmark.org" org-directory)
-	org-daily-tasks-file (format "%s/tasks.org" org-directory)
+	org-daily-tasks-file (format "%s/note/tasks/content.org" org-directory)
 	org-kpt-file (format "%s/kpt.org" org-directory)
 	elfeed-source-csv "~/Dropbox/emacs/elfeed-source.csv")
 
