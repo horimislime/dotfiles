@@ -1,6 +1,7 @@
 fpath=("$HOME/.zfunctions" $fpath)
 
 autoload -U compinit && compinit
+autoload -U promptinit; promptinit
 setopt auto_cd
 setopt auto_pushd
 setopt correct
@@ -77,6 +78,13 @@ alias t='tig status'
 alias tf='terraform'
 alias kubectl-slice='kubectl slice'
 
+# pure theme
+prompt pure
+prompt_newline='%666v' # single line prompt
+PROMPT=" $PROMPT"
+zstyle :prompt:pure:path color cyan # tweak for dark background
+PURE_GIT_UNTRACKED_DIRTY=0
+
 # fzf
 function gh-runs() {
     local selected_run=$(gh run list -b $(git symbolic-ref --short HEAD) | fzf -e)
@@ -144,4 +152,3 @@ if command -v pyenv &> /dev/null; then
     eval "$(pyenv init -)"
 fi
 
-eval "$(starship init zsh)"
