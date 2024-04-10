@@ -43,6 +43,7 @@ INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
 # Use Python package in gcloud sdk
 CLOUDSDK_PYTHON_SITEPACKAGES=1
 USE_GKE_GCLOUD_AUTH_PLUGIN=True
+PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 if [ "$VSCODE_PID" = "" ] && [ "$TERM_PROGRAM" != "vscode" ]; then
     export VISUAL='emacsclient -a "" -r'
