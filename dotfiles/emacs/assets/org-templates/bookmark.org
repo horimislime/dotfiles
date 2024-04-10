@@ -1,4 +1,0 @@
-** [[%:link][%:description]]
-CREATED: %U
-%(if (equal "%:initial" "") "" "#+begin_quote\n%:initial\n#+end_quote")
-

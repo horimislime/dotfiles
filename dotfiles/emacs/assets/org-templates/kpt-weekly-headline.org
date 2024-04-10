@@ -1,1 +1,0 @@
-* %(format-time-string "%Y/%m/%d (\%a)" (org-read-date nil t "Sun")) - %(format-time-string "%Y/%m/%d (\%a)" (org-read-date nil t "Sat"))
