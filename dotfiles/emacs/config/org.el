@@ -151,3 +151,30 @@
   :hook
   ((org-mode . org-modern-mode)
   (org-agenda-finalize . org-modern-agenda)))
+
+(use-package org-roam
+  :preface
+  (defun my/org-open-at-point-same-buffer ()
+    "Configure org links to always open in the same buffer."
+    (interactive)
+    (let ((org-link-frame-setup '((file . find-file))))
+      (org-open-at-point)))
+  :custom
+  (org-roam-directory (file-truename "~/GoogleDrive/Dev/org/roam"))
+  (org-roam-capture-templates
+   '(("d" "default" plain "%?"
+      :if-new (file+head
+               "%<%Y%m%d-%H%M>-${slug}/content.org"
+               "#+title: ${title}\n#+date: %U\n")
+      :unnarrowed t)))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+	 ("C-c n o" . my/org-open-at-point-same-buffer)
+         ("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  (org-roam-db-autosync-mode)
+  (require 'org-roam-protocol))
