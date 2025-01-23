@@ -25,7 +25,7 @@
     
   (defun my/org-screenshot ()
     (interactive)
-    (setq image-file-name (concat (make-temp-name (format-time-string "%Y%m%d_%H%M%S_")) ".png")
+    (setq image-file-name (concat (make-temp-name (format-time-string "%Y%m%d_%H%M%S_")) ".jpg")
 	  image-full-path (concat (file-name-directory buffer-file-name) image-file-name))
     (call-process "~/.homebrew/bin/pngpaste" nil nil nil image-full-path)
     (insert (format "[[./%s]]" image-file-name))
@@ -107,12 +107,13 @@
 
   :init
   (require 'org-protocol)
-  (setq org-directory "~/Dropbox/org"
+  (setq org-directory "~/GoogleDrive/org"
 	org-backlog-file (format "%s/inbox.org" org-directory)
 	org-bookmark-file (format "%s/bookmark.org" org-directory)
 	org-daily-tasks-file (format "%s/note/tasks/content.org" org-directory)
-	org-kpt-file (format "%s/kpt.org" org-directory)
-	elfeed-source-csv "~/Dropbox/emacs/elfeed-source.csv")
+	org-kpt-file (format "%s/note/kpt/content.org" org-directory)
+	org-a-file (format "%s/note/a-log/content.org" org-directory)
+	elfeed-source-csv (format "%s/assets/elfeed-source.csv" org-directory))
 
   :custom
   (org-image-actual-width 900)
@@ -120,15 +121,14 @@
   (org-startup-folded 'content)
   (org-startup-with-inline-images t)
   (org-use-speed-commands t)
-  (org-todo-keywords '((type "TODO" "WAITING" "DOING"  "|" "DONE")))
+  (org-todo-keywords '((sequence "TODO" "DOING"  "|" "DONE")))
   (org-capture-templates
-   '(("d" "Weekdays TODO" entry (file org-daily-tasks-file) "%[~/Dropbox/emacs/org/weekdays-todo.org]" :prepend t)
-     ("w" "Weekends TODO" entry (file org-daily-tasks-file) "%[~/Dropbox/emacs/org/weekends-todo.org]" :prepend t)
-     ("n" "Create Note" plain (file my/create-org-file-with-name) "%[~/Dropbox/emacs/org/note.org]")
+   '(("d" "Weekdays TODO" entry (file org-daily-tasks-file) "%[~/GoogleDrive/org/assets/weekdays-todo.org]" :prepend t)
+     ("w" "Weekends TODO" entry (file org-daily-tasks-file) "%[~/GoogleDrive/org/assets/weekends-todo.org]" :prepend t)
+     ("n" "Create Note" plain (file my/create-org-file-with-name) "%[~/GoogleDrive/org/assets/note.org]")
      ("t" "Put work task into inbox" entry (file+headline org-backlog-file "Work") "* TODO %?\n" :prepend t)
      ("h" "Put private task into inbox" entry (file+headline org-backlog-file "Private") "* TODO %?\n" :prepend t)
-     ("b" "Bookmark" entry (file+headline org-bookmark-file "Bookmarks") "%[~/Dropbox/emacs/org/bookmark.org]" :prepend t)
-     ("r" "Read Later" entry (file+headline org-bookmark-file "Read Later") "%[~/Dropbox/emacs/org/bookmark.org]" :prepend t)
+     ("b" "Bookmark" entry (file+headline org-bookmark-file "Bookmarks") "%[~/GoogleDrive/org/assets/bookmark.org]" :prepend t)
      ("k" "Keep" entry (file+function org-kpt-file my/find-k-under-headline) "*** %?\n")
      ("p" "Problem" entry (file+function org-kpt-file my/find-p-under-headline) "*** %?\n")
      ("f" "Subscribe Feed" plain (file elfeed-source-csv) "%(my/get-title-from-url \"%:link\"),%:link\n" :prepend t :immediate-finish t)
@@ -160,7 +160,7 @@
     (let ((org-link-frame-setup '((file . find-file))))
       (org-open-at-point)))
   :custom
-  (org-roam-directory (file-truename "~/GoogleDrive/Dev/org/roam"))
+  (org-roam-directory (file-truename (format "%s/roam" org-directory)))
   (org-roam-capture-templates
    '(("d" "default" plain "%?"
       :if-new (file+head
