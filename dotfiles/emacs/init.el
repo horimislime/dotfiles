@@ -318,3 +318,13 @@
            (split-string (buffer-string) "\n" t)))))
   :config
   (my/elfeed-load-feed))
+
+(use-package jsonnet-mode
+  :config
+  (add-to-list 'eglot-server-programs
+               '(jsonnet-mode . ("jsonnet-lsp" "lsp")))
+  :mode
+  (("\\.jsonnet\\'" . jsonnet-mode))
+  :hook
+  (jsonnet-mode . (lambda()
+                    (eglot-ensure))))
