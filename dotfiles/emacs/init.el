@@ -184,8 +184,7 @@
   (("C-c C-p". markdown-preview)))
 
 (use-package yaml-mode
-  :hook (js2-mode . prettier-js)
-  )
+  :hook (js2-mode . prettier-js))
 
 (use-package prettier-js)
 
@@ -216,6 +215,12 @@
   :preface
   (defun my/eglot-organize-imports ()
     (call-interactively 'eglot-code-action-organize-imports))
+  (define-derived-mode helmfile-mode yaml-mode "helm")
+  (defun my/apply-helmfile-mode ()
+    "Enable helmfile-mode for files in specific directory structure."
+    (when (and buffer-file-name
+               (string-match-p "/charts/.*/templates/.*\.ya?ml" buffer-file-name))
+      (helmfile-mode)))
   :mode
   (("\\.ts\\'" . typescript-ts-mode)
    ("\\.js\\'" . js-ts-mode)
@@ -226,11 +231,16 @@
    (js-ts-mode . eglot-ensure)
    (tsx-ts-mode . eglot-ensure)
    (typescript-ts-mode . eglot-ensure)
+   (yaml-mode . eglot-ensure)
+   (helmfile-mode . eglot-ensure)
    (before-save . eglot-format-buffer)
-   (before-save . my/eglot-organize-imports))
+   (before-save . my/eglot-organize-imports)
+   (find-file . my/apply-helmfile-mode))
   :bind
   (:map eglot-mode-map
-   ("C-c e a" . eglot-code-actions)))
+	("C-c e a" . eglot-code-actions))
+  :config
+  (add-to-list 'eglot-server-programs '(helmfile-mode "helm_ls" "serve")))
 
 (use-package rg)
 (use-package ripgrep)
