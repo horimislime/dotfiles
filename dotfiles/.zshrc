@@ -1,7 +1,6 @@
 fpath=("$HOME/.zfunctions" $fpath)
 
 autoload -U compinit && compinit
-autoload -U promptinit; promptinit
 setopt auto_cd
 setopt auto_pushd
 setopt correct
@@ -77,14 +76,21 @@ alias sed='gsed'
 alias sudo='sudo -E ' # inherit user defined env-vars
 alias t='tig status'
 alias tf='terraform'
-alias kubectl-slice='kubectl slice'
+alias k='kubectl'
+alias kx='kubectx'
 
 # pure theme
+fpath+=("$(brew --prefix)/share/zsh/site-functions")
+autoload -U promptinit; promptinit
 prompt pure
-prompt_newline='%666v' # single line prompt
-PROMPT=" $PROMPT"
 zstyle :prompt:pure:path color cyan # tweak for dark background
+zstyle :prompt:pure:git:stash show yes
 PURE_GIT_UNTRACKED_DIRTY=0
+
+# kube-ps1
+source "$(brew --prefix)/opt/kube-ps1/share/kube-ps1.sh"
+KUBE_PS1_SYMBOL_CUSTOM="k8s"
+PROMPT='$(kube_ps1) '
 
 # fzf
 function gh-runs() {
@@ -152,4 +158,3 @@ if command -v pyenv &> /dev/null; then
     export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
 fi
-
