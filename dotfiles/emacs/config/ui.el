@@ -1,28 +1,13 @@
 (use-package nerd-icons)
-(use-package doom-themes
-  :custom
-  (doom-themes-enable-italic t)
-  (doom-themes-enable-bold t)
+(use-package ef-themes
   :config
-  (load-theme 'doom-dracula t)
-  (doom-themes-neotree-config)
-  (doom-themes-org-config)
-  (use-package doom-modeline
-    :custom
-    (doom-modeline-buffer-file-name-style 'truncate-with-project)
-    (doom-modeline-icon t)
-    (doom-modeline-major-mode-color-icon t)
-    (doom-modeline-major-mode-icon t)
-    (doom-modeline-minor-modes t)
-    :hook
-    (after-init . doom-modeline-mode)
-    :config
-    (set-cursor-color "cyan")
-    (line-number-mode 0)
-    (column-number-mode 0)
-    (doom-modeline-def-modeline 'main
-      '(bar window-number matches buffer-info remote-host buffer-position parrot selection-info)
-      '(misc-info persp-name lsp github debug minor-modes input-method major-mode process vcs checker))))
+  (load-theme 'ef-maris-dark  :no-confirm)
+  ;; Enable fontification of DONE headlines
+  (setq org-fontify-done-headline t)
+  ;; Customize the face for DONE headlines
+  (custom-set-faces
+   '(org-done ((t (:foreground "gray" :weight normal :strike-through t)))))
+  )
 
 (use-package minions
     :custom
@@ -70,7 +55,13 @@
 
 (global-display-line-numbers-mode t)
 
-(use-package auto-dim-other-buffers)
-(add-hook 'after-init-hook (lambda ()
-			     (when (fboundp 'auto-dim-other-buffers-mode)
-			       (auto-dim-other-buffers-mode t))))
+;; (use-package dimmer
+;;   :custom
+;;   (dimmer-fraction 0.3)
+;;   (dimmer-adjustment-mode :background)
+;;   (dimmer-exclusion-regexp "^\*helm.*\\|^ \*Minibuf-.*")
+;;   :config
+;;   (dimmer-configure-which-key)
+;;   (dimmer-configure-magit)
+;;   (dimmer-configure-org)
+;;   (dimmer-mode t))
