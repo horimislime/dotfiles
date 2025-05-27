@@ -180,6 +180,11 @@
       (org-open-at-point)))
   :custom
   (org-roam-directory (file-truename (format "%s/roam" org-directory)))
+  (org-roam-capture-templates
+   '(("d" "default" plain
+      "%?"
+      :target (file+head "${slug}/content.org" "#+title: ${title}\n")
+      :unnarrowed t)))
   (org-roam-capture-ref-templates
    '(("r" "ref" plain "%?"
       :target (file+head
