@@ -175,6 +175,26 @@
 	 ("C-c n o" . my/org-open-at-point-same-buffer)
          ("C-c n j" . org-roam-dailies-capture-today))
   :config
-  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-  (org-roam-db-autosync-mode)
-  (require 'org-roam-protocol))
+  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag))) 
+  (org-roam-db-autosync-mode))
+
+;; org-babel
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((shell . t)))
+
+(defun my-org-confirm-babel-evaluate (lang body)
+  "Show prompt if some keywords exist in command line"
+  (or 
+   (string-match-p "rm -rf" body)
+   (string-match-p "apply" body)
+   (string-match-p "delete" body)))
+(setq org-confirm-babel-evaluate #'my-org-confirm-babel-evaluate)
+
+(defun my/org-remove-all-results ()
+  "Remove all #+RESULTS: block within current buffer"
+  (interactive)
+  (org-babel-map-src-blocks nil
+    (org-babel-remove-result)))
+
