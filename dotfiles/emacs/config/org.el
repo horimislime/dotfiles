@@ -110,7 +110,8 @@
   :bind
   (("C-c c" . org-capture)
    ("C-c j" . org-journal-new-entry)
-   ("C-c o f" . org-find-file)
+   ("C-c o f b" . (lambda () (interactive) (org-find-file (format "%s/bookmark" org-directory))))
+   ("C-c o f n" . (lambda () (interactive) (org-find-file (format "%s/note" org-directory))))
    :map org-mode-map
    ("C-c C-p C-v" . my/org-screenshot)
    ("C-c C-u C-v" . my/paste-url-with-title)
@@ -124,7 +125,7 @@
 
   :init
   (require 'org-protocol)
-  (setq org-directory "~/GoogleDrive/org"
+  (setq org-directory "~/Dropbox/org"
 	org-backlog-file (format "%s/inbox.org" org-directory)
 	org-bookmark-file (format "%s/bookmark.org" org-directory)
 	org-daily-tasks-file (format "%s/note/tasks/content.org" org-directory)
