@@ -1,7 +1,7 @@
 (use-package pcre2el)
 (use-package org-find-file
   :load-path "packages/")
-
+(use-package org-web-tools)
 (use-package org
   :preface
   (defun my/copy-to-blog-dir ()
@@ -43,6 +43,23 @@
   (defun my/create-org-file-with-name ()
     (let* ((slug (read-string "slug: ")))
       (format "%s/note/%s/content.org" org-directory slug)))
+
+  (defun my/create-web-archive ()
+    (let* ((timestamp (format-time-string "%Y%m%d%H%M%S")))
+      (format "%s/bookmark/%s/content.org" org-directory timestamp)))
+  (defun my/fetch-page-body-as-org (url)
+    "Based on org-web-tools--url-as-readable-org"
+    (-let* ((url (or url (org-web-tools--get-first-url)))
+            (dom (plz 'get url :as #'org-web-tools--sanitized-dom))
+            ((title . readable) (org-web-tools--eww-readable dom))
+            (converted (org-web-tools--html-to-org-with-pandoc readable)))
+      (with-temp-buffer
+	(org-mode)
+	(insert converted)
+	(org-web-tools--demote-headings-below 2)
+	(goto-char (point-min))
+	(buffer-string))))
+
   (defun my/get-title-from-url (url)
     (let ((title))
       (with-current-buffer (url-retrieve-synchronously url)
@@ -128,7 +145,7 @@
      ("n" "Create Note" plain (file my/create-org-file-with-name) "%[~/GoogleDrive/org/assets/note.org]")
      ("t" "Put work task into inbox" entry (file+headline org-backlog-file "Work") "* TODO %?\n" :prepend t)
      ("h" "Put private task into inbox" entry (file+headline org-backlog-file "Private") "* TODO %?\n" :prepend t)
-     ("b" "Bookmark" entry (file+headline org-bookmark-file "Bookmarks") "%[~/GoogleDrive/org/assets/bookmark.org]" :prepend t)
+     ("b" "Bookmark" plain (file my/create-web-archive) "%[~/GoogleDrive/org/assets/bookmark.org]")
      ("k" "Keep" entry (file+function org-kpt-file my/find-k-under-headline) "*** %?\n")
      ("p" "Problem" entry (file+function org-kpt-file my/find-p-under-headline) "*** %?\n")
      ("f" "Subscribe Feed" plain (file elfeed-source-csv) "%(my/get-title-from-url \"%:link\"),%:link\n" :prepend t :immediate-finish t)
@@ -154,6 +171,7 @@
 
 (use-package org-roam
   :preface
+  (require 'org-roam-protocol)
   (defun my/org-open-at-point-same-buffer ()
     "Configure org links to always open in the same buffer."
     (interactive)
@@ -161,11 +179,11 @@
       (org-open-at-point)))
   :custom
   (org-roam-directory (file-truename (format "%s/roam" org-directory)))
-  (org-roam-capture-templates
-   '(("d" "default" plain "%?"
-      :if-new (file+head
-               "%<%Y%m%d-%H%M>-${slug}/content.org"
-               "#+title: ${title}\n#+date: %U\n")
+  (org-roam-capture-ref-templates
+   '(("r" "ref" plain "%?"
+      :target (file+head
+	       "b-%<%Y%m%d-%H%M>/content.org"
+	       "#+title: ${title}\n#+date: %U\n#+filetags: :bookmark:\n\n %(my/fetch-page-body-as-org \"${ref}\")\n")
       :unnarrowed t)))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
