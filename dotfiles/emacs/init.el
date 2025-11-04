@@ -344,13 +344,34 @@
 		   (set (make-local-variable 'buffer-face-mode-face) '(:family "Hack Nerd Font"))
 		   (buffer-face-mode t)))))
 
+(use-package vterm-toggle
+  :bind
+  (("C-c v s" . vterm-toggle-show)
+   ("C-c v h" . vterm-toggle-hide)
+   ("C-c v n" . vterm-toggle-forward)
+   ("C-c v p" . vterm-toggle-backward))
+  :config
+  ;; Show vterm buffer in the window located at bottom
+  (add-to-list 'display-buffer-alist
+               '((lambda(bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))
+                 (display-buffer-reuse-window display-buffer-in-direction)
+                 (direction . bottom)
+                 (reusable-frames . visible)
+                 (window-height . 0.4)))
+  ;; Above display config affects all vterm command, not only vterm-toggle
+  (defun my/vterm-new-buffer-in-current-window()
+    (interactive)
+    (let ((display-buffer-alist nil))
+            (vterm)))
+  )
+
 (use-package elfeed
   :preface
   (defun my/elfeed-load-feed ()
     (interactive)
     (setq elfeed-feeds
         (with-temp-buffer
-          (insert-file-contents "~/Dropbox/emacs/elfeed-source.csv")
+          (insert-file-contents "~/Dropbox/org/assets/elfeed-source.csv")
           (mapcar
            (lambda (line) 
              (let ((items (split-string line ",")))
