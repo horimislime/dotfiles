@@ -1,13 +1,5 @@
 ;;;; package.el
 
-(require 'profiler)
-(profiler-start 'cpu)
-
-(add-hook 'after-init-hook
-          (lambda ()
-            (profiler-report)
-            (profiler-stop)))
-
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
@@ -280,32 +272,6 @@
   (("C-c TAB" . tempel-complete)
    ("M-*" . tempel-insert)))
 
-(use-package nov
-  :mode
-  (("\\.epub\\'" . nov-mode)))
-
-(use-package pdf-tools
-  :bind
-  (:map pdf-view-mode-map
-        ("C-s" . isearch-forward))
-  :hook
-  (pdf-view-mode . (lambda ()
-        	     (display-line-numbers-mode 0)))
-  :init
-  (pdf-tools-install)
-  :custom
-  (pdf-annot-activate-created-annotations t)
-  (pdf-view-resize-factor 0.6))
-
-(use-package pdf-view-restore
-  :after pdf-tools
-  :hook
-  ((pdf-view-mode . pdf-view-restore-mode))
-   :config
-  (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
-  :custom
-  (pdf-view-restore-filename "~/.config/emacs/.pdf-view-restore"))
-
 (use-package gptel
   :init
   (gptel-make-anthropic "Claude"
@@ -376,17 +342,5 @@
            (lambda (line) 
              (let ((items (split-string line ",")))
                (string-trim (cadr items))))
-           (split-string (buffer-string) "\n" t)))))
-  :config
-  (my/elfeed-load-feed))
-
-(use-package jsonnet-mode
-  :config
-  (add-to-list 'eglot-server-programs
-               '(jsonnet-mode . ("jsonnet-lsp" "lsp")))
-  :mode
-  (("\\.jsonnet\\'" . jsonnet-mode))
-  :hook
-  (jsonnet-mode . (lambda()
-                    (eglot-ensure))))
+           (split-string (buffer-string) "\n" t))))))
 
