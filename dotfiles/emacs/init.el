@@ -1,5 +1,13 @@
 ;;;; package.el
 
+(require 'profiler)
+(profiler-start 'cpu)
+
+(add-hook 'after-init-hook
+          (lambda ()
+            (profiler-report)
+            (profiler-stop)))
+
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
@@ -19,6 +27,7 @@
 
 (use-package benchmark-init
   :config
+  (benchmark-init/activate)
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
 (use-package server

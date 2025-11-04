@@ -97,7 +97,19 @@ function gh-runs() {
     local selected_run=$(gh run list -b $(git symbolic-ref --short HEAD) | fzf -e)
     if [ -n "$selected_run" ]; then
 	local run_id=$(echo $selected_run | awk -F '\t' '{print $7}')
+	local workflow_name=$(echo $selected_run | awk -F '\t' '{print $1}')
+	
 	gh run watch $run_id
+	
+	local run_status=$(gh run view $run_id --json conclusion -q '.conclusion')
+	
+	if [ "$run_status" = "success" ]; then
+	    terminal-notifier -title "GitHub Workflow" -message "✅ $workflow_name completed successfully" -sound Glass
+	elif [ "$run_status" = "failure" ]; then
+	    terminal-notifier -title "GitHub Workflow" -message "❌ $workflow_name failed" -sound Basso
+	else
+	    terminal-notifier -title "GitHub Workflow" -message "🔄 $workflow_name finished with status: $run_status" -sound Glass
+	fi
     fi
 }
 
