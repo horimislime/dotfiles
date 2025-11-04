@@ -66,10 +66,11 @@
   (global-auto-revert-mode 1) ;; Reload if opening file is modified by other program
   (put 'erase-buffer 'disabled nil) ;; Clear contents using erase-buffer
   (menu-bar-mode 0) ;; Hide menu bar
+  (context-menu-mode 1)
+  (set-face-attribute 'default nil :height 160)
   (setq auto-save-visited-interval 60 ;; should be set before enabling the mode
 	backup-by-copying t
 	backup-directory-alist '(("." . "~/.config/emacs/backup"))
-	browse-url-browser-function 'eww
 	completion-cycle-threshold 3
 	create-lockfiles nil ;; Do not create .#lockfile
 	delete-old-versions t
@@ -84,7 +85,11 @@
 	vc-follow-symlinks t ;; Always follow symbolic links
 	vc-handled-backends () ;; Disable vc-mode
 	version-control t
-	warning-minimum-level :emergency)
+	warning-minimum-level :emergency
+	frame-resize-pixelwise t
+	treesit-auto-install 'prompt
+	use-short-answers t
+	pixel-scroll-precision-mode t)
   (if (display-graphic-p)
       (tool-bar-mode -1)
     (setq interprogram-cut-function 'my/paste-to-clipboard))
