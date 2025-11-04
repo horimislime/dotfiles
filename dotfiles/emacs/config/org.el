@@ -142,7 +142,7 @@
   (setq org-directory "~/Dropbox/org"
 	org-backlog-file (format "%s/inbox.org" org-directory)
 	org-bookmark-file (format "%s/bookmark.org" org-directory)
-	org-daily-tasks-file (format "%s/note/tasks/content.org" org-directory)
+	org-daily-tasks-file (format "%s/roam/tasks_latest/content.org" org-directory)
 	org-kpt-file (format "%s/note/kpt/content.org" org-directory)
 	org-a-file (format "%s/note/a-log/content.org" org-directory)
 	elfeed-source-csv (format "%s/assets/elfeed-source.csv" org-directory))
@@ -155,17 +155,18 @@
   (org-use-speed-commands t)
   (org-todo-keywords '((sequence "TODO" "DOING"  "|" "DONE")))
   (org-capture-templates
-   '(("d" "Weekdays TODO" entry (file org-daily-tasks-file) "%[~/GoogleDrive/org/assets/weekdays-todo.org]" :prepend t)
-     ("w" "Weekends TODO" entry (file org-daily-tasks-file) "%[~/GoogleDrive/org/assets/weekends-todo.org]" :prepend t)
-     ("n" "Create Note" plain (file my/create-org-file-with-name) "%[~/GoogleDrive/org/assets/note.org]")
+   '(("d" "Weekdays TODO" entry (file org-daily-tasks-file) "%[~/Dropbox/org/assets/weekdays-todo.org]" :prepend t :empty-lines 1)
+     ("w" "Weekends TODO" entry (file org-daily-tasks-file) "%[~/Dropbox/org/assets/weekends-todo.org]" :prepend t)
+     ("n" "Create Note" plain (file my/create-org-file-with-name) "%[~/Dropbox/org/assets/note.org]")
      ("t" "Put work task into inbox" entry (file+headline org-backlog-file "Work") "* TODO %?\n" :prepend t)
      ("h" "Put private task into inbox" entry (file+headline org-backlog-file "Private") "* TODO %?\n" :prepend t)
      ("b" "Bookmark" plain (file my/create-web-archive) "%[~/GoogleDrive/org/assets/bookmark.org]")
      ("k" "Keep" entry (file+function org-kpt-file my/find-k-under-headline) "*** %?\n")
      ("p" "Problem" entry (file+function org-kpt-file my/find-p-under-headline) "*** %?\n")
      ("f" "Subscribe Feed" plain (file elfeed-source-csv) "%(my/get-title-from-url \"%:link\"),%:link\n" :prepend t :immediate-finish t)
-     )
-   ))
+     ))
+  (org-refile-targets '(("~/Library/CloudStorage/Dropbox/org/roam/tasks_latest/content.org" :maxlevel . 2)
+                        ("~/Library/CloudStorage/Dropbox/org/inbox.org" :maxlevel . 2))))
 
 (use-package org-pomodoro
   :custom
@@ -176,13 +177,6 @@
   (org-journal-dir (concat org-directory  "/journal"))
   (org-journal-file-format "%Y%m%d/journal.org")
   (org-journal-date-format "%Y/%m/%d (%a)"))
-
-(use-package org-modern
-  :custom
-  (org-modern-progress '("○" "◔" "◑" "◕" "✅"))
-  :hook
-  ((org-mode . org-modern-mode)
-  (org-agenda-finalize . org-modern-agenda)))
 
 (use-package org-roam
   :preface
