@@ -35,8 +35,6 @@
   (unless (server-running-p)
     (server-start)))
 
-(require 'uniquify)
-
 (use-package emacs
   :preface
   ;; Interact with macOS clipboard
@@ -136,7 +134,10 @@
   (add-to-list 'flycheck-checkers 'textlint)
   :hook
   ((gfm-mode . flycheck-mode)
-   (text-mode . flycheck-mode)))
+   (text-mode . flycheck-mode)
+   (js-ts-mode . flycheck-mode)
+   (tsx-ts-mode . flycheck-mode)
+   (typescript-ts-mode . flycheck-mode)))
 
 (use-package all-the-icons)
 (use-package neotree
@@ -153,6 +154,9 @@
               (lambda () (setq neo-persist-show nil)))
     (add-hook 'popwin:after-popup-hook
               (lambda () (setq neo-persist-show t))))
+  :custom
+  (neo-window-fixed-size nil) ; allow flexible resizing
+  (neo-autorefresh t)
   :bind
   (("C-c t" . neotree-toggle))
   )
@@ -165,15 +169,6 @@
   :config
   (popwin-mode +1))
 
-(use-package auto-complete
-  :config
-  (require 'auto-complete-config))
-
-(with-eval-after-load 'auto-complete-config
-  (ac-config-default)
-  (setq ac-use-menu-map t)
-  (setq ac-use-fuzzy t))
-
 ;;;; Git
 
 (use-package magit
@@ -185,8 +180,12 @@
   ("C-c g g" . 'browse-at-remote))
 
 (use-package git-gutter
-   :config
-   (global-git-gutter-mode t))
+  :custom-face
+  (git-gutter:modified ((t (:background "#682d0f"))))
+  (git-gutter:added    ((t (:background "#1b4721"))))
+  (git-gutter:deleted  ((t (:background "#ff79c6"))))
+  :config
+  (global-git-gutter-mode t))
 
 ;;;; Language
 
@@ -197,8 +196,7 @@
   :bind
   (("C-c C-p". markdown-preview)))
 
-(use-package yaml-mode
-  :hook (js2-mode . prettier-js))
+(use-package yaml-mode)
 
 (use-package prettier-js)
 
@@ -247,8 +245,8 @@
    (typescript-ts-mode . eglot-ensure)
    (yaml-mode . eglot-ensure)
    (helmfile-mode . eglot-ensure)
-   (before-save . eglot-format-buffer)
-   (before-save . my/eglot-organize-imports)
+;   (before-save . eglot-format-buffer)
+;   (before-save . my/eglot-organize-imports)
    (find-file . my/apply-helmfile-mode))
   :bind
   (:map eglot-mode-map
@@ -265,7 +263,8 @@
   (:map projectile-mode-map
 	("C-c p" . projectile-command-map))
   :custom
-  (projectile-project-search-path '(("~/ghq/github.com" . 2))))
+  (projectile-project-search-path '(("~/ghq/github.com" . 2)))
+  (projectile-globally-ignored-directories '(".git" "node_modules" "build" "cache" "logs")))
 
 (use-package lsp-ui)
 
