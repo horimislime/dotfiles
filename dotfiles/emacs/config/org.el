@@ -6,12 +6,13 @@
   :preface
   (defun my/copy-to-blog-dir ()
     (interactive)
-    (if (yes-or-no-p "Copy entry to repo?")
-	(let* ((current-directory (file-name-directory buffer-file-name))
+    (let* ((current-directory (file-name-directory buffer-file-name))
 	       (blog-dir-root "~/ghq/github.com/horimislime/horimisli.me")
-	       (blog-post-id (file-name-base (directory-file-name current-directory)))
+	       (raw-blog-post-id (file-name-base (directory-file-name current-directory)))
+	       (blog-post-id (replace-regexp-in-string "_" "-" 
+						       (replace-regexp-in-string "^[0-9]+-" "" raw-blog-post-id)))
 	       (blog-post-dir (format "%s/posts/blog/%s/%s" blog-dir-root (format-time-string "%Y") blog-post-id))
-	       (blog-image-dir (format "%s/public/images" blog-dir-root))
+;	       (blog-image-dir (format "%s/public/images" blog-dir-root))
 	       (blog-content-file "content.org")
 	       (blog-image-files (directory-files current-directory nil "\\(\\.png\\|\\.jpg\\|\\.jpeg\\|\\.gif\\)$")))
 
@@ -19,9 +20,9 @@
 	    (make-directory blog-post-dir t))
 	  (copy-file (concat current-directory blog-content-file) (format "%s/%s" blog-post-dir blog-content-file) t)
 	  (dolist (file blog-image-files)
-	    (copy-file (concat current-directory file) (format "%s/%s" blog-image-dir file) t))
+	    (copy-file (concat current-directory file) (format "%s/%s" blog-post-dir file) t))
 	  (message "Successfully copied entry data."))
-      (message "Cancelled")))
+    )
     
   (defun my/org-screenshot ()
     (interactive)
@@ -107,6 +108,18 @@
   (defun my/org-update-statistics-cookies-after-refile ()
     (run-at-time "0.01 sec" nil (lambda () (org-update-statistics-cookies 'all))))
 
+  (defun my/blog-draft-mode-hook ()
+    "Hook function for blog-draft-mode to auto-copy on save."
+    (my/copy-to-blog-dir))
+
+  (define-minor-mode blog-draft-mode
+    "Minor mode for blog draft files that auto-copies to blog directory on save."
+    :lighter " BlogDraft"
+    :group 'org
+    (if blog-draft-mode
+        (add-hook 'after-save-hook #'my/blog-draft-mode-hook nil t)
+      (remove-hook 'after-save-hook #'my/blog-draft-mode-hook t)))
+
   :bind
   (("C-c c" . org-capture)
    ("C-c j" . org-journal-new-entry)
@@ -115,7 +128,8 @@
    :map org-mode-map
    ("C-c C-p C-v" . my/org-screenshot)
    ("C-c C-u C-v" . my/paste-url-with-title)
-   ("C-c o c" . my/copy-to-blog-dir))
+   ("C-c o c" . my/copy-to-blog-dir)
+   ("C-c o d" . blog-draft-mode))
 
   :hook
   ((org-mode . visual-line-mode)
