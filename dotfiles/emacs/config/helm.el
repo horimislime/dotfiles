@@ -1,19 +1,53 @@
-(use-package helm
-  :init
-  (setq helm-ff-file-name-history-use-recentf t)
-  (setq helm-display-function #'display-buffer)
-  :bind
-  (("M-x" . 'helm-M-x)
-   ("C-x C-f" . helm-find-files)
-   ("C-x C-r" . helm-for-files)
-   ("C-x C-y" . helm-show-kill-ring)
-   ("C-x C-b" . helm-buffers-list)
-   :map helm-map
-   ("C-h" . delete-backward-char)
-   :map helm-find-files-map
-   ("C-h" . delete-backward-char)
-   ("TAB" . helm-execute-persistent-action)
-   :map helm-read-file-map
-   ("TAB" . helm-execute-persistent-action))
+(fido-vertical-mode 1)
+(recentf-mode 1)
+
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion))))
   :config
-  (helm-mode 1))
+  (add-hook 'minibuffer-setup-hook
+            (lambda ()
+              (setq-local completion-styles '(orderless basic)) t)))
+
+(use-package consult
+  :bind
+  (("C-c M-x" . consult-mode-command)
+   ("C-x C-f" . find-file)
+   ("C-x C-r" . consult-recent-file)
+   ("C-x C-y" . consult-yank-pop)
+   ("C-x C-b" . consult-buffer)
+   ("C-s" . consult-line)
+   ("C-M-s" . consult-ripgrep)
+   ("M-g g" . consult-goto-line)
+   ("M-g o" . consult-outline))
+  :custom
+  (consult-async-min-input 1)
+  :config
+  (consult-customize consult-recent-file :preview-key nil)
+  (setq consult-narrow-key "<"))
+
+(use-package marginalia
+  :init
+  (marginalia-mode))
+
+(use-package nerd-icons-completion
+  :after marginalia
+  :config
+  (nerd-icons-completion-mode)
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+
+(global-set-key (kbd "C-c e") 'embark-act)
+(use-package embark
+  :bind
+  (("C-." . embark-act)
+   ("C-;" . embark-dwim)
+   ("C-h B" . embark-bindings))
+  :init
+  (setq prefix-help-command #'embark-prefix-help-command))
+
+(use-package embark-consult
+  :after (embark consult)
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
