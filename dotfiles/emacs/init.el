@@ -306,20 +306,37 @@
   :custom
   (pdf-view-restore-filename "~/.config/emacs/.pdf-view-restore"))
 
+(use-package gptel
+  :init
+  (gptel-make-anthropic "Claude"
+			:models '(claude-3-7-sonnet-20250219)
+			:stream t
+			:key (shell-command-to-string "echo -n `op item get claude-api-key --fields label=credential`"))
+  (setq
+   gptel-model 'claude-3-7-sonnet-20250219
+   gptel-backend (gptel-make-anthropic "Claude"
+		   :stream t
+		   :key (shell-command-to-string "echo -n `op item get claude-api-key --fields label=credential`")))
+  (require 'gptel-integrations)
+  (setq mcp-hub-servers '(("github" :command "github-mcp-server" :args ("stdio"))))
+  )
+
+(use-package shell-maker)
 (use-package chatgpt-shell
   :hook
   ((chatgpt-shell-mode . (lambda ()
-			   (if (not chatgpt-shell-openai-key)
-			       (setq chatgpt-shell-openai-key
-				     (shell-command-to-string "echo -n `op item get chatgpt-token --fields label=credential`"))))))
-  :custom
-  (chatgpt-shell-model-version "gpt-4"))
+			   (if (not chatgpt-shell-anthropic-key)
+			       (setq chatgpt-shell-anthropic-key
+				     (shell-command-to-string "echo -n `op item get claude-api-key --fields label=credential`")
+				     ))))))
 
 (use-package vterm
   :bind
   (:map vterm-mode-map
 	("C-g" . vterm--self-insert)
-	("C-x C-c" . vterm--self-insert))
+	("C-h" . vterm--self-insert)
+	("C-x C-c" . vterm--self-insert)
+        ("M-RET" . vterm-send-return))
   :hook
   ((vterm-mode . (lambda ()
         	   (display-line-numbers-mode 0)
