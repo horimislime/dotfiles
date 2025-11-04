@@ -390,11 +390,3 @@
   (jsonnet-mode . (lambda()
                     (eglot-ensure))))
 
-(use-package copilot
-  :bind
-  (:map copilot-completion-map
-        ("<tab>" . copilot-accept-completion)
-        ("TAB" . copilot-accept-completion))
-  :hook
-  ((prog-mode . copilot-mode)))
-
