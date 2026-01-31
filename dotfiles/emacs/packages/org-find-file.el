@@ -2,13 +2,14 @@
 ;; org-find-file
 ;; ========================
 
-(defun org-find-file (file)
+(defun org-find-file (base-dir)
   "Load org-specific file like `find-file'.
 
 If called interactively, the list of files inclues the Org's
 title as well as any headline tags."
-  (interactive (list (org-find-file--choose-file (format "%s/note" org-directory))))
-  (find-file (format "%s/note/%s" org-directory file)))
+  (let ((file (org-find-file--choose-file base-dir)))
+    (find-file (format "%s/%s" base-dir file))
+    file))
 
 (defun org-find-file--choose-file (directory)
   "Use `completing-read' to present Org files for selection.
@@ -23,6 +24,7 @@ calling `org-find-file--file-choices' (which returns an alist)."
 (defun org-find-file--file-choices ()
   "Return alist of file _labels_ and the file references."
   (let ((titles  (org-find-file--gather-titles))
+	(comments (org-find-file--gather-comment))
         (tags    (org-find-file--gather-tags)))
     (seq-map (lambda (entry)
                (seq-let (file title) entry
@@ -36,11 +38,18 @@ calling `org-find-file--file-choices' (which returns an alist)."
          (title-str    (string-trim title))
          (title-pretty (propertize title-str 'face title-color))
          (tag-str      (string-join tags " ")))
-    (format "%s : %s %s" file title-pretty tag-str)))
+    (format "%s : %s" title-pretty tag-str)))
 
 (defun org-find-file--gather-titles ()
   "Return list "
   (thread-last "rg --ignore-case --no-heading --no-line-number '^#\\+title:'"
+               (shell-command-to-list)
+               (--map (split-string it ":"))
+               (--map (list (nth 0 it) (nth 2 it)))))
+
+(defun org-find-file--gather-comment ()
+  "Return list "
+  (thread-last "rg --ignore-case --no-heading --no-line-number '^#\\+comment:'"
                (shell-command-to-list)
                (--map (split-string it ":"))
                (--map (list (nth 0 it) (nth 2 it)))))

@@ -157,8 +157,6 @@
 (setq hl-line-face 'hlline-face)
 (global-hl-line-mode +1)
 
-(global-display-line-numbers-mode t)
-
 ;; ============
 ;; completions
 ;; ============
@@ -382,7 +380,10 @@
      ("n" "Create Note" plain (file my/create-org-file-with-name) "%[~/Dropbox/org/assets/note.org]")
      ("t" "Put work task into inbox" entry (file+headline org-backlog-file "Work") "* TODO %?\n" :prepend t)
      ("h" "Put private task into inbox" entry (file+headline org-backlog-file "Private") "* TODO %?\n" :prepend t)
-     ("b" "Bookmark" plain (file my/create-web-archive) "%[~/GoogleDrive/org/assets/bookmark.org]")
+     ("b" "Bookmark" entry 
+         (file+headline "~/Dropbox/org/bookmark.org" "Bookmarks")
+         "%[~/GoogleDrive/org/assets/bookmark2.org]" :prepend t)
+
      ("k" "Keep" entry (file+function org-kpt-file my/find-k-under-headline) "*** %?\n")
      ("p" "Problem" entry (file+function org-kpt-file my/find-p-under-headline) "*** %?\n")
      ("f" "Subscribe Feed" plain (file elfeed-source-csv) "%(my/get-title-from-url \"%:link\"),%:link\n" :prepend t :immediate-finish t)
@@ -555,11 +556,6 @@
   :hook
   ((dart-mode . lsp)))
 
-(use-package treesit-auto
-  :config
-  (setq treesit-auto-install t)
-  (global-treesit-auto-mode))
-
 (use-package eglot
   :preface
   (defun my/eglot-organize-imports ()
@@ -605,12 +601,12 @@
 
 (use-package lsp-ui)
 
-(use-package corfu
-  :custom
-  (corfu-cycle t)
-  (corfu-auto t)
-  :init
-  (global-corfu-mode))
+;(use-package corfu
+;  :custom
+;  (corfu-cycle t)
+;  (corfu-auto t)
+;  :init
+;  (global-corfu-mode))
 
 (use-package tempel
   :bind
@@ -620,7 +616,7 @@
 (use-package gptel
   :init
   (gptel-make-anthropic "Claude"
-			:models '(claude-3-7-sonnet-20250219)
+			:models '(claude-4-5-20250929)
 			:stream t
 			:key (shell-command-to-string "echo -n `op item get claude-api-key --fields label=credential`"))
   (setq
@@ -628,9 +624,7 @@
    gptel-backend (gptel-make-anthropic "Claude"
 		   :stream t
 		   :key (shell-command-to-string "echo -n `op item get claude-api-key --fields label=credential`")))
-  (require 'gptel-integrations)
-  (setq mcp-hub-servers '(("github" :command "github-mcp-server" :args ("stdio"))))
-  )
+  (require 'gptel-integrations))
 
 (use-package shell-maker)
 (use-package chatgpt-shell
@@ -687,5 +681,8 @@
            (lambda (line) 
              (let ((items (split-string line ",")))
                (string-trim (cadr items))))
-           (split-string (buffer-string) "\n" t))))))
+           (split-string (buffer-string) "\n" t)))))
+  :config
+  (my/elfeed-load-feed))
+
 
