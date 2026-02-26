@@ -21,12 +21,11 @@ mkdir -p $HOME/.go
 
 # tmux
 mkdir -p $HOME/.tmux.d
+ln -fsn $PWD/.tmux.conf $HOME/.tmux.conf
 
 # zsh
 mkdir -p $HOME/.zfunctions
 ln -fsn $PWD/.zshrc $HOME/.zshrc
-ln -fsn $PWD/.zsh.d/theme-pure/pure.zsh $HOME/.zfunctions/prompt_pure_setup
-ln -fsn $PWD/.zsh.d/theme-pure/async.zsh $HOME/.zfunctions/async
 
 # etc.
 mkdir -p $HOME/.local/bin

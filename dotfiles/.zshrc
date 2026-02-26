@@ -24,6 +24,7 @@ PATH=/Applications/Android\ Studio.app/Contents/jre/Contents/Home/bin:$PATH
 PATH=$HOME/bin:$PATH
 PATH=/usr/local/bin:$PATH
 #PATH=$HOME/.homebrew/bin:$PATH
+PATH=$HOME/.local/bin:$PATH
 PATH=$HOME/.rbenv/shims:$PATH
 PATH=$HOME/.nodenv/shims:$PATH
 PATH=$HOME/.nodenv/bin:$PATH
@@ -52,9 +53,10 @@ fi
 
 # google-cloud-sdk
 export CLOUDSDK_PYTHON=$(which python3)
-if [ -d "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk" ]; then
-    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+BREW_GCLOUD_SDK_DIR="$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
+if [ -d "$BREW_GCLOUD_SDK_DIR"  ]; then
+    source "$BREW_GCLOUD_SDK_DIR/path.zsh.inc"
+    source "$BREW_GCLOUD_SDK_DIR/completion.zsh.inc"
 fi
 
 HISTFILE=$HOME/.zsh_history
@@ -66,6 +68,8 @@ alias cp='cp -i'
 alias e='emacsclient -a "" -r'
 alias find='gfind' # prefer GNU version over BSD's find
 alias xargs='gxargs'
+alias g='git'
+alias ga='gcloud auth login'
 alias grep='grep --color=auto'
 alias ll='ls -la'
 alias mv='mv -i'
@@ -93,8 +97,13 @@ KUBE_PS1_SYMBOL_CUSTOM="k8s"
 PROMPT='$(kube_ps1) '
 
 # fzf
-function gh-runs() {
-    local selected_run=$(gh run list -b $(git symbolic-ref --short HEAD) | fzf -e)
+function ghr() {
+    local branch=$(git symbolic-ref --short HEAD)
+    local cmd="gh run list -b $branch"
+    local selected_run=$(eval $cmd | fzf -e \
+        --header "GitHub Actions (auto-refresh every 3s, Ctrl-R to manual refresh)" \
+        --bind "load:reload-sync:sleep 3; $cmd" \
+        --bind "ctrl-r:reload:$cmd")
     if [ -n "$selected_run" ]; then
 	local run_id=$(echo $selected_run | awk -F '\t' '{print $7}')
 	local workflow_name=$(echo $selected_run | awk -F '\t' '{print $1}')
@@ -112,6 +121,7 @@ function gh-runs() {
 	fi
     fi
 }
+zle -N ghr
 
 function select-history() {
   BUFFER=$(history -n -r 1 | fzf -e --no-sort)
@@ -119,17 +129,6 @@ function select-history() {
 }
 zle -N select-history
 bindkey '^r' select-history
-
-function select-git-branch() {
-    local selected_branch=$(git branch --format='%(refname:short)' | fzf -e --preview "git log {}")
-    if [ -n "$selected_branch" ]; then
-	BUFFER="git checkout ${selected_branch}"
-	zle accept-line
-   fi
-   zle reset-prompt
-}
-zle -N select-git-branch
-bindkey '^t' select-git-branch
 
 function select-git-repo() {
     local selected_dir=$(ghq list |fzf -e --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
