@@ -3,6 +3,8 @@
 cd $(dirname $0)
 
 # Emacs
+ln -fsn $PWD/emacs-plus $HOME/.config/emacs-plus
+
 EMACS_HOME=$HOME/.config/emacs
 mkdir -p $EMACS_HOME
 ln -fsn $PWD/emacs/init.el $EMACS_HOME/init.el

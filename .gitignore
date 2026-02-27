@@ -11,13 +11,7 @@
 .vim/bundle/*
 .tmux.d/tmux.local
 
-dotfiles/.emacs.d/ac-comphist.dat
-dotfiles/.emacs.d/el-get
-dotfiles/.emacs.d/el-get-recipes
-dotfiles/.emacs.d/elpa
-dotfiles/.emacs.d/recentf
-dotfiles/.emacs.d/.scratch-backup
-dotfiles/.emacs.d/url/
+dotfiles/emacs/custom.el
 
 .config/fish/conf.d
 .config/fish/completions
