@@ -248,7 +248,7 @@
     (interactive)
     (setq image-file-name (concat (make-temp-name (format-time-string "%Y%m%d_%H%M%S_")) ".jpg")
 	  image-full-path (concat (file-name-directory buffer-file-name) image-file-name))
-    (call-process "~/.homebrew/bin/pngpaste" nil nil nil image-full-path)
+    (call-process "pngpaste" nil nil nil image-full-path)
     (insert (format "[[./%s]]" image-file-name))
     (org-redisplay-inline-images))
   (defun my/write-to-task-file (content)
