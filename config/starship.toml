@@ -1,0 +1,7 @@
+[kubernetes]
+format = '[$context \($namespace\)]($style) '
+style = "red"
+disabled = false
+contexts = [
+  { context_pattern = ".*dev.*", style = "green" },
+]

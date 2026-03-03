@@ -83,18 +83,8 @@ alias tf='terraform'
 alias k='kubectl'
 alias kx='kubectx'
 
-# pure theme
-fpath+=("$(brew --prefix)/share/zsh/site-functions")
-autoload -U promptinit; promptinit
-prompt pure
-zstyle :prompt:pure:path color cyan # tweak for dark background
-zstyle :prompt:pure:git:stash show yes
-PURE_GIT_UNTRACKED_DIRTY=0
-
-# kube-ps1
-source "$(brew --prefix)/opt/kube-ps1/share/kube-ps1.sh"
-KUBE_PS1_SYMBOL_CUSTOM="k8s"
-PROMPT='$(kube_ps1) '
+# appearance
+eval "$(starship init zsh)"
 
 # fzf
 function ghr() {

@@ -4,7 +4,3 @@
 [submodule "dotfiles/.tmux.d/themepack"]
 	path = .tmux.d/themepack
 	url = https://github.com/jimeh/tmux-themepack.git
-
-[submodule "dotfiles/.zsh.d/theme-pure"]
-	path = dotfiles/.zsh.d/theme-pure
-	url = https://github.com/sindresorhus/pure.git
