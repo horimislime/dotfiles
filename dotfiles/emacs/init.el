@@ -1,8 +1,5 @@
 ;;;; package.el
 
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load custom-file)
-
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
@@ -41,13 +38,30 @@
       (let ((dir (file-name-directory buffer-file-name)))
 	(unless (file-exists-p dir)
           (make-directory dir t)))))
+  (defun my/toggle-frame-split-left ()
+    "Make window left half of the screen"
+    (interactive)
+    (set-frame-parameter nil 'fullscreen nil) ; Exit fullscreen
+    (set-frame-position nil 0 0)
+    (set-frame-width nil (/ (display-pixel-width) (* 2 (frame-char-width))))
+    (set-frame-height nil (/ (display-pixel-height) (frame-char-height))))
+  (defun my/toggle-frame-split-right ()
+    "Make window right half of the screen"
+    (interactive)
+    (set-frame-parameter nil 'fullscreen nil)
+    (set-frame-position nil (/ (display-pixel-width) 2) 0)
+    (set-frame-width nil (/ (display-pixel-width) (* 2 (frame-char-width))))
+    (set-frame-height nil (/ (display-pixel-height) (frame-char-height))))
   (add-hook 'find-file-hook 'my/create-parent-directory)
   :bind
   (("s-{" . (lambda () (interactive) (select-window (previous-window))))
    ("s-}" . (lambda () (interactive) (select-window (next-window))))
    ("C-x C-l" . (lambda () (interactive) (load-file buffer-file-name)))
    ("C-x C-h" . 'help-for-help)
-   ("C-h" . 'delete-backward-char))
+   ("C-h" . 'delete-backward-char)
+   ("C-s-w" . 'toggle-frame-maximized)
+   ("C-s-l" . 'my/toggle-frame-split-left)
+   ("C-s-r" . 'my/toggle-frame-split-right))
   :init
   (set-default 'buffer-file-coding-system 'utf-8)
   (set-language-environment "Japanese")
