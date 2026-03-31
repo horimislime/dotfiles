@@ -59,7 +59,7 @@
    ("C-x C-l" . (lambda () (interactive) (load-file buffer-file-name)))
    ("C-x C-h" . 'help-for-help)
    ("C-h" . 'delete-backward-char)
-   ("C-s-w" . 'toggle-frame-maximized)
+   ("C-s-f" . 'toggle-frame-maximized)
    ("C-s-l" . 'my/toggle-frame-split-left)
    ("C-s-r" . 'my/toggle-frame-split-right))
   :init
@@ -87,7 +87,6 @@
 	split-width-threshold nil ;; Always split window vertically
 	tab-always-indent 'complete
 	vc-follow-symlinks t ;; Always follow symbolic links
-	vc-handled-backends () ;; Disable vc-mode
 	version-control t
 	warning-minimum-level :emergency
 	frame-resize-pixelwise t
@@ -116,6 +115,7 @@
 ;; Interface
 ;; ==========
 
+;; run M-x nerd-icons-install-fonts
 (use-package nerd-icons)
 (use-package ef-themes
   :config
@@ -124,7 +124,8 @@
   (setq org-fontify-done-headline t)
   ;; Customize the face for DONE headlines
   (custom-set-faces
-   '(org-done ((t (:foreground "gray" :weight normal :strike-through t)))))
+   '(org-done ((t (:foreground "gray" :weight normal :strike-through t))))
+   '(org-headline-done ((t (:foreground "gray" :strike-through t)))))
   )
 
 (use-package minions
@@ -387,17 +388,14 @@
   (org-startup-folded 'content)
   (org-startup-with-inline-images t)
   (org-use-speed-commands t)
-  (org-todo-keywords '((sequence "TODO" "DOING"  "|" "DONE")))
+  (org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "WAITING(w)" "|" "DONE(d)")))
   (org-capture-templates
    '(("d" "Weekdays TODO" entry (file org-daily-tasks-file) "%[~/Dropbox/org/assets/weekdays-todo.org]" :prepend t :empty-lines 1)
      ("w" "Weekends TODO" entry (file org-daily-tasks-file) "%[~/Dropbox/org/assets/weekends-todo.org]" :prepend t)
      ("n" "Create Note" plain (file my/create-org-file-with-name) "%[~/Dropbox/org/assets/note.org]")
      ("t" "Put work task into inbox" entry (file+headline org-backlog-file "Work") "* TODO %?\n" :prepend t)
      ("h" "Put private task into inbox" entry (file+headline org-backlog-file "Private") "* TODO %?\n" :prepend t)
-     ("b" "Bookmark" entry 
-         (file+headline "~/Dropbox/org/bookmark.org" "Bookmarks")
-         "%[~/GoogleDrive/org/assets/bookmark2.org]" :prepend t)
-
+     ("b" "Bookmark" entry (file "~/Dropbox/org/bookmark.org") "%[~/Dropbox/org/assets/bookmark2.org]" :prepend t)
      ("k" "Keep" entry (file+function org-kpt-file my/find-k-under-headline) "*** %?\n")
      ("p" "Problem" entry (file+function org-kpt-file my/find-p-under-headline) "*** %?\n")
      ("f" "Subscribe Feed" plain (file elfeed-source-csv) "%(my/get-title-from-url \"%:link\"),%:link\n" :prepend t :immediate-finish t)
@@ -448,6 +446,14 @@
   :config
   (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag))) 
   (org-roam-db-autosync-mode))
+
+(use-package org-modern
+  :custom
+  ;; Default fold stars (U+2BC8/U+2BC6) are not in Hack Nerd Font; use Geometric Shapes instead
+  (org-modern-fold-stars
+   '(("▶" . "▼") ("▷" . "▽") ("▸" . "▾") ("▹" . "▿") ("►" . "▻")))
+  :config
+  (global-org-modern-mode))
 
 ;; org-babel
 
