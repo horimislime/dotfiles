@@ -1,3 +1,6 @@
+[dart]
+disabled = true
+
 [kubernetes]
 format = '[$context \($namespace\)]($style) '
 style = "red"

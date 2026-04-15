@@ -633,13 +633,6 @@
 
 (use-package lsp-ui)
 
-;(use-package corfu
-;  :custom
-;  (corfu-cycle t)
-;  (corfu-auto t)
-;  :init
-;  (global-corfu-mode))
-
 (use-package tempel
   :bind
   (("C-c TAB" . tempel-complete)

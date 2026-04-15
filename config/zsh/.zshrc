@@ -23,7 +23,6 @@ PYENV_ROOT=$HOME/.pyenv
 PATH=/Applications/Android\ Studio.app/Contents/jre/Contents/Home/bin:$PATH
 PATH=$HOME/bin:$PATH
 PATH=/usr/local/bin:$PATH
-#PATH=$HOME/.homebrew/bin:$PATH
 PATH=$HOME/.local/bin:$PATH
 PATH=$HOME/.rbenv/shims:$PATH
 PATH=$HOME/.nodenv/shims:$PATH
@@ -31,6 +30,7 @@ PATH=$HOME/.nodenv/bin:$PATH
 PATH=$HOME/ghq/github.com/flutter/flutter/bin:$PATH
 PATH=$HOME/.pub-cache/bin:$PATH
 PATH=$HOME/.go/bin:$PATH
+PATH=$HOME/Dropbox/bin:$PATH
 GOPATH=$HOME/.go
 LANG=ja_JP.UTF-8
 TERM=xterm-256color
@@ -88,7 +88,7 @@ eval "$(starship init zsh)"
 
 # fzf
 function ghr() {
-    local branch=$(git symbolic-ref --short HEAD)
+    local branch=${1:-$(git symbolic-ref --short HEAD)}
     local cmd="gh run list -b $branch"
     local selected_run=$(eval $cmd | fzf -e \
         --header "GitHub Actions (auto-refresh every 3s, Ctrl-R to manual refresh)" \

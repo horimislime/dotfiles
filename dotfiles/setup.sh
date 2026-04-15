@@ -12,6 +12,7 @@ ln -fsn $PWD/emacs/custom.el $EMACS_HOME/custom.el
 ln -fsn $PWD/emacs/assets $EMACS_HOME/assets
 ln -fsn $PWD/emacs/config $EMACS_HOME/config
 ln -fsn $PWD/emacs/packages $EMACS_HOME/packages
+ln -fsn $PWD/emacs/templates $EMACS_HOME/templates
 
 # Git
 mkdir -p $HOME/.config/git
@@ -26,8 +27,8 @@ mkdir -p $HOME/.tmux.d
 ln -fsn $PWD/.tmux.conf $HOME/.tmux.conf
 
 # zsh
-mkdir -p $HOME/.zfunctions
-ln -fsn $PWD/.zshrc $HOME/.zshrc
+ln -fsn $PWD/config/zsh $HOME/.config/zsh
+ln -fsn $PWD/.zshenv $HOME/.zshenv
 
 # etc.
 mkdir -p $HOME/.local/bin
