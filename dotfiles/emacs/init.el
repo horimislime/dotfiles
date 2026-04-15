@@ -71,7 +71,6 @@
   (put 'erase-buffer 'disabled nil) ;; Clear contents using erase-buffer
   (menu-bar-mode 0) ;; Hide menu bar
   (context-menu-mode 1)
-  (set-face-attribute 'default nil :height 160)
   (setq auto-save-visited-interval 60 ;; should be set before enabling the mode
 	backup-by-copying t
 	backup-directory-alist '(("." . "~/.config/emacs/backup"))
@@ -668,7 +667,7 @@
   ((vterm-mode . (lambda ()
         	   (display-line-numbers-mode 0)
 		   (setq-local global-hl-line-mode nil)
-		   (set (make-local-variable 'buffer-face-mode-face) '(:family "Hack Nerd Font"))
+		   (set (make-local-variable 'buffer-face-mode-face) '(:family "Hack Nerd Font Mono"))
 		   (buffer-face-mode t)))))
 
 (use-package vterm-toggle
