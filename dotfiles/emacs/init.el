@@ -714,7 +714,8 @@
              (let ((items (split-string line ",")))
                (string-trim (cadr items))))
            (split-string (buffer-string) "\n" t)))))
+  :custom
+  (elfeed-search-filter "@6-months-ago +unread !【PR】")
   :config
   (my/elfeed-load-feed))
-
 
