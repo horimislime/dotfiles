@@ -171,6 +171,11 @@
 (setq hl-line-face 'hlline-face)
 (global-hl-line-mode +1)
 
+(use-package winpulse
+  :vc (:url "https://github.com/xenodium/winpulse" :rev "c58352bea2223fd6f0cc11deb4d33bca2ff0213c")
+  :config
+  (winpulse-mode +1))
+
 ;; ============
 ;; completions
 ;; ============
