@@ -551,6 +551,12 @@
   :config
   (global-git-gutter-mode t))
 
+(use-package claude-code-ide
+  :vc (:url "https://github.com/manzaltu/claude-code-ide.el" :rev "56db02ee386d009ddb8b1482310f1f9beeefb810")
+  :bind ("C-c C-'" . claude-code-ide-menu)
+  :config
+  (claude-code-ide-emacs-tools-setup))
+
 ;;;; Language
 
 (use-package markdown-mode
