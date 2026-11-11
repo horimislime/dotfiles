@@ -79,6 +79,7 @@
 	delete-old-versions t
 	indent-tabs-mode nil ;; Use soft tab
 	initial-scratch-message nil ;; No initial message on scratch buffer
+        initial-major-mode 'org-mode
 	kept-new-versions 5
 	kept-old-versions 2
 	large-file-warning-threshold nil
@@ -175,6 +176,10 @@
   :vc (:url "https://github.com/xenodium/winpulse" :rev "c58352bea2223fd6f0cc11deb4d33bca2ff0213c")
   :config
   (winpulse-mode +1))
+
+(use-package doom-modeline
+  :init (doom-modeline-mode 1))
+
 
 ;; ============
 ;; completions
@@ -309,6 +314,22 @@
     (insert (format "[[%s][%s]]"
 		    (current-kill 0)
 		    (my/get-title-from-url (car kill-ring)))))
+  (defun my/elfeed-opml-outline-string (url)
+    "Build an OPML <outline> element string for URL, subscribing via its page title."
+    (require 'xml)
+    (let* ((title (xml-escape-string (my/get-title-from-url url)))
+	   (escaped-url (xml-escape-string url)))
+      (format "<outline type=\"rss\" xmlUrl=\"%s\" title=\"%s\" text=\"%s\" htmlUrl=\"%s\"/>"
+	      escaped-url title title escaped-url)))
+  (defun my/elfeed-opml-goto-insertion-point ()
+    "Move point just before </body> so a new outline is appended inside it."
+    (goto-char (point-min))
+    (search-forward "</body>")
+    (goto-char (match-beginning 0)))
+  (defun my/elfeed-reload-after-capture ()
+    "Reload elfeed's feed list after subscribing to a new feed via capture."
+    (when (equal (org-capture-get :key) "f")
+      (elfeed-load-opml elfeed-opml-file)))
   (defun my/find-location-under-week-headline (type)
     "Find or create my default journal tree"
     (let* ((week-begin-date-string (if (string-equal "Sun" (format-time-string "%a"))
@@ -351,6 +372,12 @@
     "Hook function for blog-draft-mode to auto-copy on save."
     (my/copy-to-blog-dir))
 
+  (defun my/refile-to-inbox ()
+  "Refile to top level of inbox.org."
+  (interactive)
+  (let ((org-refile-targets '(("~/org/inbox.org" :maxlevel . 0))))
+    (org-refile nil nil (list nil "~/org/inbox.org" nil nil))))
+
   (define-minor-mode blog-draft-mode
     "Minor mode for blog draft files that auto-copies to blog directory on save."
     :lighter " BlogDraft"
@@ -374,17 +401,18 @@
   ((org-mode . visual-line-mode)
    (org-clock-in . org-set-status-to-doing)
    (org-clock-out . my/org-empty-current-task-file)
-   (org-after-refile-insert . my/org-update-statistics-cookies-after-refile))
+   (org-after-refile-insert . my/org-update-statistics-cookies-after-refile)
+   (org-capture-after-finalize . my/elfeed-reload-after-capture))
 
   :init
   (require 'org-protocol)
   (setq org-directory "~/Dropbox/org"
 	org-backlog-file (format "%s/inbox.org" org-directory)
-	org-bookmark-file (format "%s/bookmark.org" org-directory)
+	org-bookmark-file (format "%s/bookmark/content.org" org-directory)
 	org-daily-tasks-file (format "%s/roam/tasks_latest/content.org" org-directory)
 	org-kpt-file (format "%s/note/kpt/content.org" org-directory)
 	org-a-file (format "%s/note/a-log/content.org" org-directory)
-	elfeed-source-csv (format "%s/assets/elfeed-source.csv" org-directory))
+	elfeed-opml-file "~/Dropbox/emacs/elfeed.opml")
 
   :custom
   (org-image-actual-width 900)
@@ -399,13 +427,15 @@
      ("n" "Create Note" plain (file my/create-org-file-with-name) "%[~/Dropbox/org/assets/note.org]")
      ("t" "Put work task into inbox" entry (file+headline org-backlog-file "Work") "* TODO %?\n" :prepend t)
      ("h" "Put private task into inbox" entry (file+headline org-backlog-file "Private") "* TODO %?\n" :prepend t)
-     ("b" "Bookmark" entry (file "~/Dropbox/org/bookmark.org") "%[~/Dropbox/org/assets/bookmark2.org]" :prepend t)
+     ("b" "Bookmark" entry (file "~/Dropbox/org/bookmark/content.org") "%[~/Dropbox/org/assets/bookmark2.org]" :prepend t)
      ("k" "Keep" entry (file+function org-kpt-file my/find-k-under-headline) "*** %?\n")
      ("p" "Problem" entry (file+function org-kpt-file my/find-p-under-headline) "*** %?\n")
-     ("f" "Subscribe Feed" plain (file elfeed-source-csv) "%(my/get-title-from-url \"%:link\"),%:link\n" :prepend t :immediate-finish t)
+     ("f" "Subscribe Feed" plain (file+function elfeed-opml-file my/elfeed-opml-goto-insertion-point) "%(my/elfeed-opml-outline-string \"%:link\")" :immediate-finish t)
      ))
-  (org-refile-targets '(("~/Library/CloudStorage/Dropbox/org/roam/tasks_latest/content.org" :maxlevel . 2)
-                        ("~/Library/CloudStorage/Dropbox/org/inbox.org" :maxlevel . 2))))
+  (org-refile-targets '(("~/Library/CloudStorage/Dropbox/org/roam/tasks_latest/content.org" :maxlevel . 1)
+                        ("~/Library/CloudStorage/Dropbox/org/inbox.org" :maxlevel . 1)))
+
+  )
 
 (use-package org-pomodoro
   :custom
@@ -425,6 +455,14 @@
     (interactive)
     (let ((org-link-frame-setup '((file . find-file))))
       (org-open-at-point)))
+  (defun my/org-roam-node-find ()
+    "Like `org-roam-node-find', but force sort order by file-mtime.
+Without an explicit sort-fn, `org-roam-node-read' does not mark
+`cycle-sort-function' in the completion metadata, so completion
+UIs (e.g. icomplete/fido) re-sort candidates themselves and the
+file-mtime ordering is lost."
+    (interactive)
+    (org-roam-node-find nil nil nil #'org-roam-node-read-sort-by-file-mtime))
   :custom
   (org-roam-directory (file-truename (format "%s/roam" org-directory)))
   (org-roam-dailies-capture-templates
@@ -432,7 +470,7 @@
   (org-roam-capture-templates
    '(("d" "default" plain
       "%?"
-      :target (file+head "${slug}/content.org" "#+title: ${title}\n")
+      :target (file+head "${id}/content.org" "#+title: ${title}\n")
       :unnarrowed t)))
   (org-roam-capture-ref-templates
    '(("r" "ref" plain "%?"
@@ -441,14 +479,22 @@
 	       "#+title: ${title}\n#+date: %U\n#+filetags: :bookmark:\n\n %(my/fetch-page-body-as-org \"${ref}\")\n")
       :unnarrowed t)))
   :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
+         ("C-c n f" . my/org-roam-node-find)
          ("C-c n g" . org-roam-graph)
          ("C-c n i" . org-roam-node-insert)
          ("C-c n c" . org-roam-capture)
 	 ("C-c n o" . my/org-open-at-point-same-buffer)
          ("C-c n j" . org-roam-dailies-capture-today))
   :config
-  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag))) 
+  (cl-defmethod org-roam-node-mtime ((node org-roam-node))
+    "Return NODE's file modification time as a formatted string."
+    (when-let* ((mtime (org-roam-node-file-mtime node)))
+      (format-time-string "%Y-%m-%d %H:%M" mtime)))
+  (setq org-roam-node-display-template
+        (concat "${title} "
+                (propertize "${mtime:16}" 'face 'shadow)
+                " "
+                (propertize "${tags:10}" 'face 'org-tag)))
   (org-roam-db-autosync-mode))
 
 (use-package org-modern
@@ -482,6 +528,14 @@
 ;; ========
 ;; Writing
 ;; ========
+
+(use-package persistent-scratch
+  :custom
+  (persistent-scratch-save-interval 60)
+  (persistent-scratch-save-file "~/.persistent-scratch-backup")
+  (persistent-scratch-backup-limit 10)
+  :config
+  (persistent-scratch-setup-default))
 
 (use-package flycheck
   :config
@@ -553,9 +607,19 @@
 
 (use-package claude-code-ide
   :vc (:url "https://github.com/manzaltu/claude-code-ide.el" :rev "56db02ee386d009ddb8b1482310f1f9beeefb810")
-  :bind ("C-c C-'" . claude-code-ide-menu)
+  :bind
+  (("C-c C-;" . claude-code-ide-menu)
+   ("C-c C-'" . claude-code-ide-toggle))
   :config
+  (setq claude-code-ide-terminal-backend 'ghostel)
   (claude-code-ide-emacs-tools-setup))
+
+(use-package agent-shell
+    :ensure t
+    :ensure-system-package
+    ;; Add agent installation configs here
+    (
+     (claude-agent-acp . "npm install -g @agentclientprotocol/claude-agent-acp")))
 
 ;;;; Language
 
@@ -629,7 +693,18 @@
 	("C-c p" . projectile-command-map))
   :custom
   (projectile-project-search-path '(("~/ghq/github.com" . 2)))
-  (projectile-globally-ignored-directories '(".git" "node_modules" "build" "cache" "logs")))
+  (projectile-globally-ignored-directories '(".git" "node_modules" "build" "cache" "logs"
+                                             "bower_components" ".dart_tool" "test_data"))
+  (projectile-globally-ignored-file-suffixes '(".code-search" ".g.dart" ".pb.dart"
+                                               ".pbjson.dart" ".pbgrpc.dart" ".d.ts" "_pb.js"))
+  (projectile-indexing-method 'hybrid)
+					;  (projectile-enable-caching t)
+  (defun my/copy-relative-path ()
+    "現在のバッファのファイルの相対パスをキルリングにコピーする"
+    (interactive)
+    (let ((path (file-relative-name (buffer-file-name) (project-root (project-current)))))
+      (kill-new path)
+      (message "Copied: %s" path))))
 
 (use-package lsp-ui)
 
@@ -638,27 +713,16 @@
   (("C-c TAB" . tempel-complete)
    ("M-*" . tempel-insert)))
 
-(use-package gptel
-  :init
-  (gptel-make-anthropic "Claude"
-			:models '(claude-4-5-20250929)
-			:stream t
-			:key (shell-command-to-string "echo -n `op item get claude-api-key --fields label=credential`"))
-  (setq
-   gptel-model 'claude-3-7-sonnet-20250219
-   gptel-backend (gptel-make-anthropic "Claude"
-		   :stream t
-		   :key (shell-command-to-string "echo -n `op item get claude-api-key --fields label=credential`")))
-  (require 'gptel-integrations))
-
 (use-package shell-maker)
 (use-package chatgpt-shell
   :hook
   ((chatgpt-shell-mode . (lambda ()
 			   (if (not chatgpt-shell-anthropic-key)
 			       (setq chatgpt-shell-anthropic-key
-				     (shell-command-to-string "echo -n `op item get claude-api-key --fields label=credential`")
+				     (shell-command-to-string "echo -n `op item get claude-api-key --reveal --fields label=credential`")
 				     ))))))
+
+(use-package ghostel)
 
 (use-package vterm
   :bind
